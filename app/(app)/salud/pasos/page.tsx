@@ -84,9 +84,20 @@ export default function PasosPage() {
             </span>
           }
           progress={summary.todayPercent}
+          accent="sage"
         />
-        <StatCard label="Promedio 7 días" value={formatNumber(summary.average7)} unit="pasos" />
-        <StatCard label="Promedio 30 días" value={formatNumber(summary.average30)} unit="pasos" />
+        <StatCard
+          label="Promedio 7 días"
+          value={formatNumber(summary.average7)}
+          unit="pasos"
+          accent="sage"
+        />
+        <StatCard
+          label="Promedio 30 días"
+          value={formatNumber(summary.average30)}
+          unit="pasos"
+          accent="sage"
+        />
         <StatCard
           label="Mejor día"
           value={summary.bestDay ? formatNumber(summary.bestDay.steps) : '—'}
@@ -95,6 +106,7 @@ export default function PasosPage() {
               ? `${formatDate(summary.bestDay.date)} · ${summary.goalDaysTotal} días con objetivo`
               : 'Sin registros'
           }
+          accent="sage"
         />
       </StatGrid>
 

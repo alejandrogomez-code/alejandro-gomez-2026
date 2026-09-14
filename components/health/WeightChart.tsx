@@ -2,9 +2,10 @@
 
 import { useMemo } from 'react';
 import {
+  Area,
   CartesianGrid,
+  ComposedChart,
   Line,
-  LineChart,
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
@@ -51,13 +52,20 @@ export function WeightChart({ records, targetWeight = null }: WeightChartProps) 
 
   const weights = data.map((point) => point.weight);
   const candidates = targetWeight !== null ? [...weights, targetWeight] : weights;
-  const min = Math.floor(Math.min(...candidates) - 1);
-  const max = Math.ceil(Math.max(...candidates) + 1);
+  // Dominio en kilos enteros: las marcas del eje quedan redondas y legibles.
+  const min = Math.floor(Math.min(...candidates)) - 1;
+  const max = Math.ceil(Math.max(...candidates)) + 1;
 
   return (
     <div className="h-64 w-full sm:h-72">
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: -18 }}>
+        <ComposedChart data={data} margin={{ top: 8, right: 12, bottom: 0, left: 0 }}>
+          <defs>
+            <linearGradient id="weightFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="var(--chart-weight)" stopOpacity={0.18} />
+              <stop offset="100%" stopColor="var(--chart-weight)" stopOpacity={0} />
+            </linearGradient>
+          </defs>
           <CartesianGrid stroke="var(--chart-grid)" vertical={false} />
           <XAxis
             dataKey="date"
@@ -66,13 +74,17 @@ export function WeightChart({ records, targetWeight = null }: WeightChartProps) 
             tickLine={false}
             axisLine={false}
             minTickGap={24}
+            padding={{ left: 12, right: 12 }}
           />
           <YAxis
             domain={[min, max]}
+            allowDecimals={false}
+            tickFormatter={(value: number) => `${formatNumber(value)} kg`}
             tick={{ fontSize: 11, fill: 'var(--chart-axis)' }}
             tickLine={false}
             axisLine={false}
-            width={48}
+            width={62}
+            tickMargin={8}
           />
           <Tooltip content={<WeightTooltip />} />
           {targetWeight !== null ? (
@@ -88,15 +100,22 @@ export function WeightChart({ records, targetWeight = null }: WeightChartProps) 
               }}
             />
           ) : null}
+          <Area
+            type="monotone"
+            dataKey="weight"
+            stroke="none"
+            fill="url(#weightFill)"
+            isAnimationActive={false}
+          />
           <Line
             type="monotone"
             dataKey="weight"
-            stroke="var(--chart-line)"
-            strokeWidth={2}
-            dot={{ r: 2, fill: 'var(--chart-line)' }}
-            activeDot={{ r: 4 }}
+            stroke="var(--chart-weight)"
+            strokeWidth={2.5}
+            dot={{ r: 3, fill: 'var(--chart-weight)', strokeWidth: 0 }}
+            activeDot={{ r: 5 }}
           />
-        </LineChart>
+        </ComposedChart>
       </ResponsiveContainer>
     </div>
   );

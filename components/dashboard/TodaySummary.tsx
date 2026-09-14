@@ -33,6 +33,7 @@ export function TodaySummary({
         value={formatNumber(steps)}
         detail={`${formatNumber(steps)} / ${formatNumber(stepsGoal)} · ${formatPercent(stepsPercent, 0)}`}
         progress={stepsPercent}
+        accent="sage"
         icon={<Footprints className="h-4 w-4" aria-hidden="true" />}
       />
       <StatCard
@@ -40,6 +41,7 @@ export function TodaySummary({
         value={habitsExpected === 0 ? '—' : `${habitsCompleted} / ${habitsExpected}`}
         detail={habitsExpected === 0 ? 'Sin hábitos previstos' : formatPercent(habitsPercent, 0)}
         progress={habitsExpected === 0 ? null : habitsPercent}
+        accent="honey"
         icon={<ListChecks className="h-4 w-4" aria-hidden="true" />}
       />
       <StatCard
@@ -47,12 +49,14 @@ export function TodaySummary({
         value={weightKg === null ? '—' : formatNumber(weightKg, 1)}
         unit={weightKg === null ? undefined : 'kg'}
         detail={weightKg === null ? 'Sin registros' : 'Último registro'}
+        accent="ocean"
         icon={<Scale className="h-4 w-4" aria-hidden="true" />}
       />
       <StatCard
         label="IMC"
         value={formatBMI(bmi)}
         detail={bmi === null ? 'Completá tu altura' : 'Calculado con el último peso'}
+        accent="plum"
         icon={<Activity className="h-4 w-4" aria-hidden="true" />}
       />
     </StatGrid>

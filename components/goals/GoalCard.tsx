@@ -71,7 +71,7 @@ export function GoalCard({
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <Badge tone="neutral">{GOAL_TYPE_LABELS[goal.type]}</Badge>
+          <Badge tone="plum">{GOAL_TYPE_LABELS[goal.type]}</Badge>
           <Badge tone={goal.status === 'completed' ? 'success' : 'neutral'}>
             {GOAL_STATUS_LABELS[goal.status]}
           </Badge>

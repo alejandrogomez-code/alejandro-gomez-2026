@@ -4,6 +4,7 @@ import { Progress } from '@/components/ui/Progress';
 import { formatNumber, formatPercent } from '@/lib/calculations/dates';
 import type { Goal } from '@/types/database';
 import { calculateGoalProgress } from '@/lib/calculations/goals';
+import { ACCENTS } from '@/lib/accents';
 
 export function GoalProgress({ goal, compact = false }: { goal: Goal; compact?: boolean }) {
   const progress = calculateGoalProgress(goal);
@@ -11,9 +12,13 @@ export function GoalProgress({ goal, compact = false }: { goal: Goal; compact?: 
 
   return (
     <div className="space-y-2">
-      <Progress value={progress} label={`Progreso de ${goal.name}`} />
+      <Progress
+        value={progress}
+        barClassName={ACCENTS.plum.bar}
+        label={`Progreso de ${goal.name}`}
+      />
       <div className="flex items-center justify-between text-sm">
-        <span className="tabular font-medium text-neutral-900 dark:text-neutral-100">
+        <span className={`tabular font-medium ${ACCENTS.plum.text}`}>
           {formatPercent(progress)}
         </span>
         {!compact && goal.type === 'quantitative' && goal.target_value !== null ? (

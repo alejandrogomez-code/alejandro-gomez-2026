@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Progress } from '@/components/ui/Progress';
 import { EmptyState } from '@/components/ui/States';
 import { formatPercent } from '@/lib/calculations/dates';
+import { ACCENTS } from '@/lib/accents';
 import type { OverallCompletion } from '@/lib/calculations/habits';
 
 export interface WeeklyHabitSummaryProps {
@@ -27,14 +28,20 @@ export function WeeklyHabitSummary({
         title={title}
         description={description}
         action={
-          <span className="tabular text-2xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
+          <span
+            className={`tabular text-2xl font-medium tracking-tight ${ACCENTS.honey.text}`}
+          >
             {formatPercent(completion.percentage, 0)}
           </span>
         }
       />
       <CardContent className="space-y-4">
         <div>
-          <Progress value={completion.percentage} label="Cumplimiento general" />
+          <Progress
+            value={completion.percentage}
+            barClassName={ACCENTS.honey.bar}
+            label="Cumplimiento general"
+          />
           <p className="tabular mt-2 text-sm text-neutral-500 dark:text-neutral-400">
             {completion.completed} de {completion.expected} instancias previstas
           </p>
@@ -57,7 +64,11 @@ export function WeeklyHabitSummary({
                     {row.completed}/{row.expected} · {formatPercent(row.percentage, 0)}
                   </span>
                 </div>
-                <Progress value={row.percentage} label={`Cumplimiento de ${row.habit.name}`} />
+                <Progress
+                  value={row.percentage}
+                  barClassName={ACCENTS.honey.bar}
+                  label={`Cumplimiento de ${row.habit.name}`}
+                />
               </li>
             ))}
           </ul>

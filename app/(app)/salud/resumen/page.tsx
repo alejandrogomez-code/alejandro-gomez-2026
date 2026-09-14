@@ -68,9 +68,24 @@ export default function ResumenPage() {
       />
 
       <StatGrid className="lg:grid-cols-3">
-        <StatCard label="Pasos de hoy" value={formatNumber(steps.todaySteps)} progress={steps.todayPercent} />
-        <StatCard label="Promedio 7 días" value={formatNumber(steps.average7)} unit="pasos" />
-        <StatCard label="Días con objetivo" value={`${steps.goalDays7} / 7`} detail="Últimos 7 días" />
+        <StatCard
+          label="Pasos de hoy"
+          value={formatNumber(steps.todaySteps)}
+          progress={steps.todayPercent}
+          accent="sage"
+        />
+        <StatCard
+          label="Promedio 7 días"
+          value={formatNumber(steps.average7)}
+          unit="pasos"
+          accent="sage"
+        />
+        <StatCard
+          label="Días con objetivo"
+          value={`${steps.goalDays7} / 7`}
+          detail="Últimos 7 días"
+          accent="sage"
+        />
       </StatGrid>
 
       <div className="grid gap-6 lg:grid-cols-2">

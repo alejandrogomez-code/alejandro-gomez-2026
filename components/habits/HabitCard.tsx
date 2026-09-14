@@ -8,6 +8,7 @@ import { Progress } from '@/components/ui/Progress';
 import { cn } from '@/lib/utils';
 import { formatNumber, formatPercent } from '@/lib/calculations/dates';
 import { HABIT_TYPE_LABELS, frequencyDescription, type HabitDayState } from '@/lib/calculations/habits';
+import { ACCENTS } from '@/lib/accents';
 import type { Habit } from '@/types/database';
 
 export interface HabitCardProps {
@@ -68,12 +69,12 @@ export function HabitCard({
           <Badge tone="neutral">{frequencyDescription(habit)}</Badge>
           <Badge tone="neutral">{HABIT_TYPE_LABELS[habit.type]}</Badge>
           {state.fromSteps ? (
-            <Badge tone="accent">
+            <Badge tone="success">
               <Footprints className="h-3 w-3" aria-hidden="true" />
               Usa el registro de pasos
             </Badge>
           ) : null}
-          {goalName ? <Badge tone="accent">{goalName}</Badge> : null}
+          {goalName ? <Badge tone="plum">{goalName}</Badge> : null}
           {!habit.active ? <Badge tone="neutral">Inactivo</Badge> : null}
         </div>
 
@@ -93,7 +94,11 @@ export function HabitCard({
                   {state.percent === null ? '—' : formatPercent(state.percent)}
                 </span>
               </div>
-              <Progress value={state.percent ?? 0} label={habit.name} />
+              <Progress
+                value={state.percent ?? 0}
+                barClassName={ACCENTS.sage.bar}
+                label={habit.name}
+              />
               <p className="text-xs text-neutral-500 dark:text-neutral-400">
                 {state.completed ? 'Cumplido hoy' : 'Se completa al cargar los pasos del día'}
               </p>
@@ -118,7 +123,11 @@ export function HabitCard({
                   de {formatNumber(habit.target_value ?? 0)} {habit.unit ?? ''}
                 </span>
               </div>
-              <Progress value={state.percent ?? 0} label={habit.name} />
+              <Progress
+                value={state.percent ?? 0}
+                barClassName={ACCENTS.honey.bar}
+                label={habit.name}
+              />
             </div>
           ) : (
             <button
@@ -129,8 +138,8 @@ export function HabitCard({
                 'flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-neutral-100',
                 state.completed
-                  ? 'bg-neutral-900 text-neutral-50 dark:bg-neutral-100 dark:text-neutral-900'
-                  : 'border border-neutral-200 bg-white text-neutral-600 hover:bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-300',
+                  ? 'bg-honey-500 text-white dark:bg-honey-400 dark:text-neutral-900'
+                  : 'border border-neutral-200 bg-white text-neutral-600 hover:border-honey-300 hover:bg-honey-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-300 dark:hover:bg-honey-500/10',
               )}
             >
               <span
@@ -151,11 +160,15 @@ export function HabitCard({
         <div className="space-y-1.5">
           <div className="flex items-center justify-between text-sm">
             <span className="text-neutral-500 dark:text-neutral-400">Esta semana</span>
-            <span className="tabular font-medium text-neutral-900 dark:text-neutral-100">
+            <span className={`tabular font-medium ${ACCENTS.honey.text}`}>
               {weeklyLabel} · {formatPercent(weeklyPercent, 0)}
             </span>
           </div>
-          <Progress value={weeklyPercent} label={`Cumplimiento semanal de ${habit.name}`} />
+          <Progress
+            value={weeklyPercent}
+            barClassName={ACCENTS.honey.bar}
+            label={`Cumplimiento semanal de ${habit.name}`}
+          />
         </div>
       </CardContent>
     </Card>

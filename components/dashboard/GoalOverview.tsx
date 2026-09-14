@@ -8,6 +8,7 @@ import { EmptyState } from '@/components/ui/States';
 import { Button } from '@/components/ui/Button';
 import { calculateGoalProgress, daysRemainingLabel, isGoalActive } from '@/lib/calculations/goals';
 import { formatPercent } from '@/lib/calculations/dates';
+import { ACCENTS } from '@/lib/accents';
 import type { Goal } from '@/types/database';
 
 export function GoalOverview({ goals }: { goals: Goal[] }) {
@@ -49,12 +50,16 @@ export function GoalOverview({ goals }: { goals: Goal[] }) {
                     <span className="truncate text-neutral-700 dark:text-neutral-300">
                       {goal.name}
                     </span>
-                    <span className="tabular shrink-0 font-medium text-neutral-900 dark:text-neutral-100">
+                    <span className={`tabular shrink-0 font-medium ${ACCENTS.plum.text}`}>
                       {progress === null ? '—' : formatPercent(progress, 0)}
                     </span>
                   </div>
                   {progress !== null ? (
-                    <Progress value={progress} label={`Progreso de ${goal.name}`} />
+                    <Progress
+                      value={progress}
+                      barClassName={ACCENTS.plum.bar}
+                      label={`Progreso de ${goal.name}`}
+                    />
                   ) : null}
                   {remaining ? (
                     <p className="text-xs text-neutral-400">{remaining}</p>

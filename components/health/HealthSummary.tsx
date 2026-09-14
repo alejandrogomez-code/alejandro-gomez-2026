@@ -28,6 +28,7 @@ export function HealthSummary({ records, heightCm, initialWeightKg }: HealthSumm
         label="Peso actual"
         value={currentWeight === null ? '—' : formatNumber(currentWeight, 1)}
         unit={currentWeight === null ? undefined : 'kg'}
+        accent="ocean"
         icon={<Scale className="h-4 w-4" aria-hidden="true" />}
         detail={summary.current ? formatDate(summary.current.date) : 'Sin registros'}
       />
@@ -36,6 +37,7 @@ export function HealthSummary({ records, heightCm, initialWeightKg }: HealthSumm
         value={summary.initial === null ? '—' : formatNumber(summary.initial, 1)}
         unit={summary.initial === null ? undefined : 'kg'}
         detail={`Variación ${formatWeightChange(summary.change)}`}
+        accent="ocean"
         icon={
           losing ? (
             <TrendingDown className="h-4 w-4" aria-hidden="true" />
@@ -47,6 +49,7 @@ export function HealthSummary({ records, heightCm, initialWeightKg }: HealthSumm
       <StatCard
         label="IMC actual"
         value={formatBMI(bmi)}
+        accent="plum"
         icon={<Activity className="h-4 w-4" aria-hidden="true" />}
         detail={category ? <Badge tone="neutral">{category}</Badge> : 'Falta altura o peso'}
       />
@@ -58,6 +61,7 @@ export function HealthSummary({ records, heightCm, initialWeightKg }: HealthSumm
             : '—'
         }
         unit={summary.min ? 'kg' : undefined}
+        accent="ocean"
         detail={`Registros esta semana: ${summary.recordsThisWeek} / 3`}
       />
     </StatGrid>

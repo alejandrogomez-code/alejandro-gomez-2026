@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { Card } from '@/components/ui/Card';
 import { Progress } from '@/components/ui/Progress';
 import { cn } from '@/lib/utils';
+import { ACCENTS, type Accent } from '@/lib/accents';
 
 export interface StatCardProps {
   label: string;
@@ -12,10 +13,11 @@ export interface StatCardProps {
   detail?: ReactNode;
   progress?: number | null;
   icon?: ReactNode;
+  accent?: Accent;
   className?: string;
 }
 
-/** Tarjeta de indicador: el número es el protagonista. */
+/** Tarjeta de indicador: el número es el protagonista, el color indica el área. */
 export function StatCard({
   label,
   value,
@@ -23,13 +25,23 @@ export function StatCard({
   detail,
   progress = null,
   icon,
+  accent = 'neutral',
   className,
 }: StatCardProps) {
+  const theme = ACCENTS[accent];
+
   return (
     <Card className={cn('p-5', className)}>
       <div className="flex items-start justify-between gap-2">
         <p className="text-sm text-neutral-500 dark:text-neutral-400">{label}</p>
-        {icon ? <span className="text-neutral-300 dark:text-neutral-600">{icon}</span> : null}
+        {icon ? (
+          <span
+            className={cn('flex h-8 w-8 items-center justify-center rounded-lg', theme.chip)}
+            aria-hidden="true"
+          >
+            {icon}
+          </span>
+        ) : null}
       </div>
       <p className="tabular mt-3 text-2xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
         {value}
@@ -37,7 +49,9 @@ export function StatCard({
           <span className="ml-1 text-base font-normal text-neutral-400">{unit}</span>
         ) : null}
       </p>
-      {progress !== null ? <Progress value={progress} className="mt-3" label={label} /> : null}
+      {progress !== null ? (
+        <Progress value={progress} className="mt-3" barClassName={theme.bar} label={label} />
+      ) : null}
       {detail ? (
         <div className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">{detail}</div>
       ) : null}

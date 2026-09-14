@@ -79,7 +79,7 @@ export function HabitCalendar({
                           className={cn(
                             'h-1 w-1 rounded-full',
                             index < completion.completed
-                              ? 'bg-sage-500'
+                              ? 'bg-honey-500 dark:bg-honey-400'
                               : 'bg-neutral-300 dark:bg-neutral-600',
                           )}
                         />
@@ -90,7 +90,7 @@ export function HabitCalendar({
                     <span
                       className={cn(
                         'h-1 w-4 rounded-full',
-                        stepsReached ? 'bg-neutral-900 dark:bg-neutral-100' : 'bg-neutral-200 dark:bg-neutral-700',
+                        stepsReached ? 'bg-sage-500 dark:bg-sage-400' : 'bg-neutral-200 dark:bg-neutral-700',
                       )}
                     />
                   ) : null}
@@ -100,7 +100,7 @@ export function HabitCalendar({
           />
           <div className="mt-5 flex flex-wrap gap-4 text-xs text-neutral-500 dark:text-neutral-400">
             <span className="flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-sage-500" />
+              <span className="h-1.5 w-1.5 rounded-full bg-honey-500 dark:bg-honey-400" />
               Hábito cumplido
             </span>
             <span className="flex items-center gap-1.5">
@@ -108,7 +108,7 @@ export function HabitCalendar({
               Hábito pendiente
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="h-1 w-4 rounded-full bg-neutral-900 dark:bg-neutral-100" />
+              <span className="h-1 w-4 rounded-full bg-sage-500 dark:bg-sage-400" />
               Objetivo de pasos alcanzado
             </span>
           </div>
@@ -138,6 +138,7 @@ export function HabitCalendar({
                 </p>
                 <Progress
                   value={calculateStepCompletion(selectedSteps, dailyStepsGoal)}
+                  barClassName="bg-sage-500 dark:bg-sage-400"
                   label="Pasos del día"
                 />
                 <p className="tabular text-sm font-medium text-neutral-900 dark:text-neutral-100">
@@ -164,7 +165,7 @@ export function HabitCalendar({
                         'flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm transition-colors',
                         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-neutral-100',
                         state.completed
-                          ? 'bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100'
+                          ? 'bg-honey-50 text-neutral-900 dark:bg-honey-500/10 dark:text-neutral-100'
                           : 'text-neutral-600 hover:bg-neutral-50 dark:text-neutral-300 dark:hover:bg-neutral-800/60',
                         state.fromSteps ? 'cursor-default' : '',
                       )}
@@ -173,7 +174,7 @@ export function HabitCalendar({
                         className={cn(
                           'flex h-5 w-5 shrink-0 items-center justify-center rounded-md border',
                           state.completed
-                            ? 'border-neutral-900 bg-neutral-900 text-white dark:border-neutral-100 dark:bg-neutral-100 dark:text-neutral-900'
+                            ? 'border-honey-500 bg-honey-500 text-white dark:border-honey-400 dark:bg-honey-400 dark:text-neutral-900'
                             : 'border-neutral-300 dark:border-neutral-600',
                         )}
                       >

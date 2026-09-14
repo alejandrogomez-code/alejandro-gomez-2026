@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { ACCENTS } from '@/lib/accents';
 import { NAV_ITEMS } from './nav-items';
 import { SignOutButton } from './SignOutButton';
 
@@ -35,7 +36,10 @@ export function Sidebar({ email }: { email: string }) {
                       : 'text-neutral-500 hover:bg-neutral-50 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800/60 dark:hover:text-neutral-100',
                   )}
                 >
-                  <Icon className="h-4 w-4" aria-hidden="true" />
+                  <Icon
+                    className={cn('h-4 w-4', active ? ACCENTS[item.accent].text : '')}
+                    aria-hidden="true"
+                  />
                   {item.label}
                 </Link>
 

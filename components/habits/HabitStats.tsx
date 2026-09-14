@@ -122,7 +122,7 @@ export function HabitStats({
         ) : (
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: -20 }}>
+              <LineChart data={data} margin={{ top: 8, right: 12, bottom: 0, left: 0 }}>
                 <CartesianGrid stroke="var(--chart-grid)" vertical={false} />
                 <XAxis
                   dataKey="weekStart"
@@ -138,15 +138,16 @@ export function HabitStats({
                   tick={{ fontSize: 11, fill: 'var(--chart-axis)' }}
                   tickLine={false}
                   axisLine={false}
-                  width={44}
+                  width={52}
+                  tickMargin={8}
                 />
                 <Tooltip content={<WeekTooltip />} />
                 <Line
                   type="monotone"
                   dataKey="percentage"
-                  stroke="var(--chart-line)"
-                  strokeWidth={2}
-                  dot={{ r: 2, fill: 'var(--chart-line)' }}
+                  stroke="var(--chart-habits)"
+                  strokeWidth={2.5}
+                  dot={{ r: 3, fill: 'var(--chart-habits)', strokeWidth: 0 }}
                   activeDot={{ r: 4 }}
                 />
               </LineChart>

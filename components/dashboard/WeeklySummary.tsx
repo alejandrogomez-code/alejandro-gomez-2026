@@ -4,6 +4,7 @@ import { ArrowDownRight, ArrowUpRight, Minus } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Progress } from '@/components/ui/Progress';
 import { formatNumber, formatPercent } from '@/lib/calculations/dates';
+import { ACCENTS } from '@/lib/accents';
 import type { HabitCompletionRow } from '@/lib/calculations/habits';
 
 export interface WeekMetrics {
@@ -61,14 +62,18 @@ export function WeeklySummary({
         title="Semana"
         description="De lunes a domingo, contando solo los días previstos."
         action={
-          <span className="tabular text-2xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
+          <span className={`tabular text-2xl font-medium tracking-tight ${ACCENTS.honey.text}`}>
             {formatPercent(current.completionPercent, 0)}
           </span>
         }
       />
       <CardContent className="space-y-5">
         <div>
-          <Progress value={current.completionPercent} label="Cumplimiento semanal" />
+          <Progress
+            value={current.completionPercent}
+            barClassName={ACCENTS.honey.bar}
+            label="Cumplimiento semanal"
+          />
           <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
             <span className="tabular text-sm text-neutral-500 dark:text-neutral-400">
               {current.completed} de {current.expected} instancias

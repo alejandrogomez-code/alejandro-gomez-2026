@@ -1,17 +1,19 @@
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
-type Tone = 'neutral' | 'success' | 'warning' | 'danger' | 'accent';
+type Tone = 'neutral' | 'success' | 'warning' | 'danger' | 'accent' | 'ocean' | 'plum' | 'honey';
 
 const tones: Record<Tone, string> = {
   neutral:
     'bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300',
   success:
     'bg-sage-100 text-sage-700 dark:bg-sage-900/40 dark:text-sage-300',
-  warning:
-    'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300',
+  warning: 'bg-honey-100 text-honey-700 dark:bg-honey-500/15 dark:text-honey-300',
   danger: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
-  accent: 'bg-sage-500/10 text-sage-600 dark:bg-sage-400/10 dark:text-sage-300',
+  accent: 'bg-sage-50 text-sage-600 dark:bg-sage-500/15 dark:text-sage-300',
+  ocean: 'bg-ocean-50 text-ocean-600 dark:bg-ocean-500/15 dark:text-ocean-300',
+  plum: 'bg-plum-50 text-plum-600 dark:bg-plum-500/15 dark:text-plum-300',
+  honey: 'bg-honey-50 text-honey-600 dark:bg-honey-500/15 dark:text-honey-300',
 };
 
 export function Badge({

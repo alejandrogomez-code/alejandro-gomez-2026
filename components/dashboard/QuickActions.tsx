@@ -12,6 +12,7 @@ import { GoalForm } from '@/components/goals/GoalForm';
 import { cn } from '@/lib/utils';
 import { formatNumber, todayString } from '@/lib/calculations/dates';
 import type { HabitDayState } from '@/lib/calculations/habits';
+import { ACCENTS, type Accent } from '@/lib/accents';
 import type { Goal, GoalInsert, Habit } from '@/types/database';
 
 type ActionKey = 'weight' | 'steps' | 'habit' | 'goal';
@@ -26,11 +27,11 @@ export interface QuickActionsProps {
   onCreateGoal: (values: Omit<GoalInsert, 'user_id'>) => Promise<Goal>;
 }
 
-const ACTIONS: { key: ActionKey; label: string; icon: typeof Scale }[] = [
-  { key: 'weight', label: 'Registrar peso', icon: Scale },
-  { key: 'steps', label: 'Registrar pasos', icon: Footprints },
-  { key: 'habit', label: 'Marcar hábito', icon: ListChecks },
-  { key: 'goal', label: 'Nuevo objetivo', icon: Target },
+const ACTIONS: { key: ActionKey; label: string; icon: typeof Scale; accent: Accent }[] = [
+  { key: 'weight', label: 'Registrar peso', icon: Scale, accent: 'ocean' },
+  { key: 'steps', label: 'Registrar pasos', icon: Footprints, accent: 'sage' },
+  { key: 'habit', label: 'Marcar hábito', icon: ListChecks, accent: 'honey' },
+  { key: 'goal', label: 'Nuevo objetivo', icon: Target, accent: 'plum' },
 ];
 
 /** Todo se registra desde el panel, sin navegar a otra pantalla. */
@@ -69,7 +70,15 @@ export function QuickActions({
                 'dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:border-neutral-700 dark:hover:text-neutral-100 dark:focus-visible:ring-neutral-100',
               )}
             >
-              <Icon className="h-4 w-4 shrink-0 text-neutral-400" aria-hidden="true" />
+              <span
+                className={cn(
+                  'flex h-7 w-7 shrink-0 items-center justify-center rounded-lg',
+                  ACCENTS[action.accent].chip,
+                )}
+                aria-hidden="true"
+              >
+                <Icon className="h-4 w-4" />
+              </span>
               <span className="truncate">{action.label}</span>
             </button>
           );

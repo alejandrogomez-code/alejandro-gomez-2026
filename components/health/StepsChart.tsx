@@ -55,7 +55,7 @@ export function StepsChart({ records, dailyGoal, days }: StepsChartProps) {
   return (
     <div className="h-64 w-full sm:h-72">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: -18 }}>
+        <BarChart data={data} margin={{ top: 8, right: 12, bottom: 0, left: 0 }}>
           <CartesianGrid stroke="var(--chart-grid)" vertical={false} />
           <XAxis
             dataKey="date"
@@ -70,7 +70,8 @@ export function StepsChart({ records, dailyGoal, days }: StepsChartProps) {
             tickFormatter={(value: number) => (value >= 1000 ? `${value / 1000}k` : String(value))}
             tickLine={false}
             axisLine={false}
-            width={48}
+            width={52}
+            tickMargin={8}
           />
           <Tooltip
             cursor={{ fill: 'var(--chart-grid)', opacity: 0.4 }}
@@ -91,7 +92,7 @@ export function StepsChart({ records, dailyGoal, days }: StepsChartProps) {
             {data.map((point) => (
               <Cell
                 key={point.date}
-                fill={point.steps >= dailyGoal ? 'var(--chart-bar-active)' : 'var(--chart-bar)'}
+                fill={point.steps >= dailyGoal ? 'var(--chart-steps)' : 'var(--chart-bar)'}
               />
             ))}
           </Bar>

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { ACCENTS } from '@/lib/accents';
 import { NAV_ITEMS } from './nav-items';
 
 export function BottomNav() {
@@ -29,7 +30,10 @@ export function BottomNav() {
                     : 'text-neutral-400 dark:text-neutral-500',
                 )}
               >
-                <Icon className={cn('h-5 w-5', active ? 'stroke-[2.2]' : '')} aria-hidden="true" />
+                <Icon
+                  className={cn('h-5 w-5', active ? `stroke-[2.2] ${ACCENTS[item.accent].text}` : '')}
+                  aria-hidden="true"
+                />
                 {item.label}
               </Link>
             </li>
