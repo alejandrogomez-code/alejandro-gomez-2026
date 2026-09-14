@@ -11,12 +11,12 @@ export function Sidebar({ email }: { email: string }) {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden w-64 shrink-0 border-r border-neutral-200/70 bg-white lg:flex lg:flex-col dark:border-neutral-800 dark:bg-neutral-900">
+    <aside className="hidden w-64 shrink-0 border-r border-mist-200/70 bg-white lg:flex lg:flex-col dark:border-mist-800 dark:bg-mist-900">
       <div className="px-6 py-7">
-        <p className="text-lg font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
+        <p className="text-lg font-medium tracking-tight text-mist-900 dark:text-mist-100">
           Vida
         </p>
-        <p className="mt-0.5 truncate text-xs text-neutral-400">{email}</p>
+        <p className="mt-0.5 truncate text-xs text-mist-400">{email}</p>
       </div>
 
       <nav aria-label="Navegación principal" className="flex-1 px-3">
@@ -32,8 +32,8 @@ export function Sidebar({ email }: { email: string }) {
                   className={cn(
                     'flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors',
                     active
-                      ? 'bg-neutral-100 font-medium text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100'
-                      : 'text-neutral-500 hover:bg-neutral-50 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800/60 dark:hover:text-neutral-100',
+                      ? 'bg-mist-100 font-medium text-mist-900 dark:bg-mist-800 dark:text-mist-100'
+                      : 'text-mist-500 hover:bg-mist-50 hover:text-mist-900 dark:text-mist-400 dark:hover:bg-mist-800/60 dark:hover:text-mist-100',
                   )}
                 >
                   <Icon
@@ -44,7 +44,7 @@ export function Sidebar({ email }: { email: string }) {
                 </Link>
 
                 {item.children && active ? (
-                  <ul className="mb-2 ml-7 mt-1 space-y-0.5 border-l border-neutral-200 pl-3 dark:border-neutral-800">
+                  <ul className="mb-2 ml-7 mt-1 space-y-0.5 border-l border-mist-200 pl-3 dark:border-mist-800">
                     {item.children.map((child) => {
                       const childActive = pathname.startsWith(child.match);
                       return (
@@ -55,8 +55,8 @@ export function Sidebar({ email }: { email: string }) {
                             className={cn(
                               'block rounded-md px-2 py-1.5 text-sm transition-colors',
                               childActive
-                                ? 'font-medium text-neutral-900 dark:text-neutral-100'
-                                : 'text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100',
+                                ? 'font-medium text-mist-900 dark:text-mist-100'
+                                : 'text-mist-500 hover:text-mist-900 dark:text-mist-400 dark:hover:text-mist-100',
                             )}
                           >
                             {child.label}
@@ -72,7 +72,7 @@ export function Sidebar({ email }: { email: string }) {
         </ul>
       </nav>
 
-      <div className="border-t border-neutral-100 p-3 dark:border-neutral-800">
+      <div className="border-t border-mist-100 p-3 dark:border-mist-800">
         <SignOutButton />
       </div>
     </aside>

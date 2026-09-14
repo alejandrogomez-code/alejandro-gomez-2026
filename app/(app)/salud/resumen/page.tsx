@@ -53,10 +53,10 @@ export default function ResumenPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
+        <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
           Resumen de salud
         </h1>
-        <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+        <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">
           Últimos 30 días de peso y pasos, y la semana en curso de hábitos.
         </p>
       </header>
@@ -95,7 +95,7 @@ export default function ResumenPage() {
             action={
               <Link
                 href="/salud/peso"
-                className="inline-flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+                className="inline-flex items-center gap-1 text-sm text-mist-500 hover:text-mist-900 dark:text-mist-400 dark:hover:text-mist-100"
               >
                 Ver detalle
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -113,7 +113,7 @@ export default function ResumenPage() {
             action={
               <Link
                 href="/salud/pasos"
-                className="inline-flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+                className="inline-flex items-center gap-1 text-sm text-mist-500 hover:text-mist-900 dark:text-mist-400 dark:hover:text-mist-100"
               >
                 Ver detalle
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />

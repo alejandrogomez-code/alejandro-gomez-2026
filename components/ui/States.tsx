@@ -6,7 +6,7 @@ export function LoadingState({ label = 'Cargando…', className }: { label?: str
   return (
     <div
       className={cn(
-        'flex items-center justify-center gap-2 py-10 text-sm text-neutral-500 dark:text-neutral-400',
+        'flex items-center justify-center gap-2 py-10 text-sm text-mist-500 dark:text-mist-400',
         className,
       )}
     >
@@ -47,10 +47,10 @@ export function EmptyState({
 }) {
   return (
     <div className={cn('flex flex-col items-center justify-center px-6 py-12 text-center', className)}>
-      {icon ? <div className="mb-3 text-neutral-300 dark:text-neutral-600">{icon}</div> : null}
-      <p className="text-sm font-medium text-neutral-700 dark:text-neutral-200">{title}</p>
+      {icon ? <div className="mb-3 text-mist-300 dark:text-mist-600">{icon}</div> : null}
+      <p className="text-sm font-medium text-mist-700 dark:text-mist-200">{title}</p>
       {description ? (
-        <p className="mt-1 max-w-sm text-sm text-neutral-500 dark:text-neutral-400">{description}</p>
+        <p className="mt-1 max-w-sm text-sm text-mist-500 dark:text-mist-400">{description}</p>
       ) : null}
       {action ? <div className="mt-5">{action}</div> : null}
     </div>

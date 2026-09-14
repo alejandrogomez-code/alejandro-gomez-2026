@@ -68,10 +68,10 @@ export default function ConfiguracionPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
+        <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
           Ajustes
         </h1>
-        <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{email}</p>
+        <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">{email}</p>
       </header>
 
       <Card>
@@ -107,7 +107,7 @@ export default function ConfiguracionPage() {
               />
             </div>
             {previewBMI !== null ? (
-              <p className="text-sm text-neutral-500 dark:text-neutral-400">
+              <p className="text-sm text-mist-500 dark:text-mist-400">
                 IMC con el peso inicial:{' '}
                 <span className="tabular font-medium">{formatBMI(previewBMI)}</span>
               </p>
@@ -124,7 +124,7 @@ export default function ConfiguracionPage() {
         <CardHeader title="Apariencia" />
         <CardContent className="space-y-6">
           <fieldset>
-            <legend className="mb-2 text-sm font-medium text-neutral-700 dark:text-neutral-300">
+            <legend className="mb-2 text-sm font-medium text-mist-700 dark:text-mist-300">
               Tema
             </legend>
             <div className="grid grid-cols-3 gap-2">
@@ -139,10 +139,10 @@ export default function ConfiguracionPage() {
                     aria-pressed={active}
                     className={cn(
                       'flex flex-col items-center gap-2 rounded-xl border px-3 py-4 text-sm transition-colors',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-neutral-100',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mist-900 dark:focus-visible:ring-mist-100',
                       active
-                        ? 'border-neutral-900 text-neutral-900 dark:border-neutral-100 dark:text-neutral-100'
-                        : 'border-neutral-200 text-neutral-500 hover:border-neutral-300 dark:border-neutral-800 dark:text-neutral-400',
+                        ? 'border-mist-900 text-mist-900 dark:border-mist-100 dark:text-mist-100'
+                        : 'border-mist-200 text-mist-500 hover:border-mist-300 dark:border-mist-800 dark:text-mist-400',
                     )}
                   >
                     <Icon className="h-4 w-4" aria-hidden="true" />
@@ -154,7 +154,7 @@ export default function ConfiguracionPage() {
           </fieldset>
 
           <fieldset>
-            <legend className="mb-2 text-sm font-medium text-neutral-700 dark:text-neutral-300">
+            <legend className="mb-2 text-sm font-medium text-mist-700 dark:text-mist-300">
               Tamaño de fuente
             </legend>
             <div className="grid grid-cols-3 gap-2">
@@ -168,10 +168,10 @@ export default function ConfiguracionPage() {
                     aria-pressed={active}
                     className={cn(
                       'rounded-xl border px-3 py-3 text-sm transition-colors',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-neutral-100',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mist-900 dark:focus-visible:ring-mist-100',
                       active
-                        ? 'border-neutral-900 text-neutral-900 dark:border-neutral-100 dark:text-neutral-100'
-                        : 'border-neutral-200 text-neutral-500 hover:border-neutral-300 dark:border-neutral-800 dark:text-neutral-400',
+                        ? 'border-mist-900 text-mist-900 dark:border-mist-100 dark:text-mist-100'
+                        : 'border-mist-200 text-mist-500 hover:border-mist-300 dark:border-mist-800 dark:text-mist-400',
                     )}
                   >
                     {option.label}

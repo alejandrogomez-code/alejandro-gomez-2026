@@ -130,10 +130,10 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8">
       <header>
-        <h1 className="text-2xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
+        <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
           {greeting()}
         </h1>
-        <p className="mt-1 text-sm capitalize text-neutral-500 dark:text-neutral-400">
+        <p className="mt-1 text-sm capitalize text-mist-500 dark:text-mist-400">
           {formatLongDate(today)}
         </p>
       </header>
@@ -156,7 +156,7 @@ export default function DashboardPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-sm font-medium text-neutral-500 dark:text-neutral-400">Hoy</h2>
+        <h2 className="text-sm font-medium text-mist-500 dark:text-mist-400">Hoy</h2>
         <TodaySummary
           steps={todaySteps}
           stepsGoal={dailyStepsGoal}

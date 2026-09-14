@@ -20,14 +20,14 @@ export function MobileHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between border-b border-neutral-200/70 bg-white/90 px-4 py-3 backdrop-blur lg:hidden dark:border-neutral-800 dark:bg-neutral-950/90">
-      <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+    <header className="sticky top-0 z-30 flex items-center justify-between border-b border-mist-200/70 bg-white/90 px-4 py-3 backdrop-blur lg:hidden dark:border-mist-800 dark:bg-mist-950/90">
+      <p className="text-sm font-medium text-mist-900 dark:text-mist-100">
         {currentTitle(pathname)}
       </p>
       <Link
         href="/configuracion"
         aria-label="Ajustes"
-        className="rounded-lg p-1.5 text-neutral-500 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-800"
+        className="rounded-lg p-1.5 text-mist-500 hover:bg-mist-100 dark:text-mist-400 dark:hover:bg-mist-800"
       >
         <Settings className="h-4 w-4" aria-hidden="true" />
       </Link>

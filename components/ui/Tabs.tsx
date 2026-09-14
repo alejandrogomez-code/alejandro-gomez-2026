@@ -27,7 +27,7 @@ export function Tabs<T extends string>({
       role="tablist"
       aria-label={ariaLabel}
       className={cn(
-        'inline-flex gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800/70',
+        'inline-flex gap-1 rounded-lg bg-mist-100 p-1 dark:bg-mist-800/70',
         className,
       )}
     >
@@ -42,10 +42,10 @@ export function Tabs<T extends string>({
             onClick={() => onChange(item.value)}
             className={cn(
               'rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-neutral-100',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mist-900 dark:focus-visible:ring-mist-100',
               active
-                ? 'bg-white text-neutral-900 shadow-card dark:bg-neutral-950 dark:text-neutral-100'
-                : 'text-neutral-500 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-200',
+                ? 'bg-white text-mist-900 shadow-card dark:bg-mist-950 dark:text-mist-100'
+                : 'text-mist-500 hover:text-mist-800 dark:text-mist-400 dark:hover:text-mist-200',
             )}
           >
             {item.label}

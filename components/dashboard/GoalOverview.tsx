@@ -21,7 +21,7 @@ export function GoalOverview({ goals }: { goals: Goal[] }) {
         action={
           <Link
             href="/objetivos"
-            className="inline-flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+            className="inline-flex items-center gap-1 text-sm text-mist-500 hover:text-mist-900 dark:text-mist-400 dark:hover:text-mist-100"
           >
             Ver todos
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -47,7 +47,7 @@ export function GoalOverview({ goals }: { goals: Goal[] }) {
               return (
                 <li key={goal.id} className="space-y-2">
                   <div className="flex items-center justify-between gap-3 text-sm">
-                    <span className="truncate text-neutral-700 dark:text-neutral-300">
+                    <span className="truncate text-mist-700 dark:text-mist-300">
                       {goal.name}
                     </span>
                     <span className={`tabular shrink-0 font-medium ${ACCENTS.plum.text}`}>
@@ -62,7 +62,7 @@ export function GoalOverview({ goals }: { goals: Goal[] }) {
                     />
                   ) : null}
                   {remaining ? (
-                    <p className="text-xs text-neutral-400">{remaining}</p>
+                    <p className="text-xs text-mist-400">{remaining}</p>
                   ) : null}
                 </li>
               );

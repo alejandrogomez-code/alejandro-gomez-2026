@@ -12,7 +12,7 @@ export function BottomNav() {
   return (
     <nav
       aria-label="Navegación principal"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-neutral-200 bg-white/95 backdrop-blur lg:hidden dark:border-neutral-800 dark:bg-neutral-900/95"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-mist-200 bg-white/95 backdrop-blur lg:hidden dark:border-mist-800 dark:bg-mist-900/95"
     >
       <ul className="mx-auto flex max-w-lg items-stretch justify-around px-2 pb-[env(safe-area-inset-bottom)]">
         {NAV_ITEMS.map((item) => {
@@ -26,8 +26,8 @@ export function BottomNav() {
                 className={cn(
                   'flex flex-col items-center gap-1 py-2.5 text-[11px] transition-colors',
                   active
-                    ? 'text-neutral-900 dark:text-neutral-100'
-                    : 'text-neutral-400 dark:text-neutral-500',
+                    ? 'text-mist-900 dark:text-mist-100'
+                    : 'text-mist-400 dark:text-mist-500',
                 )}
               >
                 <Icon

@@ -33,7 +33,7 @@ export function StatCard({
   return (
     <Card className={cn('p-5', className)}>
       <div className="flex items-start justify-between gap-2">
-        <p className="text-sm text-neutral-500 dark:text-neutral-400">{label}</p>
+        <p className="text-sm text-mist-500 dark:text-mist-400">{label}</p>
         {icon ? (
           <span
             className={cn('flex h-8 w-8 items-center justify-center rounded-lg', theme.chip)}
@@ -43,17 +43,17 @@ export function StatCard({
           </span>
         ) : null}
       </div>
-      <p className="tabular mt-3 text-2xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
+      <p className="tabular mt-3 text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
         {value}
         {unit ? (
-          <span className="ml-1 text-base font-normal text-neutral-400">{unit}</span>
+          <span className="ml-1 text-base font-normal text-mist-400">{unit}</span>
         ) : null}
       </p>
       {progress !== null ? (
         <Progress value={progress} className="mt-3" barClassName={theme.bar} label={label} />
       ) : null}
       {detail ? (
-        <div className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">{detail}</div>
+        <div className="mt-2 text-sm text-mist-500 dark:text-mist-400">{detail}</div>
       ) : null}
     </Card>
   );

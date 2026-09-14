@@ -22,7 +22,7 @@ export function GoalProgress({ goal, compact = false }: { goal: Goal; compact?: 
           {formatPercent(progress)}
         </span>
         {!compact && goal.type === 'quantitative' && goal.target_value !== null ? (
-          <span className="tabular text-neutral-500 dark:text-neutral-400">
+          <span className="tabular text-mist-500 dark:text-mist-400">
             {formatNumber(goal.current_value ?? 0, decimalsFor(goal.current_value))} /{' '}
             {formatNumber(goal.target_value, decimalsFor(goal.target_value))}
             {goal.unit ? ` ${goal.unit}` : ''}

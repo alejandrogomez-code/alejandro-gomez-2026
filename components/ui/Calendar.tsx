@@ -48,7 +48,7 @@ export function Calendar({ month, onMonthChange, selected, onSelect, renderDay }
         >
           <ChevronLeft className="h-4 w-4" aria-hidden="true" />
         </Button>
-        <p className="text-sm font-medium capitalize text-neutral-900 dark:text-neutral-100">
+        <p className="text-sm font-medium capitalize text-mist-900 dark:text-mist-100">
           {formatMonthYear(month)}
         </p>
         <Button
@@ -65,7 +65,7 @@ export function Calendar({ month, onMonthChange, selected, onSelect, renderDay }
         {CALENDAR_HEADERS.map((label, index) => (
           <div
             key={`${label}-${index}`}
-            className="pb-1 text-center text-xs font-medium text-neutral-400"
+            className="pb-1 text-center text-xs font-medium text-mist-400"
           >
             {label}
           </div>
@@ -87,10 +87,10 @@ export function Calendar({ month, onMonthChange, selected, onSelect, renderDay }
               aria-pressed={isSelected}
               className={cn(
                 'flex aspect-square flex-col items-center justify-start gap-1 rounded-xl border p-1 text-xs transition-colors sm:p-2',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-neutral-100',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mist-900 dark:focus-visible:ring-mist-100',
                 isSelected
-                  ? 'border-neutral-900 bg-neutral-900 text-neutral-50 dark:border-neutral-100 dark:bg-neutral-100 dark:text-neutral-900'
-                  : 'border-neutral-200/70 bg-white text-neutral-700 hover:border-neutral-300 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:border-neutral-700',
+                  ? 'border-mist-900 bg-mist-900 text-mist-50 dark:border-mist-100 dark:bg-mist-100 dark:text-mist-900'
+                  : 'border-mist-200/70 bg-white text-mist-700 hover:border-mist-300 dark:border-mist-800 dark:bg-mist-900 dark:text-mist-300 dark:hover:border-mist-700',
               )}
             >
               <span className={cn('tabular-nums', isToday && !isSelected ? 'font-semibold' : '')}>

@@ -41,11 +41,11 @@ export function HabitCard({
       <CardContent className="space-y-4">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <h3 className="truncate text-base font-medium text-neutral-900 dark:text-neutral-100">
+            <h3 className="truncate text-base font-medium text-mist-900 dark:text-mist-100">
               {habit.name}
             </h3>
             {habit.description ? (
-              <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+              <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">
                 {habit.description}
               </p>
             ) : null}
@@ -78,19 +78,19 @@ export function HabitCard({
           {!habit.active ? <Badge tone="neutral">Inactivo</Badge> : null}
         </div>
 
-        <div className="rounded-xl bg-neutral-50 p-4 dark:bg-neutral-800/50">
+        <div className="rounded-xl bg-mist-50 p-4 dark:bg-mist-800/50">
           {!state.scheduled ? (
-            <p className="text-sm text-neutral-500 dark:text-neutral-400">
+            <p className="text-sm text-mist-500 dark:text-mist-400">
               Hoy no corresponde este hábito.
             </p>
           ) : state.fromSteps ? (
             <div className="space-y-2">
               <div className="flex items-baseline justify-between">
-                <span className="tabular text-sm text-neutral-600 dark:text-neutral-300">
+                <span className="tabular text-sm text-mist-600 dark:text-mist-300">
                   {state.value === null ? 'Sin registro' : formatNumber(state.value)} /{' '}
                   {formatNumber(habit.target_value ?? 0)} {habit.unit ?? ''}
                 </span>
-                <span className="tabular text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                <span className="tabular text-sm font-medium text-mist-900 dark:text-mist-100">
                   {state.percent === null ? '—' : formatPercent(state.percent)}
                 </span>
               </div>
@@ -99,7 +99,7 @@ export function HabitCard({
                 barClassName={ACCENTS.sage.bar}
                 label={habit.name}
               />
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">
+              <p className="text-xs text-mist-500 dark:text-mist-400">
                 {state.completed ? 'Cumplido hoy' : 'Se completa al cargar los pasos del día'}
               </p>
             </div>
@@ -117,9 +117,9 @@ export function HabitCard({
                       onValueChange?.(habit, value);
                     }
                   }}
-                  className="tabular h-10 w-28 rounded-lg border border-neutral-200 bg-white px-3 text-base dark:border-neutral-700 dark:bg-neutral-950"
+                  className="tabular h-10 w-28 rounded-lg border border-mist-200 bg-white px-3 text-base dark:border-mist-700 dark:bg-mist-950"
                 />
-                <span className="text-sm text-neutral-500 dark:text-neutral-400">
+                <span className="text-sm text-mist-500 dark:text-mist-400">
                   de {formatNumber(habit.target_value ?? 0)} {habit.unit ?? ''}
                 </span>
               </div>
@@ -136,10 +136,10 @@ export function HabitCard({
               aria-pressed={state.completed}
               className={cn(
                 'flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-neutral-100',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mist-900 dark:focus-visible:ring-mist-100',
                 state.completed
-                  ? 'bg-honey-500 text-white dark:bg-honey-400 dark:text-neutral-900'
-                  : 'border border-neutral-200 bg-white text-neutral-600 hover:border-honey-300 hover:bg-honey-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-300 dark:hover:bg-honey-500/10',
+                  ? 'bg-honey-500 text-white dark:bg-honey-400 dark:text-mist-900'
+                  : 'border border-mist-200 bg-white text-mist-600 hover:border-honey-300 hover:bg-honey-50 dark:border-mist-700 dark:bg-mist-950 dark:text-mist-300 dark:hover:bg-honey-500/10',
               )}
             >
               <span
@@ -147,7 +147,7 @@ export function HabitCard({
                   'flex h-5 w-5 items-center justify-center rounded-md border',
                   state.completed
                     ? 'border-transparent bg-white/20'
-                    : 'border-neutral-300 dark:border-neutral-600',
+                    : 'border-mist-300 dark:border-mist-600',
                 )}
               >
                 {state.completed ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : null}
@@ -159,7 +159,7 @@ export function HabitCard({
 
         <div className="space-y-1.5">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-neutral-500 dark:text-neutral-400">Esta semana</span>
+            <span className="text-mist-500 dark:text-mist-400">Esta semana</span>
             <span className={`tabular font-medium ${ACCENTS.honey.text}`}>
               {weeklyLabel} · {formatPercent(weeklyPercent, 0)}
             </span>

@@ -13,15 +13,15 @@ export default async function LoginPage() {
   if (user) redirect('/dashboard');
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-neutral-50 px-4 dark:bg-neutral-950">
+    <main className="flex min-h-screen items-center justify-center bg-mist-50 px-4 dark:bg-mist-950">
       <div className="w-full max-w-sm">
-        <h1 className="text-2xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
+        <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
           Vida
         </h1>
-        <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+        <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">
           Ingresá con tu cuenta para ver tu panel.
         </p>
-        <div className="mt-8 rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-card dark:border-neutral-800 dark:bg-neutral-900">
+        <div className="mt-8 rounded-2xl border border-mist-200/80 bg-white p-6 shadow-card dark:border-mist-800 dark:bg-mist-900">
           <LoginForm />
         </div>
       </div>

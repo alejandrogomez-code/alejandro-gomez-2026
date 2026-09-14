@@ -64,10 +64,10 @@ export function QuickActions({
               type="button"
               onClick={() => setOpen(action.key)}
               className={cn(
-                'flex items-center gap-2 rounded-xl border border-neutral-200/80 bg-white px-4 py-3 text-sm font-medium text-neutral-700 shadow-card transition-colors',
-                'hover:border-neutral-300 hover:text-neutral-900',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900',
-                'dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:border-neutral-700 dark:hover:text-neutral-100 dark:focus-visible:ring-neutral-100',
+                'flex items-center gap-2 rounded-xl border border-mist-200/80 bg-white px-4 py-3 text-sm font-medium text-mist-700 shadow-card transition-colors',
+                'hover:border-mist-300 hover:text-mist-900',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mist-900',
+                'dark:border-mist-800 dark:bg-mist-900 dark:text-mist-300 dark:hover:border-mist-700 dark:hover:text-mist-100 dark:focus-visible:ring-mist-100',
               )}
             >
               <span
@@ -127,8 +127,8 @@ export function QuickActions({
                   className={cn(
                     'flex w-full items-center gap-3 rounded-lg border px-3 py-2.5 text-left text-sm transition-colors',
                     state.completed
-                      ? 'border-neutral-900 bg-neutral-900 text-neutral-50 dark:border-neutral-100 dark:bg-neutral-100 dark:text-neutral-900'
-                      : 'border-neutral-200 text-neutral-700 hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800/60',
+                      ? 'border-mist-900 bg-mist-900 text-mist-50 dark:border-mist-100 dark:bg-mist-100 dark:text-mist-900'
+                      : 'border-mist-200 text-mist-700 hover:bg-mist-50 dark:border-mist-700 dark:text-mist-300 dark:hover:bg-mist-800/60',
                     state.fromSteps ? 'cursor-default opacity-80' : '',
                   )}
                 >
@@ -137,7 +137,7 @@ export function QuickActions({
                       'flex h-5 w-5 shrink-0 items-center justify-center rounded-md border',
                       state.completed
                         ? 'border-transparent bg-white/20'
-                        : 'border-neutral-300 dark:border-neutral-600',
+                        : 'border-mist-300 dark:border-mist-600',
                     )}
                   >
                     {state.completed ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : null}
@@ -171,7 +171,7 @@ export function QuickActions({
 
 export function QuickActionsHeading() {
   return (
-    <div className="flex items-center gap-2 text-sm font-medium text-neutral-500 dark:text-neutral-400">
+    <div className="flex items-center gap-2 text-sm font-medium text-mist-500 dark:text-mist-400">
       <Plus className="h-4 w-4" aria-hidden="true" />
       Acciones rápidas
     </div>

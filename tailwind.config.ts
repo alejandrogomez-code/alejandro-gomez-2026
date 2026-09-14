@@ -23,6 +23,21 @@ const config: Config = {
         ],
       },
       colors: {
+        // Escala neutra fría: el lienzo deja de ser blanco puro y las
+        // tarjetas blancas se despegan del fondo sin necesitar sombra.
+        mist: {
+          50: '#f0f3f7',
+          100: '#e6ebf2',
+          200: '#dfe5ed',
+          300: '#c3ccd8',
+          400: '#97a2b0',
+          500: '#6f7c8b',
+          600: '#566170',
+          700: '#3d4653',
+          800: '#2b313a',
+          900: '#1c2027',
+          950: '#13161b',
+        },
         // Cada área de la app tiene su color: pasos y cumplimiento en verde,
         // peso en azul, hábitos en dorado, objetivos en violeta.
         sage: {

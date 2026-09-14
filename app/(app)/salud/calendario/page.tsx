@@ -35,10 +35,10 @@ export default function CalendarioPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
+        <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
           Calendario
         </h1>
-        <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+        <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">
           Elegí un día para ver el detalle y marcar hábitos.
         </p>
       </header>

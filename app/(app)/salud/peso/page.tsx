@@ -60,10 +60,10 @@ export default function PesoPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
+        <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
           Peso
         </h1>
-        <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+        <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">
           Un registro por día. Si cargás dos veces el mismo día, se actualiza.
         </p>
       </header>
@@ -108,7 +108,7 @@ export default function PesoPage() {
               description="Cargá tu peso arriba para empezar el seguimiento."
             />
           ) : (
-            <ul className="divide-y divide-neutral-100 dark:divide-neutral-800">
+            <ul className="divide-y divide-mist-100 dark:divide-mist-800">
               {descending.map((record) => {
                 const bmi = calculateBMI(record.weight_kg, profile?.height_cm ?? null);
                 return (
@@ -117,10 +117,10 @@ export default function PesoPage() {
                     className="flex items-center justify-between gap-3 px-5 py-3"
                   >
                     <div className="min-w-0">
-                      <p className="tabular text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                      <p className="tabular text-sm font-medium text-mist-900 dark:text-mist-100">
                         {formatNumber(record.weight_kg, 1)} kg
                       </p>
-                      <p className="tabular text-xs text-neutral-500 dark:text-neutral-400">
+                      <p className="tabular text-xs text-mist-500 dark:text-mist-400">
                         {formatDate(record.date)} · IMC {formatBMI(bmi)}
                       </p>
                     </div>

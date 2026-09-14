@@ -22,7 +22,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       {label ? (
         <label
           htmlFor={inputId}
-          className="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+          className="mb-1.5 block text-sm font-medium text-mist-700 dark:text-mist-300"
         >
           {label}
         </label>
@@ -34,9 +34,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           aria-invalid={error ? true : undefined}
           aria-describedby={error ? `${inputId}-error` : undefined}
           className={cn(
-            'h-11 w-full rounded-lg border border-neutral-200 bg-white px-3 text-base text-neutral-900 tabular-nums',
-            'placeholder:text-neutral-400 focus:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/10',
-            'dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-100 dark:focus:border-neutral-600 dark:focus:ring-neutral-100/10',
+            'h-11 w-full rounded-lg border border-mist-200 bg-white px-3 text-base text-mist-900 tabular-nums',
+            'placeholder:text-mist-400 focus:border-mist-400 focus:outline-none focus:ring-2 focus:ring-mist-900/10',
+            'dark:border-mist-800 dark:bg-mist-950 dark:text-mist-100 dark:focus:border-mist-600 dark:focus:ring-mist-100/10',
             'disabled:cursor-not-allowed disabled:opacity-60',
             suffix ? 'pr-12' : '',
             error ? 'border-red-400 dark:border-red-500' : '',
@@ -45,7 +45,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           {...props}
         />
         {suffix ? (
-          <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-neutral-400">
+          <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-mist-400">
             {suffix}
           </span>
         ) : null}
@@ -55,7 +55,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           {error}
         </p>
       ) : hint ? (
-        <p className="mt-1.5 text-sm text-neutral-500 dark:text-neutral-400">{hint}</p>
+        <p className="mt-1.5 text-sm text-mist-500 dark:text-mist-400">{hint}</p>
       ) : null}
     </div>
   );
@@ -74,7 +74,7 @@ export function Textarea({ label, id, className, ...props }: TextareaProps) {
       {label ? (
         <label
           htmlFor={textareaId}
-          className="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+          className="mb-1.5 block text-sm font-medium text-mist-700 dark:text-mist-300"
         >
           {label}
         </label>
@@ -83,9 +83,9 @@ export function Textarea({ label, id, className, ...props }: TextareaProps) {
         id={textareaId}
         rows={3}
         className={cn(
-          'w-full rounded-lg border border-neutral-200 bg-white p-3 text-base text-neutral-900',
-          'placeholder:text-neutral-400 focus:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/10',
-          'dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-100 dark:focus:border-neutral-600 dark:focus:ring-neutral-100/10',
+          'w-full rounded-lg border border-mist-200 bg-white p-3 text-base text-mist-900',
+          'placeholder:text-mist-400 focus:border-mist-400 focus:outline-none focus:ring-2 focus:ring-mist-900/10',
+          'dark:border-mist-800 dark:bg-mist-950 dark:text-mist-100 dark:focus:border-mist-600 dark:focus:ring-mist-100/10',
           className,
         )}
         {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}

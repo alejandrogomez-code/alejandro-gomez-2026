@@ -42,7 +42,7 @@ export function WeeklyHabitSummary({
             barClassName={ACCENTS.honey.bar}
             label="Cumplimiento general"
           />
-          <p className="tabular mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+          <p className="tabular mt-2 text-sm text-mist-500 dark:text-mist-400">
             {completion.completed} de {completion.expected} instancias previstas
           </p>
         </div>
@@ -57,10 +57,10 @@ export function WeeklyHabitSummary({
             {completion.byHabit.map((row) => (
               <li key={row.habit.id} className="space-y-1.5">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="truncate text-neutral-700 dark:text-neutral-300">
+                  <span className="truncate text-mist-700 dark:text-mist-300">
                     {row.habit.name}
                   </span>
-                  <span className="tabular shrink-0 pl-3 text-neutral-500 dark:text-neutral-400">
+                  <span className="tabular shrink-0 pl-3 text-mist-500 dark:text-mist-400">
                     {row.completed}/{row.expected} · {formatPercent(row.percentage, 0)}
                   </span>
                 </div>

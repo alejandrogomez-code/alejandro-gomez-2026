@@ -17,13 +17,13 @@ export function Progress({ value, className, barClassName, label }: ProgressProp
       aria-valuemax={100}
       aria-label={label}
       className={cn(
-        'h-2 w-full overflow-hidden rounded-full bg-neutral-100 dark:bg-neutral-800',
+        'h-2 w-full overflow-hidden rounded-full bg-mist-100 dark:bg-mist-800',
         className,
       )}
     >
       <div
         className={cn(
-          'h-full rounded-full bg-neutral-900 transition-[width] duration-500 dark:bg-neutral-100',
+          'h-full rounded-full bg-mist-900 transition-[width] duration-500 dark:bg-mist-100',
           barClassName,
         )}
         style={{ width: `${clamped}%` }}

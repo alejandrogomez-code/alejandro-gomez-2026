@@ -133,7 +133,7 @@ export function OnboardingGate() {
         />
 
         {previewBMI !== null ? (
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+          <p className="text-sm text-mist-500 dark:text-mist-400">
             IMC inicial: <span className="tabular font-medium">{formatBMI(previewBMI)}</span>
           </p>
         ) : null}

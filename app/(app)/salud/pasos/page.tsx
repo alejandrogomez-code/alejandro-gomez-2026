@@ -48,10 +48,10 @@ export default function PasosPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
+        <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
           Pasos
         </h1>
-        <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+        <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">
           Objetivo diario: <span className="tabular">{formatNumber(dailyGoal)}</span> pasos.
         </p>
       </header>
@@ -136,16 +136,16 @@ export default function PasosPage() {
               description="Cargá los pasos de hoy para empezar."
             />
           ) : (
-            <ul className="divide-y divide-neutral-100 dark:divide-neutral-800">
+            <ul className="divide-y divide-mist-100 dark:divide-mist-800">
               {descending.map((record) => {
                 const percent = calculateStepCompletion(record.steps, dailyGoal);
                 return (
                   <li key={record.id} className="flex items-center justify-between gap-3 px-5 py-3">
                     <div className="min-w-0">
-                      <p className="tabular text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                      <p className="tabular text-sm font-medium text-mist-900 dark:text-mist-100">
                         {formatNumber(record.steps)} pasos
                       </p>
-                      <p className="tabular text-xs text-neutral-500 dark:text-neutral-400">
+                      <p className="tabular text-xs text-mist-500 dark:text-mist-400">
                         {formatDate(record.date)} · {formatPercent(percent)}
                       </p>
                     </div>

@@ -78,10 +78,10 @@ export default function HabitosPage() {
     <div className="space-y-6">
       <header className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
+          <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
             Hábitos
           </h1>
-          <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+          <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">
             Solo cuentan los días previstos por cada hábito.
           </p>
         </div>

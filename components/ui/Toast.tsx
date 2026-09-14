@@ -44,7 +44,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
             key={item.id}
             className={cn(
               'pointer-events-auto flex w-full max-w-sm items-center gap-3 rounded-xl border px-4 py-3 text-sm shadow-float',
-              'border-neutral-200 bg-white text-neutral-800 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100',
+              'border-mist-200 bg-white text-mist-800 dark:border-mist-800 dark:bg-mist-900 dark:text-mist-100',
             )}
           >
             {item.tone === 'success' ? (
@@ -52,7 +52,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
             ) : item.tone === 'error' ? (
               <AlertCircle className="h-4 w-4 shrink-0 text-red-500" aria-hidden="true" />
             ) : (
-              <Info className="h-4 w-4 shrink-0 text-neutral-400" aria-hidden="true" />
+              <Info className="h-4 w-4 shrink-0 text-mist-400" aria-hidden="true" />
             )}
             <span>{item.message}</span>
           </div>

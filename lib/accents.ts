@@ -47,11 +47,11 @@ export const ACCENTS: Record<Accent, AccentClasses> = {
     border: 'border-plum-500 dark:border-plum-400',
   },
   neutral: {
-    chip: 'bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400',
-    bar: 'bg-neutral-900 dark:bg-neutral-100',
-    text: 'text-neutral-900 dark:text-neutral-100',
-    soft: 'bg-neutral-50 dark:bg-neutral-800/50',
-    border: 'border-neutral-900 dark:border-neutral-100',
+    chip: 'bg-mist-100 text-mist-500 dark:bg-mist-800 dark:text-mist-400',
+    bar: 'bg-mist-900 dark:bg-mist-100',
+    text: 'text-mist-900 dark:text-mist-100',
+    soft: 'bg-mist-50 dark:bg-mist-800/50',
+    border: 'border-mist-900 dark:border-mist-100',
   },
 };
 
