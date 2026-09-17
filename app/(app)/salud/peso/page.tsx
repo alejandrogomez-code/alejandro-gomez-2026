@@ -1,7 +1,8 @@
 'use client';
 
+import { Pencil, Scale, Trash2 } from 'lucide-react';
+import { PageHeader } from '@/components/ui/PageHeader';
 import { useMemo, useState } from 'react';
-import { Pencil, Trash2 } from 'lucide-react';
 import { useProfile } from '@/hooks/useProfile';
 import { useWeightRecords } from '@/hooks/useWeightRecords';
 import { useGoals } from '@/hooks/useGoals';
@@ -59,14 +60,12 @@ export default function PesoPage() {
 
   return (
     <div className="space-y-6">
-      <header>
-        <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
-          Peso
-        </h1>
-        <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">
-          Un registro por día. Si cargás dos veces el mismo día, se actualiza.
-        </p>
-      </header>
+      <PageHeader
+        icon={Scale}
+        accent="ocean"
+        title="Peso"
+        description={<>Un registro por día. Si cargás dos veces el mismo día, se actualiza.</>}
+      />
 
       <Card>
         <CardHeader title="Registrar peso" />

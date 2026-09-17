@@ -87,9 +87,9 @@ export function Calendar({ month, onMonthChange, selected, onSelect, renderDay }
               aria-pressed={isSelected}
               className={cn(
                 'flex aspect-square flex-col items-center justify-start gap-1 rounded-xl border p-1 text-xs transition-colors sm:p-2',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mist-900 dark:focus-visible:ring-mist-100',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-500 dark:focus-visible:ring-ocean-300',
                 isSelected
-                  ? 'border-mist-900 bg-mist-900 text-mist-50 dark:border-mist-100 dark:bg-mist-100 dark:text-mist-900'
+                  ? 'border-ocean-500 bg-ocean-500 text-white dark:border-ocean-400 dark:bg-ocean-500'
                   : 'border-mist-200/70 bg-white text-mist-700 hover:border-mist-300 dark:border-mist-800 dark:bg-mist-900 dark:text-mist-300 dark:hover:border-mist-700',
               )}
             >

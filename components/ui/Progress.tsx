@@ -23,7 +23,7 @@ export function Progress({ value, className, barClassName, label }: ProgressProp
     >
       <div
         className={cn(
-          'h-full rounded-full bg-mist-900 transition-[width] duration-500 dark:bg-mist-100',
+          'h-full rounded-full bg-ocean-500 transition-[width] duration-500 dark:bg-ocean-400',
           barClassName,
         )}
         style={{ width: `${clamped}%` }}

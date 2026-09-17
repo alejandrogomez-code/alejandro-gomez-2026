@@ -1,5 +1,6 @@
 'use client';
 
+import { PageHeader } from '@/components/ui/PageHeader';
 import { useMemo, useState } from 'react';
 import { Plus, Target } from 'lucide-react';
 import { useGoals } from '@/hooks/useGoals';
@@ -82,20 +83,18 @@ export default function ObjetivosPage() {
 
   return (
     <div className="space-y-6">
-      <header className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
-            Objetivos
-          </h1>
-          <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">
-            Lo que querés lograr, con su progreso y su fecha.
-          </p>
-        </div>
-        <Button onClick={openCreate}>
-          <Plus className="h-4 w-4" aria-hidden="true" />
-          Nuevo objetivo
-        </Button>
-      </header>
+      <PageHeader
+        icon={Target}
+        accent="plum"
+        title="Objetivos"
+        description="Lo que querés lograr, con su progreso y su fecha."
+        action={
+      <Button onClick={openCreate}>
+        <Plus className="h-4 w-4" aria-hidden="true" />
+        Nuevo objetivo
+      </Button>
+        }
+      />
 
       <Tabs items={FILTERS} value={filter} onChange={setFilter} ariaLabel="Filtrar objetivos" />
 

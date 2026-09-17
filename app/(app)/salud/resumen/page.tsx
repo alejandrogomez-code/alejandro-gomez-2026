@@ -1,8 +1,9 @@
 'use client';
 
+import { ArrowRight, HeartPulse } from 'lucide-react';
+import { PageHeader } from '@/components/ui/PageHeader';
 import { useMemo } from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 import { useProfile } from '@/hooks/useProfile';
 import { useHabits } from '@/hooks/useHabits';
 import { useHabitRecords } from '@/hooks/useHabitRecords';
@@ -52,14 +53,12 @@ export default function ResumenPage() {
 
   return (
     <div className="space-y-6">
-      <header>
-        <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
-          Resumen de salud
-        </h1>
-        <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">
-          Últimos 30 días de peso y pasos, y la semana en curso de hábitos.
-        </p>
-      </header>
+      <PageHeader
+        icon={HeartPulse}
+        accent="sage"
+        title="Resumen de salud"
+        description={<>Últimos 30 días de peso y pasos, y la semana en curso de hábitos.</>}
+      />
 
       <HealthSummary
         records={weightRecords}

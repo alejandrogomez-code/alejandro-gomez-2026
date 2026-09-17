@@ -231,9 +231,9 @@ export function HabitForm({ habit = null, goals, onSubmit, onCancel }: HabitForm
                   aria-label={WEEKDAY_LABELS[day]}
                   className={cn(
                     'h-10 w-10 rounded-lg border text-sm font-medium transition-colors',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mist-900 dark:focus-visible:ring-mist-100',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-honey-500 dark:focus-visible:ring-honey-300',
                     selected
-                      ? 'border-mist-900 bg-mist-900 text-mist-50 dark:border-mist-100 dark:bg-mist-100 dark:text-mist-900'
+                      ? 'border-honey-500 bg-honey-500 text-white dark:border-honey-400 dark:bg-honey-500'
                       : 'border-mist-200 bg-white text-mist-600 dark:border-mist-700 dark:bg-mist-950 dark:text-mist-300',
                   )}
                 >

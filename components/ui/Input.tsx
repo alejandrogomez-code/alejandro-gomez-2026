@@ -35,8 +35,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           aria-describedby={error ? `${inputId}-error` : undefined}
           className={cn(
             'h-11 w-full rounded-lg border border-mist-200 bg-white px-3 text-base text-mist-900 tabular-nums',
-            'placeholder:text-mist-400 focus:border-mist-400 focus:outline-none focus:ring-2 focus:ring-mist-900/10',
-            'dark:border-mist-800 dark:bg-mist-950 dark:text-mist-100 dark:focus:border-mist-600 dark:focus:ring-mist-100/10',
+            'placeholder:text-mist-400 focus:border-ocean-400 focus:outline-none focus:ring-2 focus:ring-ocean-500/20',
+            'dark:border-mist-800 dark:bg-mist-950 dark:text-mist-100 dark:focus:border-ocean-400 dark:focus:ring-ocean-400/20',
             'disabled:cursor-not-allowed disabled:opacity-60',
             suffix ? 'pr-12' : '',
             error ? 'border-red-400 dark:border-red-500' : '',
@@ -84,8 +84,8 @@ export function Textarea({ label, id, className, ...props }: TextareaProps) {
         rows={3}
         className={cn(
           'w-full rounded-lg border border-mist-200 bg-white p-3 text-base text-mist-900',
-          'placeholder:text-mist-400 focus:border-mist-400 focus:outline-none focus:ring-2 focus:ring-mist-900/10',
-          'dark:border-mist-800 dark:bg-mist-950 dark:text-mist-100 dark:focus:border-mist-600 dark:focus:ring-mist-100/10',
+          'placeholder:text-mist-400 focus:border-ocean-400 focus:outline-none focus:ring-2 focus:ring-ocean-500/20',
+          'dark:border-mist-800 dark:bg-mist-950 dark:text-mist-100 dark:focus:border-ocean-400 dark:focus:ring-ocean-400/20',
           className,
         )}
         {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}

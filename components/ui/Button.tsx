@@ -15,11 +15,11 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variants: Record<Variant, string> = {
   primary:
-    'bg-mist-900 text-mist-50 hover:bg-mist-800 dark:bg-mist-100 dark:text-mist-900 dark:hover:bg-white',
+    'bg-ocean-600 text-white shadow-sm hover:bg-ocean-700 dark:bg-ocean-500 dark:text-white dark:hover:bg-ocean-400',
   secondary:
     'border border-mist-200 bg-white text-mist-700 hover:bg-mist-50 dark:border-mist-800 dark:bg-mist-900 dark:text-mist-200 dark:hover:bg-mist-800',
   ghost:
-    'text-mist-600 hover:bg-mist-100 hover:text-mist-900 dark:text-mist-400 dark:hover:bg-mist-800 dark:hover:text-mist-100',
+    'text-mist-500 hover:bg-mist-100 hover:text-mist-900 dark:text-mist-400 dark:hover:bg-mist-800 dark:hover:text-mist-100',
   danger:
     'bg-red-600 text-white hover:bg-red-700 dark:bg-red-600 dark:text-white dark:hover:bg-red-500',
 };
@@ -41,8 +41,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       disabled={disabled || loading}
       className={cn(
         'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mist-900 focus-visible:ring-offset-2',
-        'dark:focus-visible:ring-mist-100 dark:focus-visible:ring-offset-mist-950',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-500 focus-visible:ring-offset-2',
+        'dark:focus-visible:ring-ocean-300 dark:focus-visible:ring-offset-mist-950',
         'disabled:pointer-events-none disabled:opacity-50',
         variants[variant],
         sizes[size],

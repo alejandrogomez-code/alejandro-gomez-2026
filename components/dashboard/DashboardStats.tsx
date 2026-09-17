@@ -31,7 +31,8 @@ export function StatCard({
   const theme = ACCENTS[accent];
 
   return (
-    <Card className={cn('p-5', className)}>
+    <Card className={cn('relative overflow-hidden p-5', className)}>
+      <span className={cn('absolute inset-x-0 top-0 h-1', theme.bar)} aria-hidden="true" />
       <div className="flex items-start justify-between gap-2">
         <p className="text-sm text-mist-500 dark:text-mist-400">{label}</p>
         {icon ? (

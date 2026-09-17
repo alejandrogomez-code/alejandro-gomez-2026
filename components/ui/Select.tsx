@@ -38,8 +38,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
           id={selectId}
           className={cn(
             'h-11 w-full appearance-none rounded-lg border border-mist-200 bg-white px-3 pr-9 text-base text-mist-900',
-            'focus:border-mist-400 focus:outline-none focus:ring-2 focus:ring-mist-900/10',
-            'dark:border-mist-800 dark:bg-mist-950 dark:text-mist-100 dark:focus:border-mist-600 dark:focus:ring-mist-100/10',
+            'focus:border-ocean-400 focus:outline-none focus:ring-2 focus:ring-ocean-500/20',
+            'dark:border-mist-800 dark:bg-mist-950 dark:text-mist-100 dark:focus:border-ocean-400 dark:focus:ring-ocean-400/20',
             className,
           )}
           {...props}

@@ -5,33 +5,33 @@
 @layer base {
   :root {
     /* Colores usados por los gráficos de Recharts. */
-    --chart-line: #1c2027;
-    --chart-weight: #41739e;
-    --chart-steps: #4c7c6f;
-    --chart-habits: #a8813a;
-    --chart-bar: #dde4ec;
-    --chart-bar-active: #4c7c6f;
-    --chart-grid: #e3e9f1;
-    --chart-axis: #7d8a99;
-    --chart-reference: #a8813a;
+    --chart-line: #191d31;
+    --chart-weight: #3d6bf5;
+    --chart-steps: #10a472;
+    --chart-habits: #f08c0c;
+    --chart-bar: #cff5e3;
+    --chart-bar-active: #10a472;
+    --chart-grid: #e3e8f3;
+    --chart-axis: #687393;
+    --chart-reference: #f08c0c;
     --chart-tooltip-bg: #ffffff;
-    --chart-tooltip-border: #dfe5ed;
-    --chart-tooltip-text: #1c2027;
+    --chart-tooltip-border: #dce2f0;
+    --chart-tooltip-text: #191d31;
   }
 
   .dark {
-    --chart-line: #eef1f5;
-    --chart-weight: #93b5d3;
-    --chart-steps: #92bcaf;
-    --chart-habits: #d4b671;
-    --chart-bar: #333b45;
-    --chart-bar-active: #92bcaf;
-    --chart-grid: #262c34;
-    --chart-axis: #8792a0;
-    --chart-reference: #d4b671;
-    --chart-tooltip-bg: #1c2027;
-    --chart-tooltip-border: #2f3641;
-    --chart-tooltip-text: #eef1f5;
+    --chart-line: #eef1fa;
+    --chart-weight: #6390ff;
+    --chart-steps: #2cbf88;
+    --chart-habits: #ffab2b;
+    --chart-bar: #0b533e;
+    --chart-bar-active: #2cbf88;
+    --chart-grid: #232943;
+    --chart-axis: #929cb8;
+    --chart-reference: #ffab2b;
+    --chart-tooltip-bg: #191d31;
+    --chart-tooltip-border: #272d45;
+    --chart-tooltip-text: #eef1fa;
   }
 
   html {

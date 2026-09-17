@@ -1,7 +1,8 @@
 'use client';
 
+import { Check, Footprints, Pencil, Trash2 } from 'lucide-react';
+import { PageHeader } from '@/components/ui/PageHeader';
 import { useMemo, useState } from 'react';
-import { Check, Pencil, Trash2 } from 'lucide-react';
 import { useProfile } from '@/hooks/useProfile';
 import { useStepRecords } from '@/hooks/useStepRecords';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
@@ -47,14 +48,12 @@ export default function PasosPage() {
 
   return (
     <div className="space-y-6">
-      <header>
-        <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
-          Pasos
-        </h1>
-        <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">
-          Objetivo diario: <span className="tabular">{formatNumber(dailyGoal)}</span> pasos.
-        </p>
-      </header>
+      <PageHeader
+        icon={Footprints}
+        accent="sage"
+        title="Pasos"
+        description={<>Objetivo diario: <span className="tabular">{formatNumber(dailyGoal)}</span> pasos.</>}
+      />
 
       <Card>
         <CardHeader title="Registrar pasos" />

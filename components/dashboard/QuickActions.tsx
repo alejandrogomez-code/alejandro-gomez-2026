@@ -65,9 +65,10 @@ export function QuickActions({
               onClick={() => setOpen(action.key)}
               className={cn(
                 'flex items-center gap-2 rounded-xl border border-mist-200/80 bg-white px-4 py-3 text-sm font-medium text-mist-700 shadow-card transition-colors',
-                'hover:border-mist-300 hover:text-mist-900',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mist-900',
-                'dark:border-mist-800 dark:bg-mist-900 dark:text-mist-300 dark:hover:border-mist-700 dark:hover:text-mist-100 dark:focus-visible:ring-mist-100',
+                'hover:-translate-y-px hover:text-mist-900',
+                ACCENTS[action.accent].hoverBorder,
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-500',
+                'dark:border-mist-800 dark:bg-mist-900 dark:text-mist-300 dark:hover:text-mist-100 dark:focus-visible:ring-ocean-300',
               )}
             >
               <span
@@ -127,7 +128,7 @@ export function QuickActions({
                   className={cn(
                     'flex w-full items-center gap-3 rounded-lg border px-3 py-2.5 text-left text-sm transition-colors',
                     state.completed
-                      ? 'border-mist-900 bg-mist-900 text-mist-50 dark:border-mist-100 dark:bg-mist-100 dark:text-mist-900'
+                      ? 'border-sage-500 bg-sage-500 text-white dark:border-sage-400 dark:bg-sage-500'
                       : 'border-mist-200 text-mist-700 hover:bg-mist-50 dark:border-mist-700 dark:text-mist-300 dark:hover:bg-mist-800/60',
                     state.fromSteps ? 'cursor-default opacity-80' : '',
                   )}

@@ -1,7 +1,8 @@
 'use client';
 
+import { Monitor, Moon, Settings, Sun } from 'lucide-react';
+import { PageHeader } from '@/components/ui/PageHeader';
 import { useEffect, useState, type FormEvent } from 'react';
-import { Monitor, Moon, Sun } from 'lucide-react';
 import { useProfile } from '@/hooks/useProfile';
 import { useTheme } from '@/components/providers/theme-provider';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
@@ -67,12 +68,12 @@ export default function ConfiguracionPage() {
 
   return (
     <div className="space-y-6">
-      <header>
-        <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
-          Ajustes
-        </h1>
-        <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">{email}</p>
-      </header>
+      <PageHeader
+        icon={Settings}
+        accent="neutral"
+        title="Ajustes"
+        description={<>{email}</>}
+      />
 
       <Card>
         <CardHeader title="Perfil" description="Se usa para calcular el IMC y los porcentajes." />

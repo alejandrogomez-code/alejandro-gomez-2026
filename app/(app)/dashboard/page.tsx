@@ -7,11 +7,14 @@ import { useHabits } from '@/hooks/useHabits';
 import { useHabitRecords } from '@/hooks/useHabitRecords';
 import { useStepRecords } from '@/hooks/useStepRecords';
 import { useWeightRecords } from '@/hooks/useWeightRecords';
+import { useProjects } from '@/hooks/useProjects';
 import { TodaySummary } from '@/components/dashboard/TodaySummary';
 import { WeeklySummary, type WeekMetrics } from '@/components/dashboard/WeeklySummary';
 import { GoalOverview } from '@/components/dashboard/GoalOverview';
 import { QuickActions, QuickActionsHeading } from '@/components/dashboard/QuickActions';
+import { UpcomingTasks } from '@/components/dashboard/UpcomingTasks';
 import { LoadingState, ErrorState } from '@/components/ui/States';
+import { VidaMark } from '@/components/ui/VidaMark';
 import { calculateBMI } from '@/lib/calculations/bmi';
 import { calculateStepCompletion } from '@/lib/calculations/steps';
 import {
@@ -56,6 +59,12 @@ export default function DashboardPage() {
     loading: weightLoading,
   } = useWeightRecords({ from: toDateString(addDays(new Date(), -180)), to: today });
   const { goals, createGoal, loading: goalsLoading } = useGoals();
+  const {
+    projects,
+    tasks: projectTasks,
+    setTaskStatus,
+    loading: projectsLoading,
+  } = useProjects();
 
   const dailyStepsGoal = profile?.daily_steps_goal ?? 10000;
 
@@ -123,7 +132,13 @@ export default function DashboardPage() {
   );
 
   const loading =
-    profileLoading || habitsLoading || habitRecordsLoading || stepsLoading || weightLoading || goalsLoading;
+    profileLoading ||
+    habitsLoading ||
+    habitRecordsLoading ||
+    stepsLoading ||
+    weightLoading ||
+    goalsLoading ||
+    projectsLoading;
 
   if (loading) return <LoadingState label="Cargando tu panel…" />;
 
@@ -136,6 +151,7 @@ export default function DashboardPage() {
         <p className="mt-1 text-sm capitalize text-mist-500 dark:text-mist-400">
           {formatLongDate(today)}
         </p>
+        <VidaMark className="mt-4 max-w-xs" />
       </header>
 
       {habitsError ? <ErrorState message={habitsError} /> : null}
@@ -170,6 +186,7 @@ export default function DashboardPage() {
       </section>
 
       <div className="grid gap-6 lg:grid-cols-2">
+        <UpcomingTasks projects={projects} tasks={projectTasks} onStatusChange={setTaskStatus} />
         <GoalOverview goals={goals} />
         <WeeklySummary
           current={currentWeek}

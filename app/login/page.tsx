@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { LoginForm } from './LoginForm';
+import { VidaMark } from '@/components/ui/VidaMark';
 
 export const metadata = { title: 'Ingresar · Vida' };
 
@@ -18,7 +19,8 @@ export default async function LoginPage() {
         <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
           Vida
         </h1>
-        <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">
+        <VidaMark className="mt-2 w-24" />
+        <p className="mt-3 text-sm text-mist-500 dark:text-mist-400">
           Ingresá con tu cuenta para ver tu panel.
         </p>
         <div className="mt-8 rounded-2xl border border-mist-200/80 bg-white p-6 shadow-card dark:border-mist-800 dark:bg-mist-900">

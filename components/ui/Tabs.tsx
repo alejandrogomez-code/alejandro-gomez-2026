@@ -42,9 +42,9 @@ export function Tabs<T extends string>({
             onClick={() => onChange(item.value)}
             className={cn(
               'rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mist-900 dark:focus-visible:ring-mist-100',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-500 dark:focus-visible:ring-ocean-300',
               active
-                ? 'bg-white text-mist-900 shadow-card dark:bg-mist-950 dark:text-mist-100'
+                ? 'bg-white text-ocean-700 shadow-card dark:bg-mist-950 dark:text-ocean-300'
                 : 'text-mist-500 hover:text-mist-800 dark:text-mist-400 dark:hover:text-mist-200',
             )}
           >
