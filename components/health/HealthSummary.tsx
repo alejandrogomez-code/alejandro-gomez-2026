@@ -1,8 +1,6 @@
 'use client';
 
-import { Scale, TrendingDown, TrendingUp, Activity } from 'lucide-react';
 import { StatCard, StatGrid } from '@/components/dashboard/DashboardStats';
-import { Badge } from '@/components/ui/Badge';
 import { bmiCategory, calculateBMI, formatBMI } from '@/lib/calculations/bmi';
 import { formatDate, formatNumber } from '@/lib/calculations/dates';
 import { formatWeightChange, summarizeWeight } from '@/lib/calculations/weight';
@@ -20,49 +18,41 @@ export function HealthSummary({ records, heightCm, initialWeightKg }: HealthSumm
   const currentWeight = summary.current?.weight_kg ?? null;
   const bmi = calculateBMI(currentWeight, heightCm);
   const category = bmiCategory(bmi);
-  const losing = summary.change !== null && summary.change < 0;
+  const losing = summary.change !== null && summary.change <= 0;
 
   return (
     <StatGrid>
       <StatCard
-        label="Peso actual"
+        label="Actual"
         value={currentWeight === null ? '—' : formatNumber(currentWeight, 1)}
         unit={currentWeight === null ? undefined : 'kg'}
-        accent="ocean"
-        icon={<Scale className="h-4 w-4" aria-hidden="true" />}
         detail={summary.current ? formatDate(summary.current.date) : 'Sin registros'}
+        accent="ocean"
       />
       <StatCard
-        label="Peso inicial"
+        label="Inicial"
         value={summary.initial === null ? '—' : formatNumber(summary.initial, 1)}
         unit={summary.initial === null ? undefined : 'kg'}
-        detail={`Variación ${formatWeightChange(summary.change)}`}
+        detail="peso de partida"
         accent="ocean"
-        icon={
-          losing ? (
-            <TrendingDown className="h-4 w-4" aria-hidden="true" />
-          ) : (
-            <TrendingUp className="h-4 w-4" aria-hidden="true" />
-          )
-        }
       />
       <StatCard
-        label="IMC actual"
+        label="Variación"
+        value={formatWeightChange(summary.change).replace(' kg', '')}
+        unit={summary.change === null ? undefined : 'kg'}
+        detail={`${summary.recordsThisWeek} de 3 registros esta semana`}
+        accent={losing ? 'brand' : 'amber'}
+      />
+      <StatCard
+        label="IMC"
         value={formatBMI(bmi)}
-        accent="plum"
-        icon={<Activity className="h-4 w-4" aria-hidden="true" />}
-        detail={category ? <Badge tone="neutral">{category}</Badge> : 'Falta altura o peso'}
-      />
-      <StatCard
-        label="Mínimo / máximo"
-        value={
+        note={category ?? undefined}
+        detail={
           summary.min && summary.max
-            ? `${formatNumber(summary.min.weight_kg, 1)} / ${formatNumber(summary.max.weight_kg, 1)}`
-            : '—'
+            ? `Mín ${formatNumber(summary.min.weight_kg, 1)} · Máx ${formatNumber(summary.max.weight_kg, 1)}`
+            : 'Falta altura o peso'
         }
-        unit={summary.min ? 'kg' : undefined}
-        accent="ocean"
-        detail={`Registros esta semana: ${summary.recordsThisWeek} / 3`}
+        accent={category === 'Peso normal' ? 'brand' : 'amber'}
       />
     </StatGrid>
   );

@@ -1,9 +1,8 @@
 'use client';
 
-import { ArrowRight, HeartPulse } from 'lucide-react';
-import { PageHeader } from '@/components/ui/PageHeader';
 import { useMemo } from 'react';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { useProfile } from '@/hooks/useProfile';
 import { useHabits } from '@/hooks/useHabits';
 import { useHabitRecords } from '@/hooks/useHabitRecords';
@@ -52,13 +51,15 @@ export default function ResumenPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <PageHeader
-        icon={HeartPulse}
-        accent="sage"
-        title="Resumen de salud"
-        description={<>Últimos 30 días de peso y pasos, y la semana en curso de hábitos.</>}
-      />
+    <div className="space-y-5">
+      <header>
+        <h1 className="text-xl font-medium tracking-tight text-sand-900 dark:text-sand-100">
+          Resumen de salud
+        </h1>
+        <p className="mt-0.5 text-sm text-sand-500 dark:text-sand-400">
+          Últimos 30 días de peso y pasos, y la semana en curso de hábitos.
+        </p>
+      </header>
 
       <HealthSummary
         records={weightRecords}
@@ -71,19 +72,19 @@ export default function ResumenPage() {
           label="Pasos de hoy"
           value={formatNumber(steps.todaySteps)}
           progress={steps.todayPercent}
-          accent="sage"
+          accent="brand"
         />
         <StatCard
           label="Promedio 7 días"
           value={formatNumber(steps.average7)}
           unit="pasos"
-          accent="sage"
+          accent="brand"
         />
         <StatCard
           label="Días con objetivo"
           value={`${steps.goalDays7} / 7`}
           detail="Últimos 7 días"
-          accent="sage"
+          accent="brand"
         />
       </StatGrid>
 
@@ -94,7 +95,7 @@ export default function ResumenPage() {
             action={
               <Link
                 href="/salud/peso"
-                className="inline-flex items-center gap-1 text-sm text-mist-500 hover:text-mist-900 dark:text-mist-400 dark:hover:text-mist-100"
+                className="inline-flex items-center gap-1 text-sm text-sand-500 hover:text-sand-900 dark:text-sand-400 dark:hover:text-sand-100"
               >
                 Ver detalle
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -112,7 +113,7 @@ export default function ResumenPage() {
             action={
               <Link
                 href="/salud/pasos"
-                className="inline-flex items-center gap-1 text-sm text-mist-500 hover:text-mist-900 dark:text-mist-400 dark:hover:text-mist-100"
+                className="inline-flex items-center gap-1 text-sm text-sand-500 hover:text-sand-900 dark:text-sand-400 dark:hover:text-sand-100"
               >
                 Ver detalle
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />

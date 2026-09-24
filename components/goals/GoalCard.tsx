@@ -46,11 +46,11 @@ export function GoalCard({
       <CardContent className="space-y-4">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <h3 className="truncate text-base font-medium text-mist-900 dark:text-mist-100">
+            <h3 className="truncate text-base font-medium text-sand-900 dark:text-sand-100">
               {goal.name}
             </h3>
             {goal.description ? (
-              <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">
+              <p className="mt-1 text-sm text-sand-500 dark:text-sand-400">
                 {goal.description}
               </p>
             ) : null}
@@ -81,7 +81,7 @@ export function GoalCard({
         {goal.type !== 'date' ? <GoalProgress goal={goal} /> : null}
 
         {goal.target_date ? (
-          <div className="flex items-center gap-2 text-sm text-mist-500 dark:text-mist-400">
+          <div className="flex items-center gap-2 text-sm text-sand-500 dark:text-sand-400">
             <CalendarClock className="h-4 w-4" aria-hidden="true" />
             <span className="tabular">{formatDate(goal.target_date)}</span>
             {remaining ? <span>· {remaining}</span> : null}
@@ -98,20 +98,20 @@ export function GoalCard({
         ) : null}
 
         {linkedHabits.length > 0 ? (
-          <div className="rounded-xl bg-mist-50 p-4 dark:bg-mist-800/50">
-            <div className="flex items-center gap-2 text-sm font-medium text-mist-700 dark:text-mist-200">
+          <div className="rounded-xl bg-sand-50 p-4 dark:bg-sand-800/50">
+            <div className="flex items-center gap-2 text-sm font-medium text-sand-700 dark:text-sand-200">
               <Link2 className="h-4 w-4" aria-hidden="true" />
               Hábitos asociados
             </div>
-            <ul className="mt-2 space-y-1 text-sm text-mist-500 dark:text-mist-400">
+            <ul className="mt-2 space-y-1 text-sm text-sand-500 dark:text-sand-400">
               {linkedHabits.map((habit) => (
                 <li key={habit.id}>{habit.name}</li>
               ))}
             </ul>
             {linkedCompletion !== null ? (
-              <p className="mt-3 text-sm text-mist-600 dark:text-mist-300">
+              <p className="mt-3 text-sm text-sand-600 dark:text-sand-300">
                 Cumplimiento esta semana:{' '}
-                <span className="tabular font-medium text-mist-900 dark:text-mist-100">
+                <span className="tabular font-medium text-sand-900 dark:text-sand-100">
                   {formatPercent(linkedCompletion, 0)}
                 </span>
               </p>

@@ -42,7 +42,7 @@ export function Modal({
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-4">
       <div
-        className="absolute inset-0 bg-mist-900/25 backdrop-blur-[2px] dark:bg-black/60"
+        className="absolute inset-0 bg-sand-900/25 backdrop-blur-[2px] dark:bg-black/60"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -51,32 +51,32 @@ export function Modal({
         aria-modal="true"
         aria-label={title}
         className={cn(
-          'relative z-10 flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-2xl bg-white shadow-float',
-          'sm:max-w-lg sm:rounded-2xl dark:bg-mist-900',
+          'relative z-10 flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-xl bg-white shadow-float',
+          'sm:max-w-lg sm:rounded-xl dark:bg-sand-900',
           className,
         )}
       >
-        <div className="flex items-start justify-between gap-4 border-b border-mist-100 px-5 py-4 dark:border-mist-800">
+        <div className="flex items-start justify-between gap-4 border-b border-sand-100 px-5 py-4 dark:border-sand-800">
           <div className="min-w-0">
-            <h2 className="text-base font-medium text-mist-900 dark:text-mist-100">
+            <h2 className="text-base font-medium text-sand-900 dark:text-sand-100">
               {title}
             </h2>
             {description ? (
-              <p className="mt-1 text-sm text-mist-500 dark:text-mist-400">{description}</p>
+              <p className="mt-1 text-sm text-sand-500 dark:text-sand-400">{description}</p>
             ) : null}
           </div>
           <button
             type="button"
             onClick={onClose}
             aria-label="Cerrar"
-            className="rounded-lg p-1.5 text-mist-400 transition-colors hover:bg-mist-100 hover:text-mist-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mist-900 dark:hover:bg-mist-800 dark:hover:text-mist-200"
+            className="rounded-lg p-1.5 text-sand-400 transition-colors hover:bg-sand-100 hover:text-sand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sand-900 dark:hover:bg-sand-800 dark:hover:text-sand-200"
           >
             <X className="h-4 w-4" aria-hidden="true" />
           </button>
         </div>
         <div className="overflow-y-auto px-5 py-5">{children}</div>
         {footer ? (
-          <div className="border-t border-mist-100 px-5 py-4 dark:border-mist-800">
+          <div className="border-t border-sand-100 px-5 py-4 dark:border-sand-800">
             {footer}
           </div>
         ) : null}

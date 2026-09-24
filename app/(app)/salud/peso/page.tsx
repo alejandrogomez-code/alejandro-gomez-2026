@@ -1,13 +1,13 @@
 'use client';
 
-import { Pencil, Scale, Trash2 } from 'lucide-react';
-import { PageHeader } from '@/components/ui/PageHeader';
 import { useMemo, useState } from 'react';
+import { Pencil, Plus, Scale, Trash2 } from 'lucide-react';
 import { useProfile } from '@/hooks/useProfile';
 import { useWeightRecords } from '@/hooks/useWeightRecords';
 import { useGoals } from '@/hooks/useGoals';
-import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import { Card, CardContent, CardHeader, ListRow } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { Badge } from '@/components/ui/Badge';
 import { Tabs } from '@/components/ui/Tabs';
 import { Modal } from '@/components/ui/Modal';
 import { ConfirmDialog } from '@/components/ui/Dialog';
@@ -16,6 +16,7 @@ import { useToast } from '@/components/ui/Toast';
 import { WeightForm } from '@/components/health/WeightForm';
 import { WeightChart } from '@/components/health/WeightChart';
 import { HealthSummary } from '@/components/health/HealthSummary';
+import { ACCENTS } from '@/lib/accents';
 import { addDays, formatDate, formatNumber, toDateString } from '@/lib/calculations/dates';
 import { calculateBMI, formatBMI } from '@/lib/calculations/bmi';
 import type { WeightRecord } from '@/types/database';
@@ -23,7 +24,7 @@ import type { WeightRecord } from '@/types/database';
 type Period = '14' | '30' | '90' | '180' | 'all';
 
 const PERIODS: { value: Period; label: string }[] = [
-  { value: '14', label: '2 semanas' },
+  { value: '14', label: '2 sem' },
   { value: '30', label: '1 mes' },
   { value: '90', label: '3 meses' },
   { value: '180', label: '6 meses' },
@@ -44,6 +45,7 @@ export default function PesoPage() {
   const { records, loading, error, saveWeight, deleteWeight } = useWeightRecords({ from });
   const { goals } = useGoals();
 
+  const [formOpen, setFormOpen] = useState(false);
   const [editing, setEditing] = useState<WeightRecord | null>(null);
   const [pendingDelete, setPendingDelete] = useState<WeightRecord | null>(null);
 
@@ -58,21 +60,29 @@ export default function PesoPage() {
 
   const descending = [...records].reverse();
 
-  return (
-    <div className="space-y-6">
-      <PageHeader
-        icon={Scale}
-        accent="ocean"
-        title="Peso"
-        description={<>Un registro por día. Si cargás dos veces el mismo día, se actualiza.</>}
-      />
+  /** Diferencia contra el registro anterior, para la píldora de cada fila. */
+  function deltaFor(index: number): number | null {
+    const previous = descending[index + 1];
+    if (!previous) return null;
+    return descending[index].weight_kg - previous.weight_kg;
+  }
 
-      <Card>
-        <CardHeader title="Registrar peso" />
-        <CardContent>
-          <WeightForm heightCm={profile?.height_cm ?? null} onSave={saveWeight} />
-        </CardContent>
-      </Card>
+  return (
+    <div className="space-y-5">
+      <header className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="text-xl font-medium tracking-tight text-sand-900 dark:text-sand-100">
+            Peso
+          </h1>
+          <p className="mt-0.5 text-sm text-sand-500 dark:text-sand-400">
+            Un registro por día. Si cargás dos veces el mismo día, se actualiza.
+          </p>
+        </div>
+        <Button onClick={() => setFormOpen(true)}>
+          <Plus className="h-4 w-4" aria-hidden="true" />
+          Registrar peso
+        </Button>
+      </header>
 
       {error ? <ErrorState message={error} /> : null}
 
@@ -100,54 +110,62 @@ export default function PesoPage() {
 
       <Card>
         <CardHeader title="Registros" description={`${records.length} en el período elegido`} />
-        <CardContent className="p-0">
-          {descending.length === 0 ? (
-            <EmptyState
-              title="No hay registros todavía"
-              description="Cargá tu peso arriba para empezar el seguimiento."
-            />
-          ) : (
-            <ul className="divide-y divide-mist-100 dark:divide-mist-800">
-              {descending.map((record) => {
-                const bmi = calculateBMI(record.weight_kg, profile?.height_cm ?? null);
-                return (
-                  <li
-                    key={record.id}
-                    className="flex items-center justify-between gap-3 px-5 py-3"
-                  >
-                    <div className="min-w-0">
-                      <p className="tabular text-sm font-medium text-mist-900 dark:text-mist-100">
-                        {formatNumber(record.weight_kg, 1)} kg
-                      </p>
-                      <p className="tabular text-xs text-mist-500 dark:text-mist-400">
-                        {formatDate(record.date)} · IMC {formatBMI(bmi)}
-                      </p>
-                    </div>
-                    <div className="flex shrink-0 gap-1">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        aria-label={`Editar registro del ${formatDate(record.date)}`}
-                        onClick={() => setEditing(record)}
-                      >
-                        <Pencil className="h-4 w-4" aria-hidden="true" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        aria-label={`Eliminar registro del ${formatDate(record.date)}`}
-                        onClick={() => setPendingDelete(record)}
-                      >
-                        <Trash2 className="h-4 w-4" aria-hidden="true" />
-                      </Button>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </CardContent>
+        {descending.length === 0 ? (
+          <EmptyState
+            title="No hay registros todavía"
+            description="Cargá tu peso para empezar el seguimiento."
+            action={<Button onClick={() => setFormOpen(true)}>Registrar ahora</Button>}
+          />
+        ) : (
+          descending.map((record, index) => {
+            const bmi = calculateBMI(record.weight_kg, profile?.height_cm ?? null);
+            const delta = deltaFor(index);
+            return (
+              <ListRow
+                key={record.id}
+                icon={<Scale className="h-4 w-4" />}
+                iconClassName={ACCENTS.ocean.chip}
+                title={`${formatNumber(record.weight_kg, 1)} kg`}
+                meta={`${formatDate(record.date)} · IMC ${formatBMI(bmi)}`}
+                actions={
+                  <>
+                    {delta === null ? null : (
+                      <Badge tone={delta <= 0 ? 'brand' : 'clay'}>
+                        {delta > 0 ? '+' : ''}
+                        {formatNumber(delta, 1)} kg
+                      </Badge>
+                    )}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      aria-label={`Editar registro del ${formatDate(record.date)}`}
+                      onClick={() => setEditing(record)}
+                    >
+                      <Pencil className="h-4 w-4" aria-hidden="true" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      aria-label={`Eliminar registro del ${formatDate(record.date)}`}
+                      onClick={() => setPendingDelete(record)}
+                    >
+                      <Trash2 className="h-4 w-4" aria-hidden="true" />
+                    </Button>
+                  </>
+                }
+              />
+            );
+          })
+        )}
       </Card>
+
+      <Modal open={formOpen} onClose={() => setFormOpen(false)} title="Registrar peso">
+        <WeightForm
+          heightCm={profile?.height_cm ?? null}
+          onSave={saveWeight}
+          onSaved={() => setFormOpen(false)}
+        />
+      </Modal>
 
       <Modal open={editing !== null} onClose={() => setEditing(null)} title="Editar registro">
         <WeightForm

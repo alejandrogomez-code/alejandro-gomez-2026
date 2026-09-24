@@ -1,7 +1,5 @@
 'use client';
 
-import { CalendarDays } from 'lucide-react';
-import { PageHeader } from '@/components/ui/PageHeader';
 import { useMemo, useState } from 'react';
 import { useProfile } from '@/hooks/useProfile';
 import { useHabits } from '@/hooks/useHabits';
@@ -35,13 +33,15 @@ export default function CalendarioPage() {
   const loading = habitsLoading || recordsLoading || stepsLoading;
 
   return (
-    <div className="space-y-6">
-      <PageHeader
-        icon={CalendarDays}
-        accent="plum"
-        title="Calendario"
-        description={<>Elegí un día para ver el detalle y marcar hábitos.</>}
-      />
+    <div className="space-y-5">
+      <header>
+        <h1 className="text-xl font-medium tracking-tight text-sand-900 dark:text-sand-100">
+          Calendario
+        </h1>
+        <p className="mt-0.5 text-sm text-sand-500 dark:text-sand-400">
+          Elegí un día para ver el detalle y marcar hábitos.
+        </p>
+      </header>
 
       {error ? <ErrorState message={error} /> : null}
       {loading ? (

@@ -44,15 +44,15 @@ export function ToastProvider({ children }: { children: ReactNode }) {
             key={item.id}
             className={cn(
               'pointer-events-auto flex w-full max-w-sm items-center gap-3 rounded-xl border px-4 py-3 text-sm shadow-float',
-              'border-mist-200 bg-white text-mist-800 dark:border-mist-800 dark:bg-mist-900 dark:text-mist-100',
+              'border-sand-200 bg-white text-sand-800 dark:border-sand-800 dark:bg-sand-900 dark:text-sand-100',
             )}
           >
             {item.tone === 'success' ? (
-              <CheckCircle2 className="h-4 w-4 shrink-0 text-sage-500" aria-hidden="true" />
+              <CheckCircle2 className="h-4 w-4 shrink-0 text-brand-500" aria-hidden="true" />
             ) : item.tone === 'error' ? (
               <AlertCircle className="h-4 w-4 shrink-0 text-red-500" aria-hidden="true" />
             ) : (
-              <Info className="h-4 w-4 shrink-0 text-mist-400" aria-hidden="true" />
+              <Info className="h-4 w-4 shrink-0 text-sand-400" aria-hidden="true" />
             )}
             <span>{item.message}</span>
           </div>

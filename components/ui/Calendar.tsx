@@ -48,7 +48,7 @@ export function Calendar({ month, onMonthChange, selected, onSelect, renderDay }
         >
           <ChevronLeft className="h-4 w-4" aria-hidden="true" />
         </Button>
-        <p className="text-sm font-medium capitalize text-mist-900 dark:text-mist-100">
+        <p className="text-sm font-medium capitalize text-sand-900 dark:text-sand-100">
           {formatMonthYear(month)}
         </p>
         <Button
@@ -65,7 +65,7 @@ export function Calendar({ month, onMonthChange, selected, onSelect, renderDay }
         {CALENDAR_HEADERS.map((label, index) => (
           <div
             key={`${label}-${index}`}
-            className="pb-1 text-center text-xs font-medium text-mist-400"
+            className="pb-1 text-center text-xs font-medium text-sand-400"
           >
             {label}
           </div>
@@ -87,10 +87,10 @@ export function Calendar({ month, onMonthChange, selected, onSelect, renderDay }
               aria-pressed={isSelected}
               className={cn(
                 'flex aspect-square flex-col items-center justify-start gap-1 rounded-xl border p-1 text-xs transition-colors sm:p-2',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-500 dark:focus-visible:ring-ocean-300',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sand-900 dark:focus-visible:ring-sand-100',
                 isSelected
-                  ? 'border-ocean-500 bg-ocean-500 text-white dark:border-ocean-400 dark:bg-ocean-500'
-                  : 'border-mist-200/70 bg-white text-mist-700 hover:border-mist-300 dark:border-mist-800 dark:bg-mist-900 dark:text-mist-300 dark:hover:border-mist-700',
+                  ? 'border-sand-900 bg-sand-900 text-sand-50 dark:border-sand-100 dark:bg-sand-100 dark:text-sand-900'
+                  : 'border-sand-200/70 bg-white text-sand-700 hover:border-sand-300 dark:border-sand-800 dark:bg-sand-900 dark:text-sand-300 dark:hover:border-sand-700',
               )}
             >
               <span className={cn('tabular-nums', isToday && !isSelected ? 'font-semibold' : '')}>

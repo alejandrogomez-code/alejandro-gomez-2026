@@ -22,7 +22,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       {label ? (
         <label
           htmlFor={inputId}
-          className="mb-1.5 block text-sm font-medium text-mist-700 dark:text-mist-300"
+          className="mb-1.5 block text-sm font-medium text-sand-700 dark:text-sand-300"
         >
           {label}
         </label>
@@ -34,9 +34,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           aria-invalid={error ? true : undefined}
           aria-describedby={error ? `${inputId}-error` : undefined}
           className={cn(
-            'h-11 w-full rounded-lg border border-mist-200 bg-white px-3 text-base text-mist-900 tabular-nums',
-            'placeholder:text-mist-400 focus:border-ocean-400 focus:outline-none focus:ring-2 focus:ring-ocean-500/20',
-            'dark:border-mist-800 dark:bg-mist-950 dark:text-mist-100 dark:focus:border-ocean-400 dark:focus:ring-ocean-400/20',
+            'h-11 w-full rounded-lg border border-sand-200 bg-white px-3 text-base text-sand-900 tabular-nums',
+            'placeholder:text-sand-400 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20',
+            'dark:border-sand-800 dark:bg-sand-950 dark:text-sand-100 dark:focus:border-brand-500 dark:focus:ring-brand-400/20',
             'disabled:cursor-not-allowed disabled:opacity-60',
             suffix ? 'pr-12' : '',
             error ? 'border-red-400 dark:border-red-500' : '',
@@ -45,7 +45,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           {...props}
         />
         {suffix ? (
-          <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-mist-400">
+          <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-sand-400">
             {suffix}
           </span>
         ) : null}
@@ -55,7 +55,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           {error}
         </p>
       ) : hint ? (
-        <p className="mt-1.5 text-sm text-mist-500 dark:text-mist-400">{hint}</p>
+        <p className="mt-1.5 text-sm text-sand-500 dark:text-sand-400">{hint}</p>
       ) : null}
     </div>
   );
@@ -74,7 +74,7 @@ export function Textarea({ label, id, className, ...props }: TextareaProps) {
       {label ? (
         <label
           htmlFor={textareaId}
-          className="mb-1.5 block text-sm font-medium text-mist-700 dark:text-mist-300"
+          className="mb-1.5 block text-sm font-medium text-sand-700 dark:text-sand-300"
         >
           {label}
         </label>
@@ -83,9 +83,9 @@ export function Textarea({ label, id, className, ...props }: TextareaProps) {
         id={textareaId}
         rows={3}
         className={cn(
-          'w-full rounded-lg border border-mist-200 bg-white p-3 text-base text-mist-900',
-          'placeholder:text-mist-400 focus:border-ocean-400 focus:outline-none focus:ring-2 focus:ring-ocean-500/20',
-          'dark:border-mist-800 dark:bg-mist-950 dark:text-mist-100 dark:focus:border-ocean-400 dark:focus:ring-ocean-400/20',
+          'w-full rounded-lg border border-sand-200 bg-white p-3 text-base text-sand-900',
+          'placeholder:text-sand-400 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20',
+          'dark:border-sand-800 dark:bg-sand-950 dark:text-sand-100 dark:focus:border-brand-500 dark:focus:ring-brand-400/20',
           className,
         )}
         {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}

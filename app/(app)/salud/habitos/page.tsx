@@ -1,6 +1,5 @@
 'use client';
 
-import { PageHeader } from '@/components/ui/PageHeader';
 import { useMemo, useState } from 'react';
 import { Plus, Repeat } from 'lucide-react';
 import { useHabits } from '@/hooks/useHabits';
@@ -76,19 +75,21 @@ export default function HabitosPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <PageHeader
-        icon={Repeat}
-        accent="honey"
-        title="Hábitos"
-        description="Solo cuentan los días previstos por cada hábito."
-        action={
-      <Button onClick={openCreate}>
-        <Plus className="h-4 w-4" aria-hidden="true" />
-        Nuevo hábito
-      </Button>
-        }
-      />
+    <div className="space-y-5">
+      <header className="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h1 className="text-xl font-medium tracking-tight text-sand-900 dark:text-sand-100">
+            Hábitos
+          </h1>
+          <p className="mt-0.5 text-sm text-sand-500 dark:text-sand-400">
+            Solo cuentan los días previstos por cada hábito.
+          </p>
+        </div>
+        <Button onClick={openCreate}>
+          <Plus className="h-4 w-4" aria-hidden="true" />
+          Nuevo hábito
+        </Button>
+      </header>
 
       {error ? <ErrorState message={error} /> : null}
       {loading ? <LoadingState /> : null}

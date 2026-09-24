@@ -1,11 +1,10 @@
 'use client';
 
-import { Check, Footprints, Pencil, Trash2 } from 'lucide-react';
-import { PageHeader } from '@/components/ui/PageHeader';
 import { useMemo, useState } from 'react';
+import { Check, Footprints, Pencil, Plus, Trash2 } from 'lucide-react';
 import { useProfile } from '@/hooks/useProfile';
 import { useStepRecords } from '@/hooks/useStepRecords';
-import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import { Card, CardContent, CardHeader, ListRow } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { Tabs } from '@/components/ui/Tabs';
@@ -16,6 +15,7 @@ import { useToast } from '@/components/ui/Toast';
 import { StepsForm } from '@/components/health/StepsForm';
 import { StepsChart } from '@/components/health/StepsChart';
 import { StatCard, StatGrid } from '@/components/dashboard/DashboardStats';
+import { ACCENTS } from '@/lib/accents';
 import { summarizeSteps, calculateStepCompletion } from '@/lib/calculations/steps';
 import { addDays, formatDate, formatNumber, formatPercent, toDateString } from '@/lib/calculations/dates';
 import type { StepRecord } from '@/types/database';
@@ -33,11 +33,12 @@ export default function PasosPage() {
   const { toast } = useToast();
   const [period, setPeriod] = useState<Period>('7');
 
-  // Se consulta siempre al menos 30 días para promedios, o el período elegido.
+  // Se consulta siempre al menos 30 días para los promedios.
   const days = Math.max(Number(period), 30);
   const from = useMemo(() => toDateString(addDays(new Date(), -(days - 1))), [days]);
 
   const { records, loading, error, saveSteps, deleteSteps } = useStepRecords({ from });
+  const [formOpen, setFormOpen] = useState(false);
   const [editing, setEditing] = useState<StepRecord | null>(null);
   const [pendingDelete, setPendingDelete] = useState<StepRecord | null>(null);
 
@@ -47,65 +48,51 @@ export default function PasosPage() {
   const descending = [...records].reverse();
 
   return (
-    <div className="space-y-6">
-      <PageHeader
-        icon={Footprints}
-        accent="sage"
-        title="Pasos"
-        description={<>Objetivo diario: <span className="tabular">{formatNumber(dailyGoal)}</span> pasos.</>}
-      />
-
-      <Card>
-        <CardHeader title="Registrar pasos" />
-        <CardContent>
-          <StepsForm dailyGoal={dailyGoal} onSave={saveSteps} />
-        </CardContent>
-      </Card>
+    <div className="space-y-5">
+      <header className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="text-xl font-medium tracking-tight text-sand-900 dark:text-sand-100">
+            Pasos
+          </h1>
+          <p className="mt-0.5 text-sm text-sand-500 dark:text-sand-400">
+            Objetivo diario: <span className="tabular">{formatNumber(dailyGoal)}</span> pasos
+          </p>
+        </div>
+        <Button onClick={() => setFormOpen(true)}>
+          <Plus className="h-4 w-4" aria-hidden="true" />
+          Registrar pasos
+        </Button>
+      </header>
 
       {error ? <ErrorState message={error} /> : null}
 
       <StatGrid>
         <StatCard
-          label="Pasos de hoy"
+          label="Hoy"
           value={formatNumber(summary.todaySteps)}
-          detail={
-            <span className="flex items-center gap-2">
-              <span className="tabular">
-                {formatNumber(summary.todaySteps)} / {formatNumber(dailyGoal)} ·{' '}
-                {formatPercent(summary.todayPercent)}
-              </span>
-              {goalReached ? (
-                <Badge tone="success">
-                  <Check className="h-3 w-3" aria-hidden="true" />
-                  Alcanzado
-                </Badge>
-              ) : null}
-            </span>
-          }
+          note={formatPercent(summary.todayPercent, 0)}
+          detail={goalReached ? 'objetivo alcanzado' : `de ${formatNumber(dailyGoal)}`}
           progress={summary.todayPercent}
-          accent="sage"
+          accent={goalReached ? 'brand' : 'amber'}
         />
         <StatCard
           label="Promedio 7 días"
           value={formatNumber(summary.average7)}
-          unit="pasos"
-          accent="sage"
+          detail="pasos por día"
+          accent="brand"
         />
         <StatCard
           label="Promedio 30 días"
           value={formatNumber(summary.average30)}
-          unit="pasos"
-          accent="sage"
+          detail="pasos por día"
+          accent="brand"
         />
         <StatCard
           label="Mejor día"
           value={summary.bestDay ? formatNumber(summary.bestDay.steps) : '—'}
-          detail={
-            summary.bestDay
-              ? `${formatDate(summary.bestDay.date)} · ${summary.goalDaysTotal} días con objetivo`
-              : 'Sin registros'
-          }
-          accent="sage"
+          note={summary.bestDay ? `${summary.goalDaysTotal} con objetivo` : undefined}
+          detail={summary.bestDay ? formatDate(summary.bestDay.date) : 'Sin registros'}
+          accent="brand"
         />
       </StatGrid>
 
@@ -128,52 +115,56 @@ export default function PasosPage() {
 
       <Card>
         <CardHeader title="Registros" description={`Últimos ${days} días`} />
-        <CardContent className="p-0">
-          {descending.length === 0 ? (
-            <EmptyState
-              title="No hay registros todavía"
-              description="Cargá los pasos de hoy para empezar."
-            />
-          ) : (
-            <ul className="divide-y divide-mist-100 dark:divide-mist-800">
-              {descending.map((record) => {
-                const percent = calculateStepCompletion(record.steps, dailyGoal);
-                return (
-                  <li key={record.id} className="flex items-center justify-between gap-3 px-5 py-3">
-                    <div className="min-w-0">
-                      <p className="tabular text-sm font-medium text-mist-900 dark:text-mist-100">
-                        {formatNumber(record.steps)} pasos
-                      </p>
-                      <p className="tabular text-xs text-mist-500 dark:text-mist-400">
-                        {formatDate(record.date)} · {formatPercent(percent)}
-                      </p>
-                    </div>
-                    <div className="flex shrink-0 items-center gap-1">
-                      {record.steps >= dailyGoal ? <Badge tone="success">Objetivo</Badge> : null}
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        aria-label={`Editar registro del ${formatDate(record.date)}`}
-                        onClick={() => setEditing(record)}
-                      >
-                        <Pencil className="h-4 w-4" aria-hidden="true" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        aria-label={`Eliminar registro del ${formatDate(record.date)}`}
-                        onClick={() => setPendingDelete(record)}
-                      >
-                        <Trash2 className="h-4 w-4" aria-hidden="true" />
-                      </Button>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </CardContent>
+        {descending.length === 0 ? (
+          <EmptyState
+            title="No hay registros todavía"
+            description="Cargá los pasos de hoy para empezar."
+            action={<Button onClick={() => setFormOpen(true)}>Registrar ahora</Button>}
+          />
+        ) : (
+          descending.map((record) => {
+            const percent = calculateStepCompletion(record.steps, dailyGoal);
+            const reached = record.steps >= dailyGoal;
+            return (
+              <ListRow
+                key={record.id}
+                icon={<Footprints className="h-4 w-4" />}
+                iconClassName={reached ? ACCENTS.brand.chip : ACCENTS.amber.chip}
+                title={`${formatNumber(record.steps)} pasos`}
+                meta={`${formatDate(record.date)} · ${formatPercent(percent)}`}
+                actions={
+                  <>
+                    <Badge tone={reached ? 'brand' : 'amber'}>
+                      {reached ? <Check className="h-3 w-3" aria-hidden="true" /> : null}
+                      {formatPercent(percent, 0)}
+                    </Badge>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      aria-label={`Editar registro del ${formatDate(record.date)}`}
+                      onClick={() => setEditing(record)}
+                    >
+                      <Pencil className="h-4 w-4" aria-hidden="true" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      aria-label={`Eliminar registro del ${formatDate(record.date)}`}
+                      onClick={() => setPendingDelete(record)}
+                    >
+                      <Trash2 className="h-4 w-4" aria-hidden="true" />
+                    </Button>
+                  </>
+                }
+              />
+            );
+          })
+        )}
       </Card>
+
+      <Modal open={formOpen} onClose={() => setFormOpen(false)} title="Registrar pasos">
+        <StepsForm dailyGoal={dailyGoal} onSave={saveSteps} onSaved={() => setFormOpen(false)} />
+      </Modal>
 
       <Modal open={editing !== null} onClose={() => setEditing(null)} title="Editar registro">
         <StepsForm

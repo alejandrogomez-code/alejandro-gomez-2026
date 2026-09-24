@@ -7,15 +7,14 @@ import { useHabits } from '@/hooks/useHabits';
 import { useHabitRecords } from '@/hooks/useHabitRecords';
 import { useStepRecords } from '@/hooks/useStepRecords';
 import { useWeightRecords } from '@/hooks/useWeightRecords';
-import { useProjects } from '@/hooks/useProjects';
 import { TodaySummary } from '@/components/dashboard/TodaySummary';
 import { WeeklySummary, type WeekMetrics } from '@/components/dashboard/WeeklySummary';
 import { GoalOverview } from '@/components/dashboard/GoalOverview';
-import { QuickActions, QuickActionsHeading } from '@/components/dashboard/QuickActions';
-import { UpcomingTasks } from '@/components/dashboard/UpcomingTasks';
+import { QuickActions } from '@/components/dashboard/QuickActions';
+import { TodayList } from '@/components/dashboard/TodayList';
 import { LoadingState, ErrorState } from '@/components/ui/States';
-import { VidaMark } from '@/components/ui/VidaMark';
 import { calculateBMI } from '@/lib/calculations/bmi';
+import { calculateWeightChange } from '@/lib/calculations/weight';
 import { calculateStepCompletion } from '@/lib/calculations/steps';
 import {
   buildHabitContext,
@@ -59,12 +58,6 @@ export default function DashboardPage() {
     loading: weightLoading,
   } = useWeightRecords({ from: toDateString(addDays(new Date(), -180)), to: today });
   const { goals, createGoal, loading: goalsLoading } = useGoals();
-  const {
-    projects,
-    tasks: projectTasks,
-    setTaskStatus,
-    loading: projectsLoading,
-  } = useProjects();
 
   const dailyStepsGoal = profile?.daily_steps_goal ?? 10000;
 
@@ -131,33 +124,35 @@ export default function DashboardPage() {
     [activeHabits, context],
   );
 
+  const pendingToday = Math.max(0, dayCompletion.expected - dayCompletion.completed);
+
+  const weeklyByHabit = useMemo(
+    () =>
+      new Map(
+        weekRows.map((row) => [row.habit.id, { completed: row.completed, expected: row.expected }]),
+      ),
+    [weekRows],
+  );
+
   const loading =
-    profileLoading ||
-    habitsLoading ||
-    habitRecordsLoading ||
-    stepsLoading ||
-    weightLoading ||
-    goalsLoading ||
-    projectsLoading;
+    profileLoading || habitsLoading || habitRecordsLoading || stepsLoading || weightLoading || goalsLoading;
 
   if (loading) return <LoadingState label="Cargando tu panel…" />;
 
   return (
-    <div className="space-y-8">
-      <header>
-        <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
-          {greeting()}
-        </h1>
-        <p className="mt-1 text-sm capitalize text-mist-500 dark:text-mist-400">
-          {formatLongDate(today)}
-        </p>
-        <VidaMark className="mt-4 max-w-xs" />
-      </header>
-
-      {habitsError ? <ErrorState message={habitsError} /> : null}
-
-      <section className="space-y-3">
-        <QuickActionsHeading />
+    <div className="space-y-5">
+      <header className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="text-xl font-medium tracking-tight text-sand-900 dark:text-sand-100">
+            {greeting()}
+          </h1>
+          <p className="mt-0.5 text-sm capitalize text-sand-500 dark:text-sand-400">
+            {formatLongDate(today)}
+            {pendingToday > 0 ? (
+              <span className="normal-case text-amber-500"> · {pendingToday} pendientes</span>
+            ) : null}
+          </p>
+        </div>
         <QuickActions
           heightCm={profile?.height_cm ?? null}
           dailyStepsGoal={dailyStepsGoal}
@@ -169,30 +164,47 @@ export default function DashboardPage() {
           }
           onCreateGoal={createGoal}
         />
-      </section>
+      </header>
 
-      <section className="space-y-3">
-        <h2 className="text-sm font-medium text-mist-500 dark:text-mist-400">Hoy</h2>
-        <TodaySummary
-          steps={todaySteps}
+      {habitsError ? <ErrorState message={habitsError} /> : null}
+
+      <TodaySummary
+        steps={todaySteps}
+        stepsGoal={dailyStepsGoal}
+        stepsPercent={calculateStepCompletion(todaySteps, dailyStepsGoal)}
+        habitsCompleted={dayCompletion.completed}
+        habitsExpected={dayCompletion.expected}
+        habitsPercent={dayCompletion.percentage}
+        weightKg={lastWeight?.weight_kg ?? null}
+        weightChange={calculateWeightChange(
+          lastWeight?.weight_kg ?? null,
+          profile?.initial_weight_kg ?? null,
+        )}
+        bmi={bmi}
+      />
+
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+        <TodayList
+          habits={todayHabits}
+          todaySteps={todaySteps}
           stepsGoal={dailyStepsGoal}
-          stepsPercent={calculateStepCompletion(todaySteps, dailyStepsGoal)}
-          habitsCompleted={dayCompletion.completed}
-          habitsExpected={dayCompletion.expected}
-          habitsPercent={dayCompletion.percentage}
-          weightKg={lastWeight?.weight_kg ?? null}
-          bmi={bmi}
+          stepsRecorded={stepRecords.some((record) => record.date === today)}
+          weightRecordsThisWeek={currentWeek.weightRecords}
+          weeklyByHabit={weeklyByHabit}
+          onToggleHabit={(habit, next) =>
+            void setRecord({ habitId: habit.id, date: today, completed: next })
+          }
         />
-      </section>
-
-      <div className="grid gap-6 lg:grid-cols-2">
-        <UpcomingTasks projects={projects} tasks={projectTasks} onStatusChange={setTaskStatus} />
-        <GoalOverview goals={goals} />
-        <WeeklySummary
-          current={currentWeek}
-          previous={previousWeek.expected > 0 || previousWeek.averageSteps > 0 ? previousWeek : null}
-          habitRows={weekRows}
-        />
+        <div className="space-y-4">
+          <GoalOverview goals={goals} />
+          <WeeklySummary
+            current={currentWeek}
+            previous={
+              previousWeek.expected > 0 || previousWeek.averageSteps > 0 ? previousWeek : null
+            }
+            habitRows={weekRows}
+          />
+        </div>
       </div>
     </div>
   );

@@ -27,7 +27,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
       {label ? (
         <label
           htmlFor={selectId}
-          className="mb-1.5 block text-sm font-medium text-mist-700 dark:text-mist-300"
+          className="mb-1.5 block text-sm font-medium text-sand-700 dark:text-sand-300"
         >
           {label}
         </label>
@@ -37,9 +37,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
           ref={ref}
           id={selectId}
           className={cn(
-            'h-11 w-full appearance-none rounded-lg border border-mist-200 bg-white px-3 pr-9 text-base text-mist-900',
-            'focus:border-ocean-400 focus:outline-none focus:ring-2 focus:ring-ocean-500/20',
-            'dark:border-mist-800 dark:bg-mist-950 dark:text-mist-100 dark:focus:border-ocean-400 dark:focus:ring-ocean-400/20',
+            'h-11 w-full appearance-none rounded-lg border border-sand-200 bg-white px-3 pr-9 text-base text-sand-900',
+            'focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20',
+            'dark:border-sand-800 dark:bg-sand-950 dark:text-sand-100 dark:focus:border-brand-500 dark:focus:ring-brand-400/20',
             className,
           )}
           {...props}
@@ -51,12 +51,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
           ))}
         </select>
         <ChevronDown
-          className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-mist-400"
+          className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-sand-400"
           aria-hidden="true"
         />
       </div>
       {hint ? (
-        <p className="mt-1.5 text-sm text-mist-500 dark:text-mist-400">{hint}</p>
+        <p className="mt-1.5 text-sm text-sand-500 dark:text-sand-400">{hint}</p>
       ) : null}
     </div>
   );

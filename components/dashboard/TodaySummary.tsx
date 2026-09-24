@@ -1,9 +1,9 @@
 'use client';
 
-import { Activity, Footprints, ListChecks, Scale } from 'lucide-react';
 import { StatCard, StatGrid } from './DashboardStats';
-import { formatBMI } from '@/lib/calculations/bmi';
+import { bmiCategory, formatBMI } from '@/lib/calculations/bmi';
 import { formatNumber, formatPercent } from '@/lib/calculations/dates';
+import { formatWeightChange } from '@/lib/calculations/weight';
 
 export interface TodaySummaryProps {
   steps: number;
@@ -13,6 +13,7 @@ export interface TodaySummaryProps {
   habitsExpected: number;
   habitsPercent: number;
   weightKg: number | null;
+  weightChange: number | null;
   bmi: number | null;
 }
 
@@ -24,40 +25,44 @@ export function TodaySummary({
   habitsExpected,
   habitsPercent,
   weightKg,
+  weightChange,
   bmi,
 }: TodaySummaryProps) {
+  const category = bmiCategory(bmi);
+  const losingWeight = weightChange !== null && weightChange <= 0;
+
   return (
     <StatGrid>
       <StatCard
         label="Pasos"
         value={formatNumber(steps)}
-        detail={`${formatNumber(steps)} / ${formatNumber(stepsGoal)} · ${formatPercent(stepsPercent, 0)}`}
+        note={formatPercent(stepsPercent, 0)}
+        detail={`de ${formatNumber(stepsGoal)}`}
         progress={stepsPercent}
-        accent="sage"
-        icon={<Footprints className="h-4 w-4" aria-hidden="true" />}
+        accent={steps >= stepsGoal ? 'brand' : 'amber'}
       />
       <StatCard
-        label="Hábitos de hoy"
-        value={habitsExpected === 0 ? '—' : `${habitsCompleted} / ${habitsExpected}`}
-        detail={habitsExpected === 0 ? 'Sin hábitos previstos' : formatPercent(habitsPercent, 0)}
+        label="Hábitos"
+        value={habitsExpected === 0 ? '—' : formatPercent(habitsPercent, 0)}
+        note={habitsExpected === 0 ? undefined : `${habitsCompleted} de ${habitsExpected}`}
+        detail={habitsExpected === 0 ? 'Sin hábitos previstos' : 'previstos para hoy'}
         progress={habitsExpected === 0 ? null : habitsPercent}
-        accent="honey"
-        icon={<ListChecks className="h-4 w-4" aria-hidden="true" />}
+        accent={habitsPercent >= 100 ? 'brand' : 'amber'}
       />
       <StatCard
         label="Peso"
         value={weightKg === null ? '—' : formatNumber(weightKg, 1)}
         unit={weightKg === null ? undefined : 'kg'}
-        detail={weightKg === null ? 'Sin registros' : 'Último registro'}
-        accent="ocean"
-        icon={<Scale className="h-4 w-4" aria-hidden="true" />}
+        note={weightChange === null ? undefined : formatWeightChange(weightChange)}
+        detail={weightKg === null ? 'Sin registros' : 'último registro'}
+        accent={losingWeight ? 'brand' : 'ocean'}
       />
       <StatCard
         label="IMC"
         value={formatBMI(bmi)}
-        detail={bmi === null ? 'Completá tu altura' : 'Calculado con el último peso'}
-        accent="plum"
-        icon={<Activity className="h-4 w-4" aria-hidden="true" />}
+        note={category ?? undefined}
+        detail={bmi === null ? 'Completá tu altura' : 'con el último peso'}
+        accent={category === 'Peso normal' ? 'brand' : 'amber'}
       />
     </StatGrid>
   );

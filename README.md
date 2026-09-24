@@ -1,6 +1,6 @@
 # Vida
 
-Aplicación web personal para seguir objetivos, proyectos, hábitos, peso, IMC y pasos.
+Aplicación web personal para seguir objetivos, hábitos, peso, IMC y pasos.
 
 Next.js (App Router) · TypeScript · Tailwind CSS · Supabase (Auth + PostgreSQL + RLS) · Recharts · Lucide.
 
@@ -45,8 +45,6 @@ El trigger de la migración crea el `profile` automáticamente.
 Eso crea las tablas (`profiles`, `goals`, `habits`, `weight_records`, `step_records`, `habit_records`), los índices, las constraints, las políticas RLS de `SELECT`, `INSERT`, `UPDATE` y `DELETE` para cada tabla, y los triggers de `updated_at` y de creación automática del perfil.
 
 La migración es idempotente: podés volver a ejecutarla sin romper nada.
-
-Después repetí el mismo paso con `supabase/migrations/002_projects.sql`, que crea `projects`, `project_stages` y `project_tasks` con sus políticas RLS. Si ya tenías la app funcionando, solo necesitás correr esta segunda.
 
 ---
 
@@ -121,7 +119,6 @@ app/
     layout.tsx               verifica sesión, carga perfil, monta el shell
     dashboard/
     objetivos/
-    proyectos/               listado y detalle ([id]) con etapas y tareas
     salud/
       resumen/ peso/ pasos/ habitos/ calendario/
     configuracion/
@@ -138,18 +135,16 @@ components/
   habits/                    HabitCard, HabitForm, HabitCalendar, HabitStats,
                              WeeklyHabitSummary
   goals/                     GoalCard, GoalForm, GoalProgress
-  projects/                  ProjectCard, ProjectForm, StageSection, StageForm,
-                             TaskRow, TaskForm, TaskStatusButton, TaskCountBadges
   onboarding/                OnboardingGate
-hooks/                       useProfile, useGoals, useHabits, useProjects, useProject,
+hooks/                       useProfile, useGoals, useHabits,
                              useWeightRecords, useStepRecords, useHabitRecords
 lib/
   supabase/client.ts         cliente de navegador
   supabase/server.ts         cliente de servidor (cookies)
   supabase/middleware.ts     refresco de sesión y protección de rutas
-  calculations/              bmi, goals, habits, projects, steps, weight, dates
+  calculations/              bmi, goals, habits, steps, weight, dates
 types/database.ts            tipos de todas las tablas
-supabase/migrations/         001_initial_schema.sql, 002_projects.sql
+supabase/migrations/         001_initial_schema.sql
 middleware.ts                protege todo salvo /login
 ```
 
@@ -172,10 +167,6 @@ middleware.ts                protege todo salvo /login
 **Consultas.** Cada hook pide solo las columnas que usa y filtra por rango de fechas, de modo que los gráficos traen únicamente el período visible.
 
 ---
-
-**Colores.** Cada área tiene su acento, definido en `tailwind.config.ts` y mapeado a clases en `lib/accents.ts`: panel en azul (`ocean`), objetivos en violeta (`plum`), proyectos en coral (`coral`), salud y pasos en verde (`sage`), hábitos en ámbar (`honey`). La marca de Vida (`components/ui/VidaMark.tsx`) usa los cinco. Para cambiar un tono basta con editar la escala en `tailwind.config.ts`.
-
-**Proyectos.** Un proyecto tiene etapas ordenadas y cada etapa tiene tareas con vencimiento opcional y estado `pending`, `in_progress` o `completed`. El progreso es `tareas completas / tareas totales * 100`: 3 de 8 da 37,5%, sin contar las que están en proceso. Tocar el estado de una tarea lo avanza al siguiente (Pendiente → En proceso → Completa). Una tarea está vencida si su fecha ya pasó y no está completa. Un trigger mantiene `project_id` igual al proyecto de la etapa (así mover una tarea de etapa es seguro) y completa `completed_at`. Borrar un proyecto o una etapa borra en cascada lo que contiene. El panel muestra las tareas sin terminar que vencen en los próximos 7 días o ya vencieron.
 
 ## Preparado para crecer
 

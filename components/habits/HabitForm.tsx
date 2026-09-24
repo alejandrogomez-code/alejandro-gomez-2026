@@ -186,18 +186,18 @@ export function HabitForm({ habit = null, goals, onSubmit, onCancel }: HabitForm
             />
           </div>
 
-          <label className="flex items-start gap-3 rounded-xl border border-mist-200 p-4 text-sm dark:border-mist-800">
+          <label className="flex items-start gap-3 rounded-xl border border-sand-200 p-4 text-sm dark:border-sand-800">
             <input
               type="checkbox"
               checked={values.use_step_records}
               onChange={(event) => update('use_step_records', event.target.checked)}
-              className="mt-0.5 h-4 w-4 rounded border-mist-300 dark:border-mist-600"
+              className="mt-0.5 h-4 w-4 rounded border-sand-300 dark:border-sand-600"
             />
             <span>
-              <span className="font-medium text-mist-800 dark:text-mist-200">
+              <span className="font-medium text-sand-800 dark:text-sand-200">
                 Tomar el valor del registro de pasos
               </span>
-              <span className="mt-0.5 block text-mist-500 dark:text-mist-400">
+              <span className="mt-0.5 block text-sand-500 dark:text-sand-400">
                 El cumplimiento se calcula con los pasos cargados ese día, así no tenés que
                 ingresarlos dos veces.
               </span>
@@ -216,7 +216,7 @@ export function HabitForm({ habit = null, goals, onSubmit, onCancel }: HabitForm
 
       {values.frequency_type !== 'daily' ? (
         <fieldset>
-          <legend className="mb-1.5 text-sm font-medium text-mist-700 dark:text-mist-300">
+          <legend className="mb-1.5 text-sm font-medium text-sand-700 dark:text-sand-300">
             Días
           </legend>
           <div className="flex flex-wrap gap-2">
@@ -231,10 +231,10 @@ export function HabitForm({ habit = null, goals, onSubmit, onCancel }: HabitForm
                   aria-label={WEEKDAY_LABELS[day]}
                   className={cn(
                     'h-10 w-10 rounded-lg border text-sm font-medium transition-colors',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-honey-500 dark:focus-visible:ring-honey-300',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sand-900 dark:focus-visible:ring-sand-100',
                     selected
-                      ? 'border-honey-500 bg-honey-500 text-white dark:border-honey-400 dark:bg-honey-500'
-                      : 'border-mist-200 bg-white text-mist-600 dark:border-mist-700 dark:bg-mist-950 dark:text-mist-300',
+                      ? 'border-sand-900 bg-sand-900 text-sand-50 dark:border-sand-100 dark:bg-sand-100 dark:text-sand-900'
+                      : 'border-sand-200 bg-white text-sand-600 dark:border-sand-700 dark:bg-sand-950 dark:text-sand-300',
                   )}
                 >
                   {WEEKDAY_SHORT[day]}
@@ -267,12 +267,12 @@ export function HabitForm({ habit = null, goals, onSubmit, onCancel }: HabitForm
         onChange={(event) => update('goal_id', event.target.value)}
       />
 
-      <label className="flex items-center gap-3 text-sm text-mist-700 dark:text-mist-300">
+      <label className="flex items-center gap-3 text-sm text-sand-700 dark:text-sand-300">
         <input
           type="checkbox"
           checked={values.active}
           onChange={(event) => update('active', event.target.checked)}
-          className="h-4 w-4 rounded border-mist-300 dark:border-mist-600"
+          className="h-4 w-4 rounded border-sand-300 dark:border-sand-600"
         />
         Hábito activo
       </label>

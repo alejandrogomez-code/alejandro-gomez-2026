@@ -17,7 +17,7 @@ export function SaludNav() {
 
   return (
     <nav aria-label="Secciones de salud" className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
-      <ul className="flex min-w-max gap-1 rounded-lg bg-sage-100/70 p-1 dark:bg-sage-500/10">
+      <ul className="flex min-w-max gap-1 rounded-lg bg-sand-100 p-1 dark:bg-sand-800/70">
         {LINKS.map((link) => {
           const active = pathname.startsWith(link.href);
           return (
@@ -28,8 +28,8 @@ export function SaludNav() {
                 className={cn(
                   'block rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
                   active
-                    ? 'bg-white text-sage-700 shadow-card dark:bg-mist-950 dark:text-sage-300'
-                    : 'text-mist-500 hover:text-mist-800 dark:text-mist-400 dark:hover:text-mist-200',
+                    ? 'bg-white text-sand-900 shadow-card dark:bg-sand-950 dark:text-sand-100'
+                    : 'text-sand-500 hover:text-sand-800 dark:text-sand-400 dark:hover:text-sand-200',
                 )}
               >
                 {link.label}

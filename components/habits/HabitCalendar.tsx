@@ -79,8 +79,8 @@ export function HabitCalendar({
                           className={cn(
                             'h-1 w-1 rounded-full',
                             index < completion.completed
-                              ? 'bg-honey-500 dark:bg-honey-400'
-                              : 'bg-mist-300 dark:bg-mist-600',
+                              ? 'bg-amber-500 dark:bg-amber-400'
+                              : 'bg-sand-300 dark:bg-sand-600',
                           )}
                         />
                       ))}
@@ -90,7 +90,7 @@ export function HabitCalendar({
                     <span
                       className={cn(
                         'h-1 w-4 rounded-full',
-                        stepsReached ? 'bg-sage-500 dark:bg-sage-400' : 'bg-mist-200 dark:bg-mist-700',
+                        stepsReached ? 'bg-brand-500 dark:bg-brand-400' : 'bg-sand-200 dark:bg-sand-700',
                       )}
                     />
                   ) : null}
@@ -98,17 +98,17 @@ export function HabitCalendar({
               );
             }}
           />
-          <div className="mt-5 flex flex-wrap gap-4 text-xs text-mist-500 dark:text-mist-400">
+          <div className="mt-5 flex flex-wrap gap-4 text-xs text-sand-500 dark:text-sand-400">
             <span className="flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-honey-500 dark:bg-honey-400" />
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-500 dark:bg-amber-400" />
               Hábito cumplido
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-mist-300 dark:bg-mist-600" />
+              <span className="h-1.5 w-1.5 rounded-full bg-sand-300 dark:bg-sand-600" />
               Hábito pendiente
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="h-1 w-4 rounded-full bg-sage-500 dark:bg-sage-400" />
+              <span className="h-1 w-4 rounded-full bg-brand-500 dark:bg-brand-400" />
               Objetivo de pasos alcanzado
             </span>
           </div>
@@ -126,22 +126,22 @@ export function HabitCalendar({
         />
         <CardContent className="space-y-5">
           <section>
-            <h3 className="text-sm font-medium text-mist-700 dark:text-mist-300">Pasos</h3>
+            <h3 className="text-sm font-medium text-sand-700 dark:text-sand-300">Pasos</h3>
             {selectedSteps === null ? (
-              <p className="mt-2 text-sm text-mist-500 dark:text-mist-400">
+              <p className="mt-2 text-sm text-sand-500 dark:text-sand-400">
                 No hay registro de pasos ese día.
               </p>
             ) : (
               <div className="mt-2 space-y-2">
-                <p className="tabular text-sm text-mist-600 dark:text-mist-300">
+                <p className="tabular text-sm text-sand-600 dark:text-sand-300">
                   {formatNumber(selectedSteps)} / {formatNumber(dailyStepsGoal)}
                 </p>
                 <Progress
                   value={calculateStepCompletion(selectedSteps, dailyStepsGoal)}
-                  barClassName="bg-sage-500 dark:bg-sage-400"
+                  barClassName="bg-brand-500 dark:bg-brand-400"
                   label="Pasos del día"
                 />
-                <p className="tabular text-sm font-medium text-mist-900 dark:text-mist-100">
+                <p className="tabular text-sm font-medium text-sand-900 dark:text-sand-100">
                   {formatPercent(calculateStepCompletion(selectedSteps, dailyStepsGoal))}
                 </p>
               </div>
@@ -149,7 +149,7 @@ export function HabitCalendar({
           </section>
 
           <section>
-            <h3 className="text-sm font-medium text-mist-700 dark:text-mist-300">Hábitos</h3>
+            <h3 className="text-sm font-medium text-sand-700 dark:text-sand-300">Hábitos</h3>
             {selectedHabits.length === 0 ? (
               <EmptyState title="Sin hábitos previstos para este día" className="py-6" />
             ) : (
@@ -163,10 +163,10 @@ export function HabitCalendar({
                       onClick={() => onToggleHabit(habit, selectedDate, !state.completed)}
                       className={cn(
                         'flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm transition-colors',
-                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mist-900 dark:focus-visible:ring-mist-100',
+                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sand-900 dark:focus-visible:ring-sand-100',
                         state.completed
-                          ? 'bg-honey-50 text-mist-900 dark:bg-honey-500/10 dark:text-mist-100'
-                          : 'text-mist-600 hover:bg-mist-50 dark:text-mist-300 dark:hover:bg-mist-800/60',
+                          ? 'bg-amber-50 text-sand-900 dark:bg-amber-500/10 dark:text-sand-100'
+                          : 'text-sand-600 hover:bg-sand-50 dark:text-sand-300 dark:hover:bg-sand-800/60',
                         state.fromSteps ? 'cursor-default' : '',
                       )}
                     >
@@ -174,8 +174,8 @@ export function HabitCalendar({
                         className={cn(
                           'flex h-5 w-5 shrink-0 items-center justify-center rounded-md border',
                           state.completed
-                            ? 'border-honey-500 bg-honey-500 text-white dark:border-honey-400 dark:bg-honey-400 dark:text-mist-900'
-                            : 'border-mist-300 dark:border-mist-600',
+                            ? 'border-amber-500 bg-amber-500 text-white dark:border-amber-400 dark:bg-amber-400 dark:text-sand-900'
+                            : 'border-sand-300 dark:border-sand-600',
                         )}
                       >
                         {state.completed ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : null}
@@ -183,7 +183,7 @@ export function HabitCalendar({
                       <span className="min-w-0 flex-1 truncate">{habit.name}</span>
                       {state.fromSteps ? (
                         <Footprints
-                          className="h-4 w-4 shrink-0 text-mist-400"
+                          className="h-4 w-4 shrink-0 text-sand-400"
                           aria-label="Se calcula con los pasos del día"
                         />
                       ) : null}

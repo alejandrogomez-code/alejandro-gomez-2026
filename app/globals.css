@@ -5,33 +5,33 @@
 @layer base {
   :root {
     /* Colores usados por los gráficos de Recharts. */
-    --chart-line: #191d31;
-    --chart-weight: #3d6bf5;
-    --chart-steps: #10a472;
-    --chart-habits: #f08c0c;
-    --chart-bar: #cff5e3;
-    --chart-bar-active: #10a472;
-    --chart-grid: #e3e8f3;
-    --chart-axis: #687393;
-    --chart-reference: #f08c0c;
+    --chart-line: #232120;
+    --chart-weight: #0f6b5a;
+    --chart-steps: #0f6b5a;
+    --chart-habits: #d99425;
+    --chart-bar: #e7e3db;
+    --chart-bar-active: #0f6b5a;
+    --chart-grid: #efebe3;
+    --chart-axis: #a09a90;
+    --chart-reference: #d99425;
     --chart-tooltip-bg: #ffffff;
-    --chart-tooltip-border: #dce2f0;
-    --chart-tooltip-text: #191d31;
+    --chart-tooltip-border: #e7e3db;
+    --chart-tooltip-text: #232120;
   }
 
   .dark {
-    --chart-line: #eef1fa;
-    --chart-weight: #6390ff;
-    --chart-steps: #2cbf88;
-    --chart-habits: #ffab2b;
-    --chart-bar: #0b533e;
-    --chart-bar-active: #2cbf88;
-    --chart-grid: #232943;
-    --chart-axis: #929cb8;
-    --chart-reference: #ffab2b;
-    --chart-tooltip-bg: #191d31;
-    --chart-tooltip-border: #272d45;
-    --chart-tooltip-text: #eef1fa;
+    --chart-line: #efece7;
+    --chart-weight: #7fb3a5;
+    --chart-steps: #7fb3a5;
+    --chart-habits: #e0a94f;
+    --chart-bar: #3a3632;
+    --chart-bar-active: #7fb3a5;
+    --chart-grid: #2b2825;
+    --chart-axis: #8a857c;
+    --chart-reference: #e0a94f;
+    --chart-tooltip-bg: #232120;
+    --chart-tooltip-border: #33302d;
+    --chart-tooltip-text: #efece7;
   }
 
   html {
@@ -52,7 +52,7 @@
   }
 
   body {
-    @apply bg-mist-50 text-mist-900 antialiased dark:bg-mist-950 dark:text-mist-100;
+    @apply bg-sand-50 text-sand-900 antialiased dark:bg-sand-950 dark:text-sand-100;
   }
 
   /* Los números son el contenido principal de esta app. */

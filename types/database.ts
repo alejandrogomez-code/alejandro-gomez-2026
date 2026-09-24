@@ -4,9 +4,6 @@ export type HabitType = 'check' | 'quantitative';
 export type FrequencyType = 'daily' | 'weekly_days' | 'custom';
 export type ThemePreference = 'light' | 'dark' | 'system';
 export type FontSize = 'small' | 'normal' | 'large';
-export type ProjectStatus = 'active' | 'paused' | 'completed' | 'archived';
-export type ProjectColor = 'coral' | 'ocean' | 'sage' | 'honey' | 'plum';
-export type TaskStatus = 'pending' | 'in_progress' | 'completed';
 
 export interface Database {
   public: {
@@ -205,95 +202,6 @@ export interface Database {
         };
         Relationships: [];
       };
-      projects: {
-        Row: {
-          id: string;
-          user_id: string;
-          name: string;
-          description: string | null;
-          color: ProjectColor;
-          start_date: string;
-          target_date: string | null;
-          status: ProjectStatus;
-          created_at: string;
-          updated_at: string;
-        };
-        Insert: {
-          id?: string;
-          user_id: string;
-          name: string;
-          description?: string | null;
-          color?: ProjectColor;
-          start_date?: string;
-          target_date?: string | null;
-          status?: ProjectStatus;
-        };
-        Update: {
-          name?: string;
-          description?: string | null;
-          color?: ProjectColor;
-          start_date?: string;
-          target_date?: string | null;
-          status?: ProjectStatus;
-        };
-        Relationships: [];
-      };
-      project_stages: {
-        Row: {
-          id: string;
-          user_id: string;
-          project_id: string;
-          name: string;
-          position: number;
-          created_at: string;
-          updated_at: string;
-        };
-        Insert: {
-          id?: string;
-          user_id: string;
-          project_id: string;
-          name: string;
-          position?: number;
-        };
-        Update: {
-          name?: string;
-          position?: number;
-        };
-        Relationships: [];
-      };
-      project_tasks: {
-        Row: {
-          id: string;
-          user_id: string;
-          project_id: string;
-          stage_id: string;
-          title: string;
-          notes: string | null;
-          due_date: string | null;
-          status: TaskStatus;
-          completed_at: string | null;
-          created_at: string;
-          updated_at: string;
-        };
-        Insert: {
-          id?: string;
-          user_id: string;
-          project_id: string;
-          stage_id: string;
-          title: string;
-          notes?: string | null;
-          due_date?: string | null;
-          status?: TaskStatus;
-        };
-        Update: {
-          stage_id?: string;
-          title?: string;
-          notes?: string | null;
-          due_date?: string | null;
-          status?: TaskStatus;
-        };
-        Relationships: [];
-      };
     };
     Views: { [_ in never]: never };
     Functions: { [_ in never]: never };
@@ -316,17 +224,6 @@ export type HabitUpdate = Database['public']['Tables']['habits']['Update'];
 export type WeightRecord = Database['public']['Tables']['weight_records']['Row'];
 export type StepRecord = Database['public']['Tables']['step_records']['Row'];
 export type HabitRecord = Database['public']['Tables']['habit_records']['Row'];
-
-export type Project = Database['public']['Tables']['projects']['Row'];
-export type ProjectInsert = Database['public']['Tables']['projects']['Insert'];
-export type ProjectUpdate = Database['public']['Tables']['projects']['Update'];
-
-export type ProjectStage = Database['public']['Tables']['project_stages']['Row'];
-export type ProjectStageUpdate = Database['public']['Tables']['project_stages']['Update'];
-
-export type ProjectTask = Database['public']['Tables']['project_tasks']['Row'];
-export type ProjectTaskInsert = Database['public']['Tables']['project_tasks']['Insert'];
-export type ProjectTaskUpdate = Database['public']['Tables']['project_tasks']['Update'];
 
 /** Datos de un formulario de objetivo (sin ids ni timestamps). */
 export interface GoalFormValues {

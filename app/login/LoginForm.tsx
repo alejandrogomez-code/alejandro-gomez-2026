@@ -60,7 +60,7 @@ export function LoginForm() {
       <Button type="submit" className="w-full" loading={loading}>
         Ingresar
       </Button>
-      <p className="text-center text-xs text-mist-400">
+      <p className="text-center text-xs text-sand-400">
         Cuenta personal: el alta se hace desde el panel de Supabase.
       </p>
     </form>

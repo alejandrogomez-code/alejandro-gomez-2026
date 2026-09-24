@@ -1,8 +1,7 @@
 'use client';
 
-import { Monitor, Moon, Settings, Sun } from 'lucide-react';
-import { PageHeader } from '@/components/ui/PageHeader';
 import { useEffect, useState, type FormEvent } from 'react';
+import { Monitor, Moon, Sun } from 'lucide-react';
 import { useProfile } from '@/hooks/useProfile';
 import { useTheme } from '@/components/providers/theme-provider';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
@@ -67,13 +66,13 @@ export default function ConfiguracionPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <PageHeader
-        icon={Settings}
-        accent="neutral"
-        title="Ajustes"
-        description={<>{email}</>}
-      />
+    <div className="space-y-5">
+      <header>
+        <h1 className="text-xl font-medium tracking-tight text-sand-900 dark:text-sand-100">
+          Ajustes
+        </h1>
+        <p className="mt-0.5 text-sm text-sand-500 dark:text-sand-400">{email}</p>
+      </header>
 
       <Card>
         <CardHeader title="Perfil" description="Se usa para calcular el IMC y los porcentajes." />
@@ -108,7 +107,7 @@ export default function ConfiguracionPage() {
               />
             </div>
             {previewBMI !== null ? (
-              <p className="text-sm text-mist-500 dark:text-mist-400">
+              <p className="text-sm text-sand-500 dark:text-sand-400">
                 IMC con el peso inicial:{' '}
                 <span className="tabular font-medium">{formatBMI(previewBMI)}</span>
               </p>
@@ -125,7 +124,7 @@ export default function ConfiguracionPage() {
         <CardHeader title="Apariencia" />
         <CardContent className="space-y-6">
           <fieldset>
-            <legend className="mb-2 text-sm font-medium text-mist-700 dark:text-mist-300">
+            <legend className="mb-2 text-sm font-medium text-sand-700 dark:text-sand-300">
               Tema
             </legend>
             <div className="grid grid-cols-3 gap-2">
@@ -140,10 +139,10 @@ export default function ConfiguracionPage() {
                     aria-pressed={active}
                     className={cn(
                       'flex flex-col items-center gap-2 rounded-xl border px-3 py-4 text-sm transition-colors',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mist-900 dark:focus-visible:ring-mist-100',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sand-900 dark:focus-visible:ring-sand-100',
                       active
-                        ? 'border-mist-900 text-mist-900 dark:border-mist-100 dark:text-mist-100'
-                        : 'border-mist-200 text-mist-500 hover:border-mist-300 dark:border-mist-800 dark:text-mist-400',
+                        ? 'border-sand-900 text-sand-900 dark:border-sand-100 dark:text-sand-100'
+                        : 'border-sand-200 text-sand-500 hover:border-sand-300 dark:border-sand-800 dark:text-sand-400',
                     )}
                   >
                     <Icon className="h-4 w-4" aria-hidden="true" />
@@ -155,7 +154,7 @@ export default function ConfiguracionPage() {
           </fieldset>
 
           <fieldset>
-            <legend className="mb-2 text-sm font-medium text-mist-700 dark:text-mist-300">
+            <legend className="mb-2 text-sm font-medium text-sand-700 dark:text-sand-300">
               Tamaño de fuente
             </legend>
             <div className="grid grid-cols-3 gap-2">
@@ -169,10 +168,10 @@ export default function ConfiguracionPage() {
                     aria-pressed={active}
                     className={cn(
                       'rounded-xl border px-3 py-3 text-sm transition-colors',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mist-900 dark:focus-visible:ring-mist-100',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sand-900 dark:focus-visible:ring-sand-100',
                       active
-                        ? 'border-mist-900 text-mist-900 dark:border-mist-100 dark:text-mist-100'
-                        : 'border-mist-200 text-mist-500 hover:border-mist-300 dark:border-mist-800 dark:text-mist-400',
+                        ? 'border-sand-900 text-sand-900 dark:border-sand-100 dark:text-sand-100'
+                        : 'border-sand-200 text-sand-500 hover:border-sand-300 dark:border-sand-800 dark:text-sand-400',
                     )}
                   >
                     {option.label}
@@ -187,7 +186,7 @@ export default function ConfiguracionPage() {
       <Card>
         <CardHeader title="Sesión" />
         <CardContent>
-          <SignOutButton full={false} />
+          <SignOutButton />
         </CardContent>
       </Card>
     </div>

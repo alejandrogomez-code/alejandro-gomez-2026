@@ -1,21 +1,22 @@
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import { ACCENTS, type Accent } from '@/lib/accents';
 
-type Tone = 'neutral' | 'success' | 'warning' | 'danger' | 'accent' | 'ocean' | 'plum' | 'honey';
+type Tone = Accent | 'success' | 'warning' | 'danger';
 
-const tones: Record<Tone, string> = {
-  neutral:
-    'bg-mist-100 text-mist-600 dark:bg-mist-800 dark:text-mist-300',
-  success:
-    'bg-sage-100 text-sage-700 dark:bg-sage-900/40 dark:text-sage-300',
-  warning: 'bg-honey-100 text-honey-700 dark:bg-honey-500/15 dark:text-honey-300',
-  danger: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
-  accent: 'bg-sage-50 text-sage-600 dark:bg-sage-500/15 dark:text-sage-300',
-  ocean: 'bg-ocean-50 text-ocean-600 dark:bg-ocean-500/15 dark:text-ocean-300',
-  plum: 'bg-plum-50 text-plum-600 dark:bg-plum-500/15 dark:text-plum-300',
-  honey: 'bg-honey-50 text-honey-600 dark:bg-honey-500/15 dark:text-honey-300',
+const TONE_TO_ACCENT: Record<Tone, Accent> = {
+  brand: 'brand',
+  ocean: 'ocean',
+  amber: 'amber',
+  plum: 'plum',
+  clay: 'clay',
+  neutral: 'neutral',
+  success: 'brand',
+  warning: 'amber',
+  danger: 'clay',
 };
 
+/** Píldora de estado: fondo tenue y texto del mismo color, sin bordes. */
 export function Badge({
   children,
   tone = 'neutral',
@@ -28,8 +29,8 @@ export function Badge({
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium',
-        tones[tone],
+        'inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium',
+        ACCENTS[TONE_TO_ACCENT[tone]].pill,
         className,
       )}
     >

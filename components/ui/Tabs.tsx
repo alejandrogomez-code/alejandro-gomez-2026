@@ -26,10 +26,7 @@ export function Tabs<T extends string>({
     <div
       role="tablist"
       aria-label={ariaLabel}
-      className={cn(
-        'inline-flex gap-1 rounded-lg bg-mist-100 p-1 dark:bg-mist-800/70',
-        className,
-      )}
+      className={cn('inline-flex gap-0.5 rounded-lg bg-sand-100 p-0.5 dark:bg-sand-800', className)}
     >
       {items.map((item) => {
         const active = item.value === value;
@@ -41,11 +38,11 @@ export function Tabs<T extends string>({
             aria-selected={active}
             onClick={() => onChange(item.value)}
             className={cn(
-              'rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-500 dark:focus-visible:ring-ocean-300',
+              'rounded-md px-2.5 py-1 text-xs font-medium transition-colors',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500',
               active
-                ? 'bg-white text-ocean-700 shadow-card dark:bg-mist-950 dark:text-ocean-300'
-                : 'text-mist-500 hover:text-mist-800 dark:text-mist-400 dark:hover:text-mist-200',
+                ? 'bg-white text-sand-900 dark:bg-sand-950 dark:text-sand-100'
+                : 'text-sand-500 hover:text-sand-800 dark:text-sand-400 dark:hover:text-sand-200',
             )}
           >
             {item.label}

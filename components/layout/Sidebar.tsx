@@ -2,84 +2,105 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { LogOut, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ACCENTS } from '@/lib/accents';
-import { VidaMark } from '@/components/ui/VidaMark';
+import { useSidebarCounters } from '@/hooks/useSidebarCounters';
 import { NAV_ITEMS } from './nav-items';
+import { AppearanceControls } from './AppearanceControls';
 import { SignOutButton } from './SignOutButton';
 
 export function Sidebar({ email }: { email: string }) {
   const pathname = usePathname();
+  const counters = useSidebarCounters();
+
+  function badgeFor(href: string): number | null {
+    if (href === '/objetivos') return counters.activeGoals || null;
+    if (href === '/salud/habitos') return counters.pendingHabitsToday || null;
+    return null;
+  }
 
   return (
-    <aside className="hidden w-64 shrink-0 border-r border-mist-200/70 bg-white lg:flex lg:flex-col dark:border-mist-800 dark:bg-mist-900">
-      <div className="px-6 py-7">
-        <p className="text-xl font-semibold tracking-tight text-mist-900 dark:text-mist-100">
-          Vida
-        </p>
-        <VidaMark className="mt-2 w-20" segmentClassName="h-1" />
-        <p className="mt-2 truncate text-xs text-mist-400">{email}</p>
+    <aside className="hidden w-60 shrink-0 flex-col border-r border-sand-200 bg-white lg:flex dark:border-sand-800 dark:bg-sand-900">
+      <div className="flex items-center gap-2.5 px-4 py-4">
+        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-500 text-sm font-medium text-white">
+          V
+        </span>
+        <span className="min-w-0">
+          <span className="block text-sm font-medium text-sand-900 dark:text-sand-100">Vida</span>
+          <span className="block truncate text-xs text-sand-400">Espacio personal</span>
+        </span>
       </div>
 
-      <nav aria-label="Navegación principal" className="flex-1 px-3">
-        <ul className="space-y-1">
+      <nav aria-label="Navegación principal" className="flex-1 px-2">
+        <ul className="space-y-0.5">
           {NAV_ITEMS.map((item) => {
             const active = pathname.startsWith(item.match);
             const Icon = item.icon;
-            const theme = ACCENTS[item.accent];
+            const badge = badgeFor(item.href);
+
             return (
               <li key={item.href}>
                 <Link
                   href={item.href}
                   aria-current={active ? 'page' : undefined}
                   className={cn(
-                    'group flex items-center gap-3 rounded-xl px-2.5 py-2 text-sm transition-colors',
+                    'flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm transition-colors',
                     active
-                      ? cn('font-medium', theme.nav)
-                      : 'text-mist-500 hover:bg-mist-50 hover:text-mist-900 dark:text-mist-400 dark:hover:bg-mist-800/60 dark:hover:text-mist-100',
+                      ? 'bg-brand-50 font-medium text-brand-600 dark:bg-brand-500/15 dark:text-brand-200'
+                      : 'text-sand-600 hover:bg-sand-50 hover:text-sand-900 dark:text-sand-400 dark:hover:bg-sand-800/60 dark:hover:text-sand-100',
                   )}
                 >
-                  <span
-                    className={cn(
-                      'flex h-7 w-7 items-center justify-center rounded-lg transition-colors',
-                      active ? theme.solid : cn(theme.text, 'bg-transparent'),
-                    )}
-                    aria-hidden="true"
-                  >
-                    <Icon className="h-4 w-4" />
-                  </span>
-                  {item.label}
+                  <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  <span className="flex-1 truncate">{item.label}</span>
+                  {badge ? (
+                    <span className="tabular rounded-full bg-sand-100 px-1.5 text-xs text-sand-600 dark:bg-sand-800 dark:text-sand-300">
+                      {badge}
+                    </span>
+                  ) : null}
                 </Link>
 
-                {item.children && active ? (
-                  <ul className="mb-2 ml-6 mt-1 space-y-0.5 border-l-2 border-sage-200 pl-3 dark:border-sage-500/30">
-                    {item.children.map((child) => {
-                      const childActive = pathname.startsWith(child.match);
-                      return (
-                        <li key={child.href}>
-                          <Link
-                            href={child.href}
-                            aria-current={childActive ? 'page' : undefined}
-                            className={cn(
-                              'flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors',
-                              childActive
-                                ? 'font-medium text-mist-900 dark:text-mist-100'
-                                : 'text-mist-500 hover:text-mist-900 dark:text-mist-400 dark:hover:text-mist-100',
-                            )}
-                          >
-                            <span
+                {item.children ? (
+                  <>
+                    <p className="mb-1 mt-3 px-2.5 text-[11px] uppercase tracking-wider text-sand-400">
+                      {item.label}
+                    </p>
+                    <ul className="space-y-0.5">
+                      {item.children.map((child) => {
+                        const childActive = pathname.startsWith(child.match);
+                        const ChildIcon = child.icon;
+                        const childBadge = badgeFor(child.href);
+                        return (
+                          <li key={child.href}>
+                            <Link
+                              href={child.href}
+                              aria-current={childActive ? 'page' : undefined}
                               className={cn(
-                                'h-1.5 w-1.5 rounded-full',
-                                childActive ? ACCENTS[child.accent].dot : 'bg-mist-300 dark:bg-mist-700',
+                                'flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm transition-colors',
+                                childActive
+                                  ? 'bg-brand-50 font-medium text-brand-600 dark:bg-brand-500/15 dark:text-brand-200'
+                                  : 'text-sand-600 hover:bg-sand-50 hover:text-sand-900 dark:text-sand-400 dark:hover:bg-sand-800/60 dark:hover:text-sand-100',
                               )}
-                              aria-hidden="true"
-                            />
-                            {child.label}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                            >
+                              <ChildIcon
+                                className={cn(
+                                  'h-4 w-4 shrink-0',
+                                  childActive ? '' : ACCENTS[child.accent].text,
+                                )}
+                                aria-hidden="true"
+                              />
+                              <span className="flex-1 truncate">{child.label}</span>
+                              {childBadge ? (
+                                <span className="tabular rounded-full bg-sand-100 px-1.5 text-xs text-sand-600 dark:bg-sand-800 dark:text-sand-300">
+                                  {childBadge}
+                                </span>
+                              ) : null}
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </>
                 ) : null}
               </li>
             );
@@ -87,8 +108,24 @@ export function Sidebar({ email }: { email: string }) {
         </ul>
       </nav>
 
-      <div className="border-t border-mist-100 p-3 dark:border-mist-800">
-        <SignOutButton />
+      <div className="border-t border-sand-200 p-3 dark:border-sand-800">
+        <AppearanceControls />
+        <div className="mt-3 flex items-center gap-2">
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-sand-100 text-[11px] font-medium text-sand-600 dark:bg-sand-800 dark:text-sand-300">
+            {email.slice(0, 2).toUpperCase()}
+          </span>
+          <span className="min-w-0 flex-1 truncate text-xs text-sand-600 dark:text-sand-400">
+            {email}
+          </span>
+          <Link
+            href="/configuracion"
+            aria-label="Ajustes"
+            className="rounded-md p-1 text-sand-400 hover:bg-sand-100 hover:text-sand-700 dark:hover:bg-sand-800"
+          >
+            <Settings className="h-4 w-4" aria-hidden="true" />
+          </Link>
+          <SignOutButton compact />
+        </div>
       </div>
     </aside>
   );

@@ -29,7 +29,7 @@ export function WeeklyHabitSummary({
         description={description}
         action={
           <span
-            className={`tabular text-2xl font-medium tracking-tight ${ACCENTS.honey.text}`}
+            className={`tabular text-2xl font-medium tracking-tight ${ACCENTS.amber.text}`}
           >
             {formatPercent(completion.percentage, 0)}
           </span>
@@ -39,10 +39,10 @@ export function WeeklyHabitSummary({
         <div>
           <Progress
             value={completion.percentage}
-            barClassName={ACCENTS.honey.bar}
+            barClassName={ACCENTS.amber.bar}
             label="Cumplimiento general"
           />
-          <p className="tabular mt-2 text-sm text-mist-500 dark:text-mist-400">
+          <p className="tabular mt-2 text-sm text-sand-500 dark:text-sand-400">
             {completion.completed} de {completion.expected} instancias previstas
           </p>
         </div>
@@ -57,16 +57,16 @@ export function WeeklyHabitSummary({
             {completion.byHabit.map((row) => (
               <li key={row.habit.id} className="space-y-1.5">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="truncate text-mist-700 dark:text-mist-300">
+                  <span className="truncate text-sand-700 dark:text-sand-300">
                     {row.habit.name}
                   </span>
-                  <span className="tabular shrink-0 pl-3 text-mist-500 dark:text-mist-400">
+                  <span className="tabular shrink-0 pl-3 text-sand-500 dark:text-sand-400">
                     {row.completed}/{row.expected} · {formatPercent(row.percentage, 0)}
                   </span>
                 </div>
                 <Progress
                   value={row.percentage}
-                  barClassName={ACCENTS.honey.bar}
+                  barClassName={ACCENTS.amber.bar}
                   label={`Cumplimiento de ${row.habit.name}`}
                 />
               </li>

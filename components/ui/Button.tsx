@@ -14,21 +14,19 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants: Record<Variant, string> = {
-  primary:
-    'bg-ocean-600 text-white shadow-sm hover:bg-ocean-700 dark:bg-ocean-500 dark:text-white dark:hover:bg-ocean-400',
+  primary: 'bg-brand-500 text-white hover:bg-brand-600 dark:bg-brand-500 dark:hover:bg-brand-400',
   secondary:
-    'border border-mist-200 bg-white text-mist-700 hover:bg-mist-50 dark:border-mist-800 dark:bg-mist-900 dark:text-mist-200 dark:hover:bg-mist-800',
+    'border border-sand-300 bg-white text-sand-700 hover:bg-sand-50 dark:border-sand-800 dark:bg-sand-900 dark:text-sand-200 dark:hover:bg-sand-800',
   ghost:
-    'text-mist-500 hover:bg-mist-100 hover:text-mist-900 dark:text-mist-400 dark:hover:bg-mist-800 dark:hover:text-mist-100',
-  danger:
-    'bg-red-600 text-white hover:bg-red-700 dark:bg-red-600 dark:text-white dark:hover:bg-red-500',
+    'text-sand-600 hover:bg-sand-100 hover:text-sand-900 dark:text-sand-400 dark:hover:bg-sand-800 dark:hover:text-sand-100',
+  danger: 'bg-clay-500 text-white hover:bg-clay-600 dark:bg-clay-500 dark:hover:bg-clay-400',
 };
 
 const sizes: Record<Size, string> = {
   sm: 'h-8 px-3 text-sm',
-  md: 'h-10 px-4 text-sm',
-  lg: 'h-12 px-6 text-base',
-  icon: 'h-9 w-9',
+  md: 'h-9 px-3.5 text-sm',
+  lg: 'h-11 px-5 text-base',
+  icon: 'h-8 w-8',
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
@@ -40,9 +38,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       ref={ref}
       disabled={disabled || loading}
       className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-500 focus-visible:ring-offset-2',
-        'dark:focus-visible:ring-ocean-300 dark:focus-visible:ring-offset-mist-950',
+        'inline-flex items-center justify-center gap-1.5 rounded-lg font-medium transition-colors',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2',
+        'dark:focus-visible:ring-offset-sand-950',
         'disabled:pointer-events-none disabled:opacity-50',
         variants[variant],
         sizes[size],
