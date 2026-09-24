@@ -21,8 +21,8 @@ export function ErrorState({ message, className }: { message: string; className?
     <div
       role="alert"
       className={cn(
-        'flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700',
-        'dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-300',
+        'flex items-start gap-3 rounded-xl border border-clay-200 bg-clay-50 p-4 text-sm text-clay-700',
+        'dark:border-clay-800/50 dark:bg-clay-900/30 dark:text-clay-300',
         className,
       )}
     >

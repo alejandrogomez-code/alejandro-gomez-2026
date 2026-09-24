@@ -59,7 +59,7 @@ export function UpcomingTasks({
         action={
           <Link
             href="/proyectos"
-            className="inline-flex items-center gap-1 text-sm text-mist-500 hover:text-mist-900 dark:text-mist-400 dark:hover:text-mist-100"
+            className="inline-flex items-center gap-1 text-sm text-sand-500 hover:text-sand-900 dark:text-sand-400 dark:hover:text-sand-100"
           >
             Ver proyectos
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -75,7 +75,7 @@ export function UpcomingTasks({
             description="Las tareas con fecha de tus proyectos en curso aparecen acá."
           />
         ) : (
-          <ul className="divide-y divide-mist-100 dark:divide-mist-800">
+          <ul className="divide-y divide-sand-100 dark:divide-sand-800">
             {shown.map((task) => {
               const project = projectById.get(task.project_id);
               const overdue = isTaskOverdue(task);
@@ -89,11 +89,11 @@ export function UpcomingTasks({
                   <div className="min-w-0 flex-1">
                     <Link
                       href={`/proyectos/${task.project_id}`}
-                      className="block truncate text-sm text-mist-800 hover:underline dark:text-mist-100"
+                      className="block truncate text-sm text-sand-800 hover:underline dark:text-sand-100"
                     >
                       {task.title}
                     </Link>
-                    <p className="flex items-center gap-1.5 truncate text-xs text-mist-500 dark:text-mist-400">
+                    <p className="flex items-center gap-1.5 truncate text-xs text-sand-500 dark:text-sand-400">
                       {project ? (
                         <>
                           <span className={cn('h-2 w-2 shrink-0 rounded-full', ACCENTS[project.color].dot)} aria-hidden="true" />
@@ -103,10 +103,10 @@ export function UpcomingTasks({
                     </p>
                   </div>
                   <div className="shrink-0 text-right text-xs">
-                    <p className={cn('tabular', overdue ? 'font-medium text-red-600 dark:text-red-400' : 'text-mist-700 dark:text-mist-200')}>
+                    <p className={cn('tabular', overdue ? 'font-medium text-clay-600 dark:text-clay-400' : 'text-sand-700 dark:text-sand-200')}>
                       {task.due_date ? formatShortDate(task.due_date) : ''}
                     </p>
-                    <p className={cn(overdue ? 'text-red-500 dark:text-red-400' : 'text-mist-400')}>
+                    <p className={cn(overdue ? 'text-clay-500 dark:text-clay-400' : 'text-sand-400')}>
                       {taskDueLabel(task.due_date)}
                     </p>
                   </div>
@@ -116,7 +116,7 @@ export function UpcomingTasks({
           </ul>
         )}
         {upcoming.length > MAX_ITEMS ? (
-          <p className="mt-2 text-xs text-mist-400">
+          <p className="mt-2 text-xs text-sand-400">
             Y {upcoming.length - MAX_ITEMS} más en tus proyectos.
           </p>
         ) : null}

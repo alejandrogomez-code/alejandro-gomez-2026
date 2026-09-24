@@ -34,11 +34,11 @@ export function PageHeader({
           </span>
         ) : null}
         <div className="min-w-0">
-          <h1 className="truncate text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
+          <h1 className="truncate text-2xl font-medium tracking-tight text-sand-900 dark:text-sand-100">
             {title}
           </h1>
           {description ? (
-            <p className="mt-0.5 text-sm text-mist-500 dark:text-mist-400">{description}</p>
+            <p className="mt-0.5 text-sm text-sand-500 dark:text-sand-400">{description}</p>
           ) : null}
         </div>
       </div>

@@ -139,7 +139,7 @@ export default function ProyectoPage() {
     <div className="space-y-6">
       <Link
         href="/proyectos"
-        className="inline-flex items-center gap-1.5 text-sm text-mist-500 hover:text-mist-900 dark:text-mist-400 dark:hover:text-mist-100"
+        className="inline-flex items-center gap-1.5 text-sm text-sand-500 hover:text-sand-900 dark:text-sand-400 dark:hover:text-sand-100"
       >
         <ArrowLeft className="h-4 w-4" aria-hidden="true" />
         Proyectos
@@ -157,11 +157,11 @@ export default function ProyectoPage() {
                 <FolderKanban className="h-5 w-5" />
               </span>
               <div className="min-w-0">
-                <h1 className="text-2xl font-medium tracking-tight text-mist-900 dark:text-mist-100">
+                <h1 className="text-2xl font-medium tracking-tight text-sand-900 dark:text-sand-100">
                   {project.name}
                 </h1>
                 {project.description ? (
-                  <p className="mt-1 whitespace-pre-line text-sm text-mist-500 dark:text-mist-400">
+                  <p className="mt-1 whitespace-pre-line text-sm text-sand-500 dark:text-sand-400">
                     {project.description}
                   </p>
                 ) : null}
@@ -175,7 +175,7 @@ export default function ProyectoPage() {
                 variant="ghost"
                 size="icon"
                 aria-label="Eliminar proyecto"
-                className="hover:text-red-600 dark:hover:text-red-400"
+                className="hover:text-clay-600 dark:hover:text-clay-400"
                 onClick={() => setConfirmProjectDelete(true)}
               >
                 <Trash2 className="h-4 w-4" aria-hidden="true" />
@@ -185,7 +185,7 @@ export default function ProyectoPage() {
 
           <div>
             <div className="flex items-baseline justify-between gap-3">
-              <span className="text-sm text-mist-500 dark:text-mist-400">
+              <span className="text-sm text-sand-500 dark:text-sand-400">
                 {summary.total === 0
                   ? 'Todavía no hay tareas'
                   : `${summary.completed} de ${plural(summary.total, 'tarea completa', 'tareas completas')}`}
@@ -203,12 +203,12 @@ export default function ProyectoPage() {
           </div>
 
           <div className="flex flex-wrap items-center gap-1.5">
-            <Badge tone={project.status === 'completed' ? 'success' : project.status === 'active' ? 'accent' : 'neutral'}>
+            <Badge tone={project.status === 'completed' ? 'success' : project.status === 'active' ? 'brand' : 'neutral'}>
               {PROJECT_STATUS_LABELS[project.status]}
             </Badge>
             <TaskCountBadges summary={summary} />
             {project.target_date ? (
-              <span className="ml-auto inline-flex items-center gap-1.5 text-sm text-mist-500 dark:text-mist-400">
+              <span className="ml-auto inline-flex items-center gap-1.5 text-sm text-sand-500 dark:text-sand-400">
                 <CalendarClock className="h-4 w-4" aria-hidden="true" />
                 <span className="tabular">{formatDate(project.target_date)}</span>
                 {remaining ? <span>· {remaining}</span> : null}
@@ -217,8 +217,8 @@ export default function ProyectoPage() {
           </div>
 
           {summary.total > 0 && summary.completed === summary.total && project.status === 'active' ? (
-            <div className={cn('flex flex-wrap items-center justify-between gap-3 rounded-xl p-3 text-sm', ACCENTS.sage.soft)}>
-              <span className="text-sage-800 dark:text-sage-200">Todas las tareas están completas.</span>
+            <div className={cn('flex flex-wrap items-center justify-between gap-3 rounded-xl p-3 text-sm', ACCENTS.brand.soft)}>
+              <span className="text-brand-800 dark:text-brand-200">Todas las tareas están completas.</span>
               <Button
                 size="sm"
                 variant="secondary"

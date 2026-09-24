@@ -7,9 +7,9 @@ import { cn } from '@/lib/utils';
 const SEGMENTS = [
   'bg-ocean-500',
   'bg-plum-500',
-  'bg-coral-500',
-  'bg-sage-500',
-  'bg-honey-500',
+  'bg-clay-500',
+  'bg-brand-500',
+  'bg-amber-500',
 ];
 
 export function VidaMark({ className, segmentClassName }: { className?: string; segmentClassName?: string }) {

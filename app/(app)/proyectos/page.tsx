@@ -56,7 +56,7 @@ export default function ProyectosPage() {
     <div className="space-y-6">
       <PageHeader
         icon={FolderKanban}
-        accent="coral"
+        accent="clay"
         title="Proyectos"
         description="Dividí cada proyecto en etapas y seguí sus tareas."
         action={
@@ -69,13 +69,13 @@ export default function ProyectosPage() {
 
       {!loading && projects.length > 0 ? (
         <StatGrid>
-          <StatCard label="En curso" value={openProjects.length} accent="coral" />
-          <StatCard label="Tareas pendientes" value={openTasks.pending} accent="honey" />
+          <StatCard label="En curso" value={openProjects.length} accent="clay" />
+          <StatCard label="Tareas pendientes" value={openTasks.pending} accent="amber" />
           <StatCard label="En proceso" value={openTasks.inProgress} accent="ocean" />
           <StatCard
             label="Vencidas"
             value={openTasks.overdue}
-            accent={openTasks.overdue > 0 ? 'coral' : 'sage'}
+            accent={openTasks.overdue > 0 ? 'clay' : 'brand'}
             detail={openTasks.overdue > 0 ? 'Revisalas primero' : 'Todo al día'}
           />
         </StatGrid>

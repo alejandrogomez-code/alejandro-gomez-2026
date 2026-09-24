@@ -7,11 +7,11 @@ import type { TaskStatus } from '@/types/database';
 
 export const TASK_STATUS_STYLES: Record<TaskStatus, string> = {
   pending:
-    'bg-honey-100 text-honey-800 hover:bg-honey-200 dark:bg-honey-500/15 dark:text-honey-300 dark:hover:bg-honey-500/25',
+    'bg-amber-100 text-amber-800 hover:bg-amber-200 dark:bg-amber-500/15 dark:text-amber-300 dark:hover:bg-amber-500/25',
   in_progress:
     'bg-ocean-100 text-ocean-700 hover:bg-ocean-200 dark:bg-ocean-500/20 dark:text-ocean-300 dark:hover:bg-ocean-500/30',
   completed:
-    'bg-sage-100 text-sage-700 hover:bg-sage-200 dark:bg-sage-500/20 dark:text-sage-300 dark:hover:bg-sage-500/30',
+    'bg-brand-100 text-brand-700 hover:bg-brand-200 dark:bg-brand-500/20 dark:text-brand-300 dark:hover:bg-brand-500/30',
 };
 
 const ICONS = { pending: Circle, in_progress: CircleDot, completed: CheckCircle2 };

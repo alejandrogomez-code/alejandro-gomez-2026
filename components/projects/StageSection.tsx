@@ -79,24 +79,24 @@ export function StageSection({
         <span
           className={cn(
             'tabular flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-sm font-semibold',
-            complete ? ACCENTS.sage.solid : theme.solid,
+            complete ? ACCENTS.brand.solid : theme.solid,
           )}
           aria-hidden="true"
         >
           {index + 1}
         </span>
         <div className="min-w-0 flex-1">
-          <h2 className="truncate text-base font-medium text-mist-900 dark:text-mist-100">
+          <h2 className="truncate text-base font-medium text-sand-900 dark:text-sand-100">
             {stage.name}
           </h2>
           <div className="mt-2 flex items-center gap-3">
             <Progress
               value={summary.percentage}
               className="h-1.5 max-w-[12rem]"
-              barClassName={complete ? ACCENTS.sage.bar : theme.bar}
+              barClassName={complete ? ACCENTS.brand.bar : theme.bar}
               label={`Progreso de ${stage.name}`}
             />
-            <span className="tabular shrink-0 text-xs text-mist-500 dark:text-mist-400">
+            <span className="tabular shrink-0 text-xs text-sand-500 dark:text-sand-400">
               {summary.total === 0
                 ? 'Sin tareas'
                 : `${summary.completed}/${summary.total} · ${formatPercent(summary.percentage, 0)}`}
@@ -116,7 +116,7 @@ export function StageSection({
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8 hover:text-red-600 dark:hover:text-red-400"
+            className="h-8 w-8 hover:text-clay-600 dark:hover:text-clay-400"
             aria-label="Eliminar etapa"
             onClick={() => onDelete(stage)}
           >
@@ -139,7 +139,7 @@ export function StageSection({
             ))}
           </ul>
         ) : (
-          <p className="px-2 pb-2 text-sm text-mist-400">
+          <p className="px-2 pb-2 text-sm text-sand-400">
             {filtered && summary.total > 0
               ? 'Ninguna tarea de esta etapa coincide con el filtro.'
               : 'Todavía no hay tareas en esta etapa.'}
@@ -149,7 +149,7 @@ export function StageSection({
 
       <form
         onSubmit={handleAdd}
-        className={cn('mt-2 flex flex-wrap items-center gap-2 border-t px-4 py-3 sm:px-5', 'border-mist-100 dark:border-mist-800', theme.soft)}
+        className={cn('mt-2 flex flex-wrap items-center gap-2 border-t px-4 py-3 sm:px-5', 'border-sand-100 dark:border-sand-800', theme.soft)}
       >
         <label htmlFor={`add-${stage.id}`} className="sr-only">
           Nueva tarea en {stage.name}
@@ -159,7 +159,7 @@ export function StageSection({
           value={title}
           onChange={(event) => setTitle(event.target.value)}
           placeholder="Agregar una tarea…"
-          className="h-9 min-w-0 flex-1 basis-40 rounded-lg border border-transparent bg-white px-3 text-sm text-mist-900 placeholder:text-mist-400 focus:border-ocean-400 focus:outline-none focus:ring-2 focus:ring-ocean-500/20 dark:bg-mist-950 dark:text-mist-100"
+          className="h-9 min-w-0 flex-1 basis-40 rounded-lg border border-transparent bg-white px-3 text-sm text-sand-900 placeholder:text-sand-400 focus:border-ocean-400 focus:outline-none focus:ring-2 focus:ring-ocean-500/20 dark:bg-sand-950 dark:text-sand-100"
         />
         {showDate ? (
           <>
@@ -171,7 +171,7 @@ export function StageSection({
               type="date"
               value={dueDate}
               onChange={(event) => setDueDate(event.target.value)}
-              className="h-9 rounded-lg border border-transparent bg-white px-2 text-sm text-mist-900 focus:border-ocean-400 focus:outline-none focus:ring-2 focus:ring-ocean-500/20 dark:bg-mist-950 dark:text-mist-100"
+              className="h-9 rounded-lg border border-transparent bg-white px-2 text-sm text-sand-900 focus:border-ocean-400 focus:outline-none focus:ring-2 focus:ring-ocean-500/20 dark:bg-sand-950 dark:text-sand-100"
             />
           </>
         ) : (

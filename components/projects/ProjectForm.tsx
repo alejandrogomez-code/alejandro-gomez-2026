@@ -31,7 +31,7 @@ export function ProjectForm({
 }) {
   const [name, setName] = useState(project?.name ?? '');
   const [description, setDescription] = useState(project?.description ?? '');
-  const [color, setColor] = useState<ProjectColor>(project?.color ?? 'coral');
+  const [color, setColor] = useState<ProjectColor>(project?.color ?? 'brand');
   const [startDate, setStartDate] = useState(project?.start_date ?? todayString());
   const [targetDate, setTargetDate] = useState(project?.target_date ?? '');
   const [status, setStatus] = useState<ProjectStatus>(project?.status ?? 'active');
@@ -84,7 +84,7 @@ export function ProjectForm({
       />
 
       <fieldset>
-        <legend className="mb-1.5 block text-sm font-medium text-mist-700 dark:text-mist-300">
+        <legend className="mb-1.5 block text-sm font-medium text-sand-700 dark:text-sand-300">
           Color
         </legend>
         <div className="flex flex-wrap gap-2">
@@ -100,9 +100,9 @@ export function ProjectForm({
                 title={PROJECT_COLOR_LABELS[option]}
                 className={cn(
                   'flex h-10 w-10 items-center justify-center rounded-full transition-transform',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-mist-900',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-sand-900',
                   ACCENTS[option].solid,
-                  selected ? 'scale-110 ring-2 ring-mist-900/80 ring-offset-2 dark:ring-white/80 dark:ring-offset-mist-900' : 'hover:scale-105',
+                  selected ? 'scale-110 ring-2 ring-sand-900/80 ring-offset-2 dark:ring-white/80 dark:ring-offset-sand-900' : 'hover:scale-105',
                 )}
               >
                 {selected ? <Check className="h-4 w-4" aria-hidden="true" /> : null}

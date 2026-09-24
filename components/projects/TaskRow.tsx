@@ -38,8 +38,8 @@ export function TaskRow({
   return (
     <li
       className={cn(
-        'group flex items-start gap-3 rounded-xl px-2 py-2.5 transition-colors hover:bg-mist-50 dark:hover:bg-mist-800/40',
-        overdue ? 'bg-red-50/70 dark:bg-red-950/20' : '',
+        'group flex items-start gap-3 rounded-xl px-2 py-2.5 transition-colors hover:bg-sand-50 dark:hover:bg-sand-800/40',
+        overdue ? 'bg-clay-50/70 dark:bg-clay-900/20' : '',
       )}
     >
       <TaskStatusButton status={task.status} onChange={handleStatus} disabled={working} />
@@ -51,8 +51,8 @@ export function TaskRow({
           className={cn(
             'block w-full text-left text-sm leading-snug focus-visible:outline-none focus-visible:underline',
             done
-              ? 'text-mist-400 line-through decoration-mist-300 dark:text-mist-500'
-              : 'text-mist-800 dark:text-mist-100',
+              ? 'text-sand-400 line-through decoration-sand-300 dark:text-sand-500'
+              : 'text-sand-800 dark:text-sand-100',
           )}
         >
           {task.title}
@@ -64,10 +64,10 @@ export function TaskRow({
                 className={cn(
                   'inline-flex items-center gap-1',
                   overdue
-                    ? 'font-medium text-red-600 dark:text-red-400'
+                    ? 'font-medium text-clay-600 dark:text-clay-400'
                     : soon
-                      ? 'font-medium text-honey-700 dark:text-honey-300'
-                      : 'text-mist-500 dark:text-mist-400',
+                      ? 'font-medium text-amber-700 dark:text-amber-300'
+                      : 'text-sand-500 dark:text-sand-400',
                 )}
               >
                 <CalendarClock className="h-3.5 w-3.5" aria-hidden="true" />
@@ -76,7 +76,7 @@ export function TaskRow({
               </span>
             ) : null}
             {task.notes ? (
-              <span className="inline-flex items-center gap-1 text-mist-400" title={task.notes}>
+              <span className="inline-flex items-center gap-1 text-sand-400" title={task.notes}>
                 <NotebookText className="h-3.5 w-3.5" aria-hidden="true" />
                 Con notas
               </span>
@@ -92,7 +92,7 @@ export function TaskRow({
         <Button
           variant="ghost"
           size="icon"
-          className="h-8 w-8 hover:text-red-600 dark:hover:text-red-400"
+          className="h-8 w-8 hover:text-clay-600 dark:hover:text-clay-400"
           aria-label={`Eliminar ${task.title}`}
           onClick={() => onDelete(task)}
         >

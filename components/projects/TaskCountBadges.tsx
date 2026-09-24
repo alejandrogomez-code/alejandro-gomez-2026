@@ -7,7 +7,7 @@ export function TaskCountBadges({ summary }: { summary: TaskSummary }) {
   return (
     <>
       {summary.pending > 0 ? (
-        <Badge tone="honey">{plural(summary.pending, 'pendiente', 'pendientes')}</Badge>
+        <Badge tone="amber">{plural(summary.pending, 'pendiente', 'pendientes')}</Badge>
       ) : null}
       {summary.inProgress > 0 ? <Badge tone="ocean">{summary.inProgress} en proceso</Badge> : null}
       {summary.completed > 0 ? (

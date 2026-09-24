@@ -39,7 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
             'dark:border-sand-800 dark:bg-sand-950 dark:text-sand-100 dark:focus:border-brand-500 dark:focus:ring-brand-400/20',
             'disabled:cursor-not-allowed disabled:opacity-60',
             suffix ? 'pr-12' : '',
-            error ? 'border-red-400 dark:border-red-500' : '',
+            error ? 'border-clay-400 dark:border-clay-500' : '',
             className,
           )}
           {...props}
@@ -51,7 +51,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         ) : null}
       </div>
       {error ? (
-        <p id={`${inputId}-error`} className="mt-1.5 text-sm text-red-600 dark:text-red-400">
+        <p id={`${inputId}-error`} className="mt-1.5 text-sm text-clay-600 dark:text-clay-400">
           {error}
         </p>
       ) : hint ? (
