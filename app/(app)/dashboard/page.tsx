@@ -18,7 +18,6 @@ import Link from 'next/link';
 import { ClipboardCheck } from 'lucide-react';
 import { WeeklySummary, type WeekMetrics } from '@/components/dashboard/WeeklySummary';
 import { GoalOverview } from '@/components/dashboard/GoalOverview';
-import { QuickActions } from '@/components/dashboard/QuickActions';
 import { TodayList } from '@/components/dashboard/TodayList';
 import { DailyInfo } from '@/components/dashboard/DailyInfo';
 import { LoadingState, ErrorState } from '@/components/ui/States';
@@ -55,15 +54,13 @@ export default function DashboardPage() {
   } = useHabitRecords({ from: rangeFrom, to: rangeTo });
   const {
     records: stepRecords,
-    saveSteps,
     loading: stepsLoading,
   } = useStepRecords({ from: rangeFrom, to: rangeTo });
   const {
     records: weightRecords,
-    saveWeight,
     loading: weightLoading,
   } = useWeightRecords({ from: toDateString(addDays(new Date(), -180)), to: today });
-  const { goals, createGoal, loading: goalsLoading } = useGoals();
+  const { goals, loading: goalsLoading } = useGoals();
   const { rows: taskRows, update: updateTask } = useRows('tasks', {
     eq: { done: false },
     order: [{ column: 'due_date', ascending: true }],
@@ -175,17 +172,6 @@ export default function DashboardPage() {
             ) : null}
           </p>
         </div>
-        <QuickActions
-          heightCm={profile?.height_cm ?? null}
-          dailyStepsGoal={dailyStepsGoal}
-          todayHabits={todayHabits}
-          onSaveWeight={saveWeight}
-          onSaveSteps={saveSteps}
-          onToggleHabit={(habit, date, next) =>
-            setRecord({ habitId: habit.id, date, completed: next })
-          }
-          onCreateGoal={createGoal}
-        />
       </header>
 
       <DailyInfo />
