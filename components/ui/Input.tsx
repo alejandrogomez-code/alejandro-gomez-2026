@@ -1,6 +1,12 @@
 'use client';
 
-import { forwardRef, useId, type InputHTMLAttributes, type ReactNode } from 'react';
+import {
+  forwardRef,
+  useId,
+  type InputHTMLAttributes,
+  type ReactNode,
+  type TextareaHTMLAttributes,
+} from 'react';
 import { cn } from '@/lib/utils';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -61,8 +67,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   );
 });
 
-export interface TextareaProps
-  extends InputHTMLAttributes<HTMLTextAreaElement> {
+export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
 }
 
@@ -88,7 +93,7 @@ export function Textarea({ label, id, className, ...props }: TextareaProps) {
           'dark:border-sand-800 dark:bg-sand-950 dark:text-sand-100 dark:focus:border-brand-500 dark:focus:ring-brand-400/20',
           className,
         )}
-        {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
+        {...props}
       />
     </div>
   );

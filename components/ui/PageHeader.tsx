@@ -25,8 +25,8 @@ export function PageHeader({
         {Icon ? (
           <span
             className={cn(
-              'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl shadow-sm',
-              ACCENTS[accent].solid,
+              'flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl',
+              ACCENTS[accent].chip,
             )}
             aria-hidden="true"
           >
@@ -34,7 +34,7 @@ export function PageHeader({
           </span>
         ) : null}
         <div className="min-w-0">
-          <h1 className="truncate text-2xl font-medium tracking-tight text-sand-900 dark:text-sand-100">
+          <h1 className="truncate text-2xl font-extrabold tracking-tight text-sand-900 dark:text-sand-100">
             {title}
           </h1>
           {description ? (

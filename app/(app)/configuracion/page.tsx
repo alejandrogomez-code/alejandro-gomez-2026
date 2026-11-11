@@ -36,13 +36,34 @@ export default function ConfiguracionPage() {
   const [stepsGoal, setStepsGoal] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [reminderEmail, setReminderEmail] = useState('');
+  const [remindersOn, setRemindersOn] = useState(true);
+  const [savingReminders, setSavingReminders] = useState(false);
 
   useEffect(() => {
     if (!profile) return;
     setHeight(profile.height_cm === null ? '' : String(profile.height_cm));
     setInitialWeight(profile.initial_weight_kg === null ? '' : String(profile.initial_weight_kg));
     setStepsGoal(String(profile.daily_steps_goal));
+    setReminderEmail(profile.reminder_email ?? '');
+    setRemindersOn(profile.reminders_enabled ?? true);
   }, [profile]);
+
+  async function saveReminders(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSavingReminders(true);
+    try {
+      await updateProfile({
+        reminder_email: reminderEmail.trim() || null,
+        reminders_enabled: remindersOn,
+      });
+      toast('Recordatorios actualizados');
+    } catch (saveError) {
+      toast(saveError instanceof Error ? saveError.message : 'No se pudo guardar.');
+    } finally {
+      setSavingReminders(false);
+    }
+  }
 
   const previewBMI = calculateBMI(Number(initialWeight) || null, Number(height) || null);
 
@@ -116,6 +137,39 @@ export default function ConfiguracionPage() {
             <Button type="submit" loading={saving}>
               Guardar cambios
             </Button>
+          </form>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title="Recordatorios por mail"
+          description="Todas las mañanas te llega un resumen con vencimientos, fechas y tareas atrasadas. Los domingos, el recordatorio de la revisión semanal."
+        />
+        <CardContent>
+          <form onSubmit={saveReminders} className="space-y-4">
+            <Input
+              label="Mail para los avisos"
+              type="email"
+              placeholder={email}
+              value={reminderEmail}
+              onChange={(event) => setReminderEmail(event.target.value)}
+              hint="Si lo dejás vacío, se usa el mail de tu cuenta."
+            />
+            <label className="flex min-h-[44px] items-center gap-3 text-sm font-medium text-sand-700 dark:text-sand-300">
+              <input
+                type="checkbox"
+                checked={remindersOn}
+                onChange={(event) => setRemindersOn(event.target.checked)}
+                className="h-5 w-5 rounded border-sand-300 text-brand-500 focus:ring-brand-500"
+              />
+              Recibir recordatorios
+            </label>
+            <div className="flex justify-end">
+              <Button type="submit" loading={savingReminders}>
+                Guardar
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>

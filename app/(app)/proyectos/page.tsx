@@ -56,9 +56,9 @@ export default function ProyectosPage() {
     <div className="space-y-6">
       <PageHeader
         icon={FolderKanban}
-        accent="clay"
+        accent="plum"
         title="Proyectos"
-        description="Dividí cada proyecto en etapas y seguí sus tareas."
+        description="Proyectos de trabajo divididos en etapas, con sus tareas."
         action={
           <Button onClick={() => setFormOpen(true)}>
             <Plus className="h-4 w-4" aria-hidden="true" />
@@ -69,13 +69,13 @@ export default function ProyectosPage() {
 
       {!loading && projects.length > 0 ? (
         <StatGrid>
-          <StatCard label="En curso" value={openProjects.length} accent="clay" />
-          <StatCard label="Tareas pendientes" value={openTasks.pending} accent="amber" />
-          <StatCard label="En proceso" value={openTasks.inProgress} accent="ocean" />
+          <StatCard label="En curso" value={openProjects.length} fill="lilac" />
+          <StatCard label="Tareas pendientes" value={openTasks.pending} fill="sun" />
+          <StatCard label="En proceso" value={openTasks.inProgress} fill="mint" />
           <StatCard
             label="Vencidas"
             value={openTasks.overdue}
-            accent={openTasks.overdue > 0 ? 'clay' : 'brand'}
+            fill="coral"
             detail={openTasks.overdue > 0 ? 'Revisalas primero' : 'Todo al día'}
           />
         </StatGrid>

@@ -17,7 +17,9 @@ import { GoalForm } from '@/components/goals/GoalForm';
 import { buildHabitContext, calculateWeeklyCompletion } from '@/lib/calculations/habits';
 import { isGoalActive } from '@/lib/calculations/goals';
 import { addDays, startOfWeek, toDateString } from '@/lib/calculations/dates';
-import type { Goal, GoalStatus } from '@/types/database';
+import type { Area, Goal, GoalStatus } from '@/types/database';
+import { AREA_OPTIONS, GOALS_META } from '@/lib/areas';
+import { PageHeader } from '@/components/ui/PageHeader';
 
 type Filter = 'active' | 'completed' | 'all';
 
@@ -25,6 +27,13 @@ const FILTERS: { value: Filter; label: string }[] = [
   { value: 'active', label: 'Activos' },
   { value: 'completed', label: 'Completados' },
   { value: 'all', label: 'Todos' },
+];
+
+type AreaFilter = Area | 'todas';
+
+const AREA_FILTERS: { value: AreaFilter; label: string }[] = [
+  { value: 'todas', label: 'Todas las áreas' },
+  ...AREA_OPTIONS,
 ];
 
 export default function ObjetivosPage() {
@@ -39,6 +48,7 @@ export default function ObjetivosPage() {
   const { records: stepRecords } = useStepRecords({ from, to });
 
   const [filter, setFilter] = useState<Filter>('active');
+  const [areaFilter, setAreaFilter] = useState<AreaFilter>('todas');
   const [formOpen, setFormOpen] = useState(false);
   const [editing, setEditing] = useState<Goal | null>(null);
   const [pendingDelete, setPendingDelete] = useState<Goal | null>(null);
@@ -49,6 +59,7 @@ export default function ObjetivosPage() {
   );
 
   const visibleGoals = goals.filter((goal) => {
+    if (areaFilter !== 'todas' && (goal.area ?? 'general') !== areaFilter) return false;
     if (filter === 'active') return isGoalActive(goal);
     if (filter === 'completed') return goal.status === 'completed';
     return true;
@@ -82,22 +93,23 @@ export default function ObjetivosPage() {
 
   return (
     <div className="space-y-5">
-      <header className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-xl font-medium tracking-tight text-sand-900 dark:text-sand-100">
-            Objetivos
-          </h1>
-          <p className="mt-0.5 text-sm text-sand-500 dark:text-sand-400">
-            Lo que querés lograr, con su progreso y su fecha.
-          </p>
-        </div>
-        <Button onClick={openCreate}>
-          <Plus className="h-4 w-4" aria-hidden="true" />
-          Nuevo objetivo
-        </Button>
-      </header>
+      <PageHeader
+        title="Objetivos"
+        description="Lo que querés lograr en cada área, con su progreso y su fecha."
+        icon={GOALS_META.icon}
+        accent={GOALS_META.accent}
+        action={
+          <Button onClick={openCreate}>
+            <Plus className="h-4 w-4" aria-hidden="true" />
+            Nuevo objetivo
+          </Button>
+        }
+      />
 
-      <Tabs items={FILTERS} value={filter} onChange={setFilter} ariaLabel="Filtrar objetivos" />
+      <div className="flex flex-wrap items-center gap-2">
+        <Tabs items={FILTERS} value={filter} onChange={setFilter} ariaLabel="Filtrar objetivos por estado" />
+        <Tabs items={AREA_FILTERS} value={areaFilter} onChange={setAreaFilter} ariaLabel="Filtrar objetivos por área" />
+      </div>
 
       {error ? <ErrorState message={error} /> : null}
       {loading ? <LoadingState /> : null}
@@ -132,6 +144,7 @@ export default function ObjetivosPage() {
       >
         <GoalForm
           goal={editing}
+          defaultArea={areaFilter === 'todas' ? 'general' : areaFilter}
           onCancel={() => setFormOpen(false)}
           onSubmit={async (values) => {
             if (editing) {

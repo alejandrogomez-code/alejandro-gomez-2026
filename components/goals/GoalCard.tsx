@@ -13,7 +13,17 @@ import {
   isGoalOverdue,
 } from '@/lib/calculations/goals';
 import { formatDate, formatPercent } from '@/lib/calculations/dates';
-import type { Goal, GoalStatus, Habit } from '@/types/database';
+import type { Area, Goal, GoalStatus, Habit } from '@/types/database';
+import { cn } from '@/lib/utils';
+import { ACCENTS } from '@/lib/accents';
+import { AREAS } from '@/lib/areas';
+
+const AREA_BORDER: Record<Area, string> = {
+  trabajo: 'border-plum-300',
+  personal: 'border-clay-300',
+  salud: 'border-ocean-300',
+  general: 'border-amber-300',
+};
 
 const STATUS_OPTIONS = (Object.keys(GOAL_STATUS_LABELS) as GoalStatus[]).map((status) => ({
   value: status,
@@ -42,11 +52,19 @@ export function GoalCard({
   const remaining = daysRemainingLabel(goal.target_date);
 
   return (
-    <Card>
-      <CardContent className="space-y-4">
+    <Card className={cn('border-t-[6px]', AREA_BORDER[goal.area ?? 'general'])}>
+      <CardContent className="space-y-4 pt-4">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <h3 className="truncate text-base font-medium text-sand-900 dark:text-sand-100">
+            <span
+              className={cn(
+                'mb-1.5 inline-block rounded-full px-2.5 py-0.5 text-[11px] font-extrabold uppercase tracking-wide',
+                ACCENTS[AREAS[goal.area ?? 'general'].accent].chip,
+              )}
+            >
+              {AREAS[goal.area ?? 'general'].label}
+            </span>
+            <h3 className="truncate text-base font-extrabold text-sand-900 dark:text-sand-100">
               {goal.name}
             </h3>
             {goal.description ? (

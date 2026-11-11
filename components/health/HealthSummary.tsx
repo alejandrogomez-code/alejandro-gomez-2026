@@ -18,7 +18,6 @@ export function HealthSummary({ records, heightCm, initialWeightKg }: HealthSumm
   const currentWeight = summary.current?.weight_kg ?? null;
   const bmi = calculateBMI(currentWeight, heightCm);
   const category = bmiCategory(bmi);
-  const losing = summary.change !== null && summary.change <= 0;
 
   return (
     <StatGrid>
@@ -27,21 +26,21 @@ export function HealthSummary({ records, heightCm, initialWeightKg }: HealthSumm
         value={currentWeight === null ? '—' : formatNumber(currentWeight, 1)}
         unit={currentWeight === null ? undefined : 'kg'}
         detail={summary.current ? formatDate(summary.current.date) : 'Sin registros'}
-        accent="ocean"
+        fill="mint"
       />
       <StatCard
         label="Inicial"
         value={summary.initial === null ? '—' : formatNumber(summary.initial, 1)}
         unit={summary.initial === null ? undefined : 'kg'}
         detail="peso de partida"
-        accent="ocean"
+        fill="lilac"
       />
       <StatCard
         label="Variación"
         value={formatWeightChange(summary.change).replace(' kg', '')}
         unit={summary.change === null ? undefined : 'kg'}
         detail={`${summary.recordsThisWeek} de 3 registros esta semana`}
-        accent={losing ? 'brand' : 'amber'}
+        fill="coral"
       />
       <StatCard
         label="IMC"
@@ -52,7 +51,7 @@ export function HealthSummary({ records, heightCm, initialWeightKg }: HealthSumm
             ? `Mín ${formatNumber(summary.min.weight_kg, 1)} · Máx ${formatNumber(summary.max.weight_kg, 1)}`
             : 'Falta altura o peso'
         }
-        accent={category === 'Peso normal' ? 'brand' : 'amber'}
+        fill="sun"
       />
     </StatGrid>
   );

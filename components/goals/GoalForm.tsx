@@ -8,7 +8,8 @@ import { DatePicker } from '@/components/ui/DatePicker';
 import { ErrorState } from '@/components/ui/States';
 import { GOAL_STATUS_LABELS, GOAL_TYPE_LABELS } from '@/lib/calculations/goals';
 import { todayString } from '@/lib/calculations/dates';
-import type { Goal, GoalFormValues, GoalInsert, GoalStatus, GoalType } from '@/types/database';
+import type { Area, Goal, GoalFormValues, GoalInsert, GoalStatus, GoalType } from '@/types/database';
+import { AREA_OPTIONS } from '@/lib/areas';
 
 const TYPE_OPTIONS = (Object.keys(GOAL_TYPE_LABELS) as GoalType[]).map((type) => ({
   value: type,
@@ -20,7 +21,7 @@ const STATUS_OPTIONS = (Object.keys(GOAL_STATUS_LABELS) as GoalStatus[]).map((st
   label: GOAL_STATUS_LABELS[status],
 }));
 
-function emptyValues(): GoalFormValues {
+function emptyValues(area: Area = 'general'): GoalFormValues {
   return {
     name: '',
     description: '',
@@ -32,6 +33,7 @@ function emptyValues(): GoalFormValues {
     current_value: '',
     unit: '',
     status: 'in_progress',
+    area,
   };
 }
 
@@ -47,6 +49,7 @@ function toFormValues(goal: Goal): GoalFormValues {
     current_value: goal.current_value === null ? '' : String(goal.current_value),
     unit: goal.unit ?? '',
     status: goal.status,
+    area: goal.area ?? 'general',
   };
 }
 
@@ -54,10 +57,14 @@ export interface GoalFormProps {
   goal?: Goal | null;
   onSubmit: (values: Omit<GoalInsert, 'user_id'>) => Promise<void>;
   onCancel: () => void;
+  /** Área preseleccionada al crear (por ejemplo, desde la sección Trabajo). */
+  defaultArea?: Area;
 }
 
-export function GoalForm({ goal = null, onSubmit, onCancel }: GoalFormProps) {
-  const [values, setValues] = useState<GoalFormValues>(goal ? toFormValues(goal) : emptyValues());
+export function GoalForm({ goal = null, onSubmit, onCancel, defaultArea = 'general' }: GoalFormProps) {
+  const [values, setValues] = useState<GoalFormValues>(
+    goal ? toFormValues(goal) : emptyValues(defaultArea),
+  );
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
@@ -97,6 +104,7 @@ export function GoalForm({ goal = null, onSubmit, onCancel }: GoalFormProps) {
       start_date: values.start_date || todayString(),
       target_date: values.target_date || null,
       status: values.status,
+      area: values.area,
       initial_value: values.type === 'quantitative' ? Number(values.initial_value) : null,
       target_value: values.type === 'quantitative' ? Number(values.target_value) : null,
       current_value:
@@ -126,6 +134,12 @@ export function GoalForm({ goal = null, onSubmit, onCancel }: GoalFormProps) {
         value={values.name}
         onChange={(event) => update('name', event.target.value)}
         required
+      />
+      <Select
+        label="Área"
+        options={AREA_OPTIONS}
+        value={values.area}
+        onChange={(event) => update('area', event.target.value as Area)}
       />
       <Textarea
         label="Descripción"

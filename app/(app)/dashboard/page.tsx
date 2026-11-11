@@ -7,15 +7,20 @@ import { useHabits } from '@/hooks/useHabits';
 import { useHabitRecords } from '@/hooks/useHabitRecords';
 import { useStepRecords } from '@/hooks/useStepRecords';
 import { useWeightRecords } from '@/hooks/useWeightRecords';
-import { TodaySummary } from '@/components/dashboard/TodaySummary';
+import { AreaOverview } from '@/components/dashboard/AreaOverview';
+import { TodayTasks } from '@/components/dashboard/TodayTasks';
+import { UpcomingDeadlines } from '@/components/agenda/UpcomingDeadlines';
+import { useRows } from '@/hooks/useRows';
+import { calculateGoalProgress, isGoalActive } from '@/lib/calculations/goals';
+import { needsAttention } from '@/lib/calculations/agenda';
+import { formatNumber, formatPercent, formatShortDate } from '@/lib/calculations/dates';
+import Link from 'next/link';
+import { ClipboardCheck } from 'lucide-react';
 import { WeeklySummary, type WeekMetrics } from '@/components/dashboard/WeeklySummary';
 import { GoalOverview } from '@/components/dashboard/GoalOverview';
 import { QuickActions } from '@/components/dashboard/QuickActions';
 import { TodayList } from '@/components/dashboard/TodayList';
 import { LoadingState, ErrorState } from '@/components/ui/States';
-import { calculateBMI } from '@/lib/calculations/bmi';
-import { calculateWeightChange } from '@/lib/calculations/weight';
-import { calculateStepCompletion } from '@/lib/calculations/steps';
 import {
   buildHabitContext,
   calculateDayCompletion,
@@ -30,7 +35,7 @@ import {
   toDateString,
   todayString,
 } from '@/lib/calculations/dates';
-import type { Habit } from '@/types/database';
+import type { Habit, Task } from '@/types/database';
 
 export default function DashboardPage() {
   const { profile, loading: profileLoading } = useProfile();
@@ -58,6 +63,14 @@ export default function DashboardPage() {
     loading: weightLoading,
   } = useWeightRecords({ from: toDateString(addDays(new Date(), -180)), to: today });
   const { goals, createGoal, loading: goalsLoading } = useGoals();
+  const { rows: taskRows, update: updateTask } = useRows('tasks', {
+    eq: { done: false },
+    order: [{ column: 'due_date', ascending: true }],
+  });
+  const { rows: deadlines } = useRows('deadlines', {
+    eq: { done: false },
+    order: [{ column: 'due_date', ascending: true }],
+  });
 
   const dailyStepsGoal = profile?.daily_steps_goal ?? 10000;
 
@@ -76,8 +89,15 @@ export default function DashboardPage() {
 
   const dayCompletion = calculateDayCompletion(activeHabits, today, context);
   const todaySteps = stepRecords.find((record) => record.date === today)?.steps ?? 0;
-  const lastWeight = weightRecords.length > 0 ? weightRecords[weightRecords.length - 1] : null;
-  const bmi = calculateBMI(lastWeight?.weight_kg ?? null, profile?.height_cm ?? null);
+  const tasks = taskRows.filter((task) => !task.done);
+  const tasksForToday = tasks.filter((task) => task.due_date !== null && task.due_date <= today);
+  const activeGoals = goals.filter(isGoalActive);
+  const goalProgress = activeGoals
+    .map((goal) => calculateGoalProgress(goal))
+    .filter((value): value is number => value !== null);
+  const nextPersonalDate = deadlines.find((deadline) => deadline.area === 'personal') ?? null;
+  const weekday = new Date().getDay();
+  const reviewTime = weekday === 0 || weekday === 5 || weekday === 6;
 
   const currentWeek = useMemo<WeekMetrics>(
     () => buildWeekMetrics(activeHabits, currentWeekStart),
@@ -124,7 +144,8 @@ export default function DashboardPage() {
     [activeHabits, context],
   );
 
-  const pendingToday = Math.max(0, dayCompletion.expected - dayCompletion.completed);
+  const pendingToday =
+    Math.max(0, dayCompletion.expected - dayCompletion.completed) + tasksForToday.length;
 
   const weeklyByHabit = useMemo(
     () =>
@@ -168,22 +189,49 @@ export default function DashboardPage() {
 
       {habitsError ? <ErrorState message={habitsError} /> : null}
 
-      <TodaySummary
-        steps={todaySteps}
-        stepsGoal={dailyStepsGoal}
-        stepsPercent={calculateStepCompletion(todaySteps, dailyStepsGoal)}
-        habitsCompleted={dayCompletion.completed}
-        habitsExpected={dayCompletion.expected}
-        habitsPercent={dayCompletion.percentage}
-        weightKg={lastWeight?.weight_kg ?? null}
-        weightChange={calculateWeightChange(
-          lastWeight?.weight_kg ?? null,
-          profile?.initial_weight_kg ?? null,
-        )}
-        bmi={bmi}
+      <AreaOverview
+        work={{
+          pending: tasks.filter((task) => task.area === 'trabajo').length,
+          dueSoon: deadlines.filter((deadline) => deadline.area === 'trabajo' && needsAttention(deadline)).length,
+        }}
+        personal={{
+          pending: tasks.filter((task) => task.area === 'personal').length,
+          nextDate: nextPersonalDate ? formatShortDate(nextPersonalDate.due_date) : null,
+        }}
+        health={{
+          habitsLabel:
+            dayCompletion.expected === 0 ? '—' : `${dayCompletion.completed}/${dayCompletion.expected}`,
+          stepsLabel: `${formatNumber(todaySteps)} pasos (${formatPercent(
+            dailyStepsGoal > 0 ? (todaySteps / dailyStepsGoal) * 100 : 0,
+            0,
+          )})`,
+        }}
+        goals={{
+          active: activeGoals.length,
+          averageProgress:
+            goalProgress.length === 0
+              ? null
+              : goalProgress.reduce((sum, value) => sum + value, 0) / goalProgress.length,
+        }}
       />
 
+      {reviewTime ? (
+        <Link
+          href="/revision"
+          className="flex items-center gap-3 rounded-3xl bg-amber-100 px-5 py-4 text-sm font-bold text-amber-800 transition hover:bg-amber-200 dark:bg-amber-400/15 dark:text-amber-100"
+        >
+          <ClipboardCheck className="h-5 w-5 shrink-0" aria-hidden="true" />
+          <span className="flex-1">Se termina la semana: hacé tu revisión semanal guiada (5 minutos).</span>
+          <span aria-hidden="true">→</span>
+        </Link>
+      ) : null}
+
       <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+        <div className="space-y-5">
+        <TodayTasks
+          tasks={tasksForToday}
+          onDone={(task: Task) => void updateTask(task.id, { done: true, done_at: new Date().toISOString() })}
+        />
         <TodayList
           habits={todayHabits}
           todaySteps={todaySteps}
@@ -195,7 +243,9 @@ export default function DashboardPage() {
             void setRecord({ habitId: habit.id, date: today, completed: next })
           }
         />
+        </div>
         <div className="space-y-5">
+          <UpcomingDeadlines title="Próximas fechas" limit={5} />
           <GoalOverview goals={goals} />
           <WeeklySummary
             current={currentWeek}

@@ -3,16 +3,14 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Settings } from 'lucide-react';
-import { NAV_ITEMS } from './nav-items';
+import { NAV_ITEMS, isNavActive } from './nav-items';
 import { AppearanceControls } from './AppearanceControls';
 
 function currentTitle(pathname: string): string {
   for (const item of NAV_ITEMS) {
-    if (item.children) {
-      const child = item.children.find((entry) => pathname.startsWith(entry.match));
-      if (child) return `${item.label} · ${child.label}`;
-    }
-    if (pathname.startsWith(item.match)) return item.label;
+    if (!isNavActive(item, pathname)) continue;
+    const child = item.children?.find((entry) => isNavActive(entry, pathname));
+    return child ? `${item.label} · ${child.label}` : item.label;
   }
   return 'Vida';
 }
@@ -22,7 +20,7 @@ export function MobileHeader() {
 
   return (
     <header className="sticky top-0 z-30 flex items-center justify-between border-b border-sand-200/70 bg-white/90 px-4 py-3 backdrop-blur lg:hidden dark:border-sand-800 dark:bg-sand-950/90">
-      <p className="text-sm font-medium text-sand-900 dark:text-sand-100">
+      <p className="text-sm font-bold text-sand-900 dark:text-sand-100">
         {currentTitle(pathname)}
       </p>
       <div className="flex items-center gap-2">

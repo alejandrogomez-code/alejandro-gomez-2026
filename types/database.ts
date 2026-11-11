@@ -8,12 +8,21 @@ export type TaskStatus = 'pending' | 'in_progress' | 'completed';
 export type ProjectColor = 'brand' | 'ocean' | 'amber' | 'plum' | 'clay';
 export type ThemePreference = 'light' | 'dark' | 'system';
 export type FontSize = 'small' | 'normal' | 'large';
+/** Áreas de la vida que organiza la app. */
+export type Area = 'trabajo' | 'personal' | 'salud' | 'general';
+/** Áreas que tienen tareas, proyectos y vencimientos. */
+export type WorkArea = 'trabajo' | 'personal';
+export type DeadlineKind = 'vencimiento' | 'fecha';
+export type Recurrence = 'none' | 'monthly' | 'yearly';
+export type BookStatus = 'pendiente' | 'leyendo' | 'leido';
 
 export interface Database {
   public: {
     Tables: {
       profiles: {
         Row: {
+          reminder_email: string | null;
+          reminders_enabled: boolean;
           id: string;
           height_cm: number | null;
           initial_weight_kg: number | null;
@@ -24,6 +33,8 @@ export interface Database {
           updated_at: string;
         };
         Insert: {
+          reminder_email?: string | null;
+          reminders_enabled?: boolean;
           id: string;
           height_cm?: number | null;
           initial_weight_kg?: number | null;
@@ -34,6 +45,8 @@ export interface Database {
           updated_at?: string;
         };
         Update: {
+          reminder_email?: string | null;
+          reminders_enabled?: boolean;
           id?: string;
           height_cm?: number | null;
           initial_weight_kg?: number | null;
@@ -46,6 +59,7 @@ export interface Database {
       };
       goals: {
         Row: {
+          area: Area;
           id: string;
           user_id: string;
           name: string;
@@ -62,6 +76,7 @@ export interface Database {
           updated_at: string;
         };
         Insert: {
+          area?: Area;
           id?: string;
           user_id: string;
           name: string;
@@ -76,6 +91,7 @@ export interface Database {
           status?: GoalStatus;
         };
         Update: {
+          area?: Area;
           name?: string;
           description?: string | null;
           type?: GoalType;
@@ -208,6 +224,7 @@ export interface Database {
       };
       projects: {
         Row: {
+          area: WorkArea;
           id: string;
           user_id: string;
           name: string;
@@ -220,6 +237,7 @@ export interface Database {
           updated_at: string;
         };
         Insert: {
+          area?: WorkArea;
           id?: string;
           user_id: string;
           name: string;
@@ -230,6 +248,7 @@ export interface Database {
           status?: ProjectStatus;
         };
         Update: {
+          area?: WorkArea;
           name?: string;
           description?: string | null;
           color?: ProjectColor;
@@ -294,6 +313,243 @@ export interface Database {
         };
         Relationships: [];
       };
+      meetings: {
+        Row: {
+          id: string;
+          user_id: string;
+          title: string;
+          date: string;
+          attendees: string | null;
+          notes: string | null;
+          decisions: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          title: string;
+          date?: string;
+          attendees?: string | null;
+          notes?: string | null;
+          decisions?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          title?: string;
+          date?: string;
+          attendees?: string | null;
+          notes?: string | null;
+          decisions?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      tasks: {
+        Row: {
+          id: string;
+          user_id: string;
+          area: WorkArea;
+          title: string;
+          notes: string | null;
+          due_date: string | null;
+          done: boolean;
+          done_at: string | null;
+          meeting_id: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          area?: WorkArea;
+          title: string;
+          notes?: string | null;
+          due_date?: string | null;
+          done?: boolean;
+          done_at?: string | null;
+          meeting_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          area?: WorkArea;
+          title?: string;
+          notes?: string | null;
+          due_date?: string | null;
+          done?: boolean;
+          done_at?: string | null;
+          meeting_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      deadlines: {
+        Row: {
+          id: string;
+          user_id: string;
+          area: WorkArea;
+          kind: DeadlineKind;
+          title: string;
+          due_date: string;
+          recurrence: Recurrence;
+          remind_days: number;
+          notes: string | null;
+          done: boolean;
+          last_done: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          area?: WorkArea;
+          kind?: DeadlineKind;
+          title: string;
+          due_date: string;
+          recurrence?: Recurrence;
+          remind_days?: number;
+          notes?: string | null;
+          done?: boolean;
+          last_done?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          area?: WorkArea;
+          kind?: DeadlineKind;
+          title?: string;
+          due_date?: string;
+          recurrence?: Recurrence;
+          remind_days?: number;
+          notes?: string | null;
+          done?: boolean;
+          last_done?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      books: {
+        Row: {
+          id: string;
+          user_id: string;
+          title: string;
+          author: string | null;
+          status: BookStatus;
+          started_on: string | null;
+          finished_on: string | null;
+          rating: number | null;
+          notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          title: string;
+          author?: string | null;
+          status?: BookStatus;
+          started_on?: string | null;
+          finished_on?: string | null;
+          rating?: number | null;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          title?: string;
+          author?: string | null;
+          status?: BookStatus;
+          started_on?: string | null;
+          finished_on?: string | null;
+          rating?: number | null;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      notes: {
+        Row: {
+          id: string;
+          user_id: string;
+          area: Area;
+          title: string | null;
+          body: string;
+          pinned: boolean;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          area?: Area;
+          title?: string | null;
+          body: string;
+          pinned?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          area?: Area;
+          title?: string | null;
+          body?: string;
+          pinned?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      weekly_reviews: {
+        Row: {
+          id: string;
+          user_id: string;
+          week_start: string;
+          highlights: string | null;
+          blockers: string | null;
+          next_focus: string | null;
+          mood: number | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          week_start: string;
+          highlights?: string | null;
+          blockers?: string | null;
+          next_focus?: string | null;
+          mood?: number | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          week_start?: string;
+          highlights?: string | null;
+          blockers?: string | null;
+          next_focus?: string | null;
+          mood?: number | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: { [_ in never]: never };
     Functions: { [_ in never]: never };
@@ -325,6 +581,13 @@ export type ProjectTask = Database['public']['Tables']['project_tasks']['Row'];
 export type ProjectTaskInsert = Database['public']['Tables']['project_tasks']['Insert'];
 export type ProjectTaskUpdate = Database['public']['Tables']['project_tasks']['Update'];
 
+export type Meeting = Database['public']['Tables']['meetings']['Row'];
+export type Task = Database['public']['Tables']['tasks']['Row'];
+export type Deadline = Database['public']['Tables']['deadlines']['Row'];
+export type Book = Database['public']['Tables']['books']['Row'];
+export type Note = Database['public']['Tables']['notes']['Row'];
+export type WeeklyReview = Database['public']['Tables']['weekly_reviews']['Row'];
+
 export type WeightRecord = Database['public']['Tables']['weight_records']['Row'];
 export type StepRecord = Database['public']['Tables']['step_records']['Row'];
 export type HabitRecord = Database['public']['Tables']['habit_records']['Row'];
@@ -341,6 +604,7 @@ export interface GoalFormValues {
   current_value: string;
   unit: string;
   status: GoalStatus;
+  area: Area;
 }
 
 /** Datos de un formulario de hábito. */
