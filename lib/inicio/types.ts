@@ -14,6 +14,7 @@ export interface GospelInfo {
   liturgicalDay: string | null;
   reference: string | null;
   text: string;
+  translation: string | null;
   sourceUrl: string;
 }
 

@@ -153,7 +153,7 @@ function GospelCard() {
               rel="noopener noreferrer"
               className="opacity-70 hover:underline"
             >
-              Fuente: Evangelio del Día
+              {state.data.translation ? `${state.data.translation} · ` : ''}Fuente: Evangelio del Día
             </a>
           </div>
         </>

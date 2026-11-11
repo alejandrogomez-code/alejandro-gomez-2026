@@ -14,7 +14,7 @@ function cleanText(raw: string): string {
     .replace(/&#39;|&apos;/g, "'")
     .replace(/&amp;/g, '&')
     .replace(/[ \t]+\n/g, '\n')
-    .replace(/\n{3,}/g, '\n\n')
+    .replace(/\n\s*\n/g, '\n')
     .trim();
 }
 
@@ -39,11 +39,18 @@ export async function GET() {
       read({ date, type: 'reading', content: 'GSP' }),
     ]);
 
+    // El feed agrega al final el crédito de la traducción y un aviso de suscripción.
+    const lines = text.split('\n').filter((line) => !/^para recibir cada mañana/i.test(line));
+    const creditIndex = lines.findIndex((line) => /^extraído de la biblia/i.test(line));
+    const translation =
+      creditIndex >= 0 ? lines.splice(creditIndex, 1)[0].replace(/^extraído de la biblia:?\s*/i, '').replace(/\.$/, '') : null;
+
     const info: GospelInfo = {
       date: today,
       liturgicalDay: liturgicalDay || null,
       reference: reference || null,
-      text,
+      text: lines.join('\n').trim(),
+      translation,
       sourceUrl: 'https://evangeliodeldia.org/SP/gospel',
     };
     return NextResponse.json(info);
