@@ -20,6 +20,7 @@ import { WeeklySummary, type WeekMetrics } from '@/components/dashboard/WeeklySu
 import { GoalOverview } from '@/components/dashboard/GoalOverview';
 import { QuickActions } from '@/components/dashboard/QuickActions';
 import { TodayList } from '@/components/dashboard/TodayList';
+import { DailyInfo } from '@/components/dashboard/DailyInfo';
 import { LoadingState, ErrorState } from '@/components/ui/States';
 import {
   buildHabitContext,
@@ -186,6 +187,8 @@ export default function DashboardPage() {
           onCreateGoal={createGoal}
         />
       </header>
+
+      <DailyInfo />
 
       {habitsError ? <ErrorState message={habitsError} /> : null}
 
