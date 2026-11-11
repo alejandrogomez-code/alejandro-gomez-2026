@@ -91,3 +91,11 @@ export const PROJECT_COLOR_LABELS: Record<ProjectColor, string> = {
   plum: 'Violeta',
   clay: 'Arcilla',
 };
+
+/**
+ * Acento de un color guardado en la base. Si el color no existe en la paleta
+ * (por ejemplo, uno de una versión anterior como 'sage'), usa el violeta.
+ */
+export function accentFor(color: string | null | undefined): AccentClasses {
+  return (color && ACCENTS[color as Accent]) || ACCENTS.plum;
+}

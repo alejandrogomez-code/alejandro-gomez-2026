@@ -7,7 +7,7 @@ import { EmptyState } from '@/components/ui/States';
 import { useToast } from '@/components/ui/Toast';
 import { TaskStatusButton } from '@/components/projects/TaskStatusButton';
 import { cn } from '@/lib/utils';
-import { ACCENTS } from '@/lib/accents';
+import { ACCENTS, accentFor } from '@/lib/accents';
 import { addDaysString, formatShortDate, todayString } from '@/lib/calculations/dates';
 import { compareTasks, isProjectOpen, isTaskOverdue, taskDueLabel } from '@/lib/calculations/projects';
 import type { TaskBrief } from '@/hooks/useProjects';
@@ -96,7 +96,7 @@ export function UpcomingTasks({
                     <p className="flex items-center gap-1.5 truncate text-xs text-sand-500 dark:text-sand-400">
                       {project ? (
                         <>
-                          <span className={cn('h-2 w-2 shrink-0 rounded-full', ACCENTS[project.color].dot)} aria-hidden="true" />
+                          <span className={cn('h-2 w-2 shrink-0 rounded-full', accentFor(project.color).dot)} aria-hidden="true" />
                           <span className="truncate">{project.name}</span>
                         </>
                       ) : null}

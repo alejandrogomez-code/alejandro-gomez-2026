@@ -20,7 +20,7 @@ import { StageSection } from '@/components/projects/StageSection';
 import { TaskForm } from '@/components/projects/TaskForm';
 import { TaskCountBadges } from '@/components/projects/TaskCountBadges';
 import { cn } from '@/lib/utils';
-import { ACCENTS } from '@/lib/accents';
+import { ACCENTS, accentFor } from '@/lib/accents';
 import { daysRemainingLabel } from '@/lib/calculations/goals';
 import { formatDate, formatPercent } from '@/lib/calculations/dates';
 import {
@@ -132,7 +132,7 @@ export default function ProyectoPage() {
     );
   }
 
-  const theme = ACCENTS[project.color];
+  const theme = accentFor(project.color);
   const remaining = project.status === 'completed' ? null : daysRemainingLabel(project.target_date);
 
   return (

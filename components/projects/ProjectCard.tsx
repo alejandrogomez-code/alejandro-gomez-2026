@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Progress } from '@/components/ui/Progress';
 import { cn } from '@/lib/utils';
-import { ACCENTS } from '@/lib/accents';
+import { ACCENTS, accentFor } from '@/lib/accents';
 import { formatDate, formatPercent, formatShortDate } from '@/lib/calculations/dates';
 import { PROJECT_STATUS_LABELS, compareTasks, summarizeTasks } from '@/lib/calculations/projects';
 import { TaskCountBadges } from './TaskCountBadges';
@@ -12,7 +12,7 @@ import type { TaskBrief } from '@/hooks/useProjects';
 import type { Project } from '@/types/database';
 
 export function ProjectCard({ project, tasks }: { project: Project; tasks: TaskBrief[] }) {
-  const theme = ACCENTS[project.color];
+  const theme = accentFor(project.color);
   const summary = summarizeTasks(tasks);
   const nextTask = tasks
     .filter((task) => task.status !== 'completed' && task.due_date)

@@ -10,7 +10,7 @@ import { TaskList } from '@/components/agenda/TaskList';
 import { UpcomingDeadlines } from '@/components/agenda/UpcomingDeadlines';
 import { useProjects } from '@/hooks/useProjects';
 import { AREAS } from '@/lib/areas';
-import { ACCENTS } from '@/lib/accents';
+import { ACCENTS, accentFor } from '@/lib/accents';
 
 export default function TrabajoPage() {
   const { projects, tasks, loading } = useProjects();
@@ -71,7 +71,7 @@ export default function TrabajoPage() {
                           <Progress
                             value={percent}
                             className="mt-2"
-                            barClassName={ACCENTS[project.color].bar}
+                            barClassName={accentFor(project.color).bar}
                             label={`Avance de ${project.name}`}
                           />
                         </Link>

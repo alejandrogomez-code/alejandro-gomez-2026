@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Progress } from '@/components/ui/Progress';
 import { cn } from '@/lib/utils';
-import { ACCENTS } from '@/lib/accents';
+import { ACCENTS, accentFor } from '@/lib/accents';
 import { formatPercent } from '@/lib/calculations/dates';
 import { summarizeTasks } from '@/lib/calculations/projects';
 import type { ProjectColor, ProjectStage, ProjectTask, TaskStatus } from '@/types/database';
@@ -49,7 +49,7 @@ export function StageSection({
   onMove,
   onDelete,
 }: StageSectionProps) {
-  const theme = ACCENTS[color];
+  const theme = accentFor(color);
   const summary = summarizeTasks(tasks);
   const complete = summary.total > 0 && summary.completed === summary.total;
   const [title, setTitle] = useState('');
