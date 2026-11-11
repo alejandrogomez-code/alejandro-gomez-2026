@@ -12,7 +12,6 @@ import { GoalForm } from '@/components/goals/GoalForm';
 import { cn } from '@/lib/utils';
 import { formatNumber, todayString } from '@/lib/calculations/dates';
 import type { HabitDayState } from '@/lib/calculations/habits';
-import { ACCENTS, type Accent } from '@/lib/accents';
 import type { Goal, GoalInsert, Habit } from '@/types/database';
 
 type ActionKey = 'weight' | 'steps' | 'habit' | 'goal';
@@ -27,11 +26,11 @@ export interface QuickActionsProps {
   onCreateGoal: (values: Omit<GoalInsert, 'user_id'>) => Promise<Goal>;
 }
 
-const ACTIONS: { key: ActionKey; label: string; icon: typeof Scale; accent: Accent }[] = [
-  { key: 'weight', label: 'Peso', icon: Scale, accent: 'ocean' },
-  { key: 'steps', label: 'Pasos', icon: Footprints, accent: 'brand' },
-  { key: 'habit', label: 'Hábito', icon: ListChecks, accent: 'amber' },
-  { key: 'goal', label: 'Objetivo', icon: Target, accent: 'plum' },
+const ACTIONS: { key: ActionKey; label: string; icon: typeof Scale; className: string }[] = [
+  { key: 'weight', label: 'Peso', icon: Scale, className: 'bg-ocean-300 hover:bg-ocean-200' },
+  { key: 'steps', label: 'Pasos', icon: Footprints, className: 'bg-clay-300 hover:bg-clay-200' },
+  { key: 'habit', label: 'Hábito', icon: ListChecks, className: 'bg-plum-300 hover:bg-plum-200' },
+  { key: 'goal', label: 'Objetivo', icon: Target, className: 'bg-amber-300 hover:bg-amber-200' },
 ];
 
 /** Todo se registra desde el panel, sin navegar a otra pantalla. */
@@ -64,11 +63,9 @@ export function QuickActions({
               type="button"
               onClick={() => setOpen(action.key)}
               className={cn(
-                'inline-flex h-9 items-center gap-1.5 rounded-lg px-3 text-sm font-medium transition-colors',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2',
-                action.key === 'weight'
-                  ? 'bg-brand-500 text-white hover:bg-brand-600'
-                  : 'border border-sand-300 bg-white text-sand-700 hover:bg-sand-50 dark:border-sand-800 dark:bg-sand-900 dark:text-sand-200 dark:hover:bg-sand-800',
+                'inline-flex h-11 items-center gap-1.5 rounded-full px-4 text-sm font-extrabold text-brand-900 transition-colors',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-800',
+                action.className,
               )}
             >
               <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />

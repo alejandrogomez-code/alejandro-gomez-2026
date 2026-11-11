@@ -26,7 +26,7 @@ export function Tabs<T extends string>({
     <div
       role="tablist"
       aria-label={ariaLabel}
-      className={cn('inline-flex gap-0.5 rounded-lg bg-sand-100 p-0.5 dark:bg-sand-800', className)}
+      className={cn('inline-flex gap-1 rounded-full bg-sand-100 p-1 dark:bg-sand-800', className)}
     >
       {items.map((item) => {
         const active = item.value === value;
@@ -38,10 +38,10 @@ export function Tabs<T extends string>({
             aria-selected={active}
             onClick={() => onChange(item.value)}
             className={cn(
-              'rounded-md px-2.5 py-1 text-xs font-medium transition-colors',
+              'rounded-full px-3 py-1.5 text-xs font-bold transition-colors',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500',
               active
-                ? 'bg-white text-sand-900 dark:bg-sand-950 dark:text-sand-100'
+                ? 'bg-brand-800 text-white dark:bg-brand-300 dark:text-brand-900'
                 : 'text-sand-500 hover:text-sand-800 dark:text-sand-400 dark:hover:text-sand-200',
             )}
           >

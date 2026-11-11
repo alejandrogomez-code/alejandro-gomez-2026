@@ -1,7 +1,7 @@
 import type { ProjectColor } from '@/types/database';
 
 /**
- * El verde es el único color de acción. El resto son tintes de estado o de
+ * El violeta es el color de acción. El resto son tintes de estado o de
  * categoría para los chips de icono. Las clases van escritas completas
  * (no interpoladas) para que Tailwind las incluya en el build.
  */
@@ -26,7 +26,7 @@ interface AccentClasses {
 
 export const ACCENTS: Record<Accent, AccentClasses> = {
   brand: {
-    chip: 'bg-brand-50 text-brand-600 dark:bg-brand-500/15 dark:text-brand-200',
+    chip: 'bg-brand-300 text-brand-900 dark:bg-brand-300 dark:text-brand-900',
     bar: 'bg-brand-500 dark:bg-brand-300',
     text: 'text-brand-600 dark:text-brand-200',
     pill: 'bg-brand-50 text-brand-600 dark:bg-brand-500/15 dark:text-brand-200',
@@ -35,7 +35,7 @@ export const ACCENTS: Record<Accent, AccentClasses> = {
     dot: 'bg-brand-500 dark:bg-brand-300',
   },
   ocean: {
-    chip: 'bg-ocean-50 text-ocean-600 dark:bg-ocean-500/15 dark:text-ocean-200',
+    chip: 'bg-ocean-300 text-brand-900 dark:bg-ocean-300 dark:text-brand-900',
     bar: 'bg-ocean-500 dark:bg-ocean-300',
     text: 'text-ocean-600 dark:text-ocean-200',
     pill: 'bg-ocean-50 text-ocean-600 dark:bg-ocean-500/15 dark:text-ocean-200',
@@ -44,7 +44,7 @@ export const ACCENTS: Record<Accent, AccentClasses> = {
     dot: 'bg-ocean-500 dark:bg-ocean-300',
   },
   amber: {
-    chip: 'bg-amber-50 text-amber-600 dark:bg-amber-400/15 dark:text-amber-200',
+    chip: 'bg-amber-300 text-brand-900 dark:bg-amber-300 dark:text-brand-900',
     bar: 'bg-amber-400 dark:bg-amber-300',
     text: 'text-amber-500 dark:text-amber-200',
     pill: 'bg-amber-50 text-amber-600 dark:bg-amber-400/15 dark:text-amber-200',
@@ -53,7 +53,7 @@ export const ACCENTS: Record<Accent, AccentClasses> = {
     dot: 'bg-amber-400 dark:bg-amber-300',
   },
   plum: {
-    chip: 'bg-plum-50 text-plum-600 dark:bg-plum-500/15 dark:text-plum-200',
+    chip: 'bg-plum-300 text-brand-900 dark:bg-plum-300 dark:text-brand-900',
     bar: 'bg-plum-500 dark:bg-plum-300',
     text: 'text-plum-600 dark:text-plum-200',
     pill: 'bg-plum-50 text-plum-600 dark:bg-plum-500/15 dark:text-plum-200',
@@ -62,7 +62,7 @@ export const ACCENTS: Record<Accent, AccentClasses> = {
     dot: 'bg-plum-500 dark:bg-plum-300',
   },
   clay: {
-    chip: 'bg-clay-50 text-clay-600 dark:bg-clay-500/15 dark:text-clay-200',
+    chip: 'bg-clay-300 text-brand-900 dark:bg-clay-300 dark:text-brand-900',
     bar: 'bg-clay-500 dark:bg-clay-300',
     text: 'text-clay-500 dark:text-clay-200',
     pill: 'bg-clay-50 text-clay-500 dark:bg-clay-500/15 dark:text-clay-200',

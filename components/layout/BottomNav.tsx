@@ -25,8 +25,8 @@ export function BottomNav() {
                 className={cn(
                   'flex flex-col items-center gap-1 py-2.5 text-[11px] transition-colors',
                   active
-                    ? 'text-brand-600 dark:text-brand-200'
-                    : 'text-sand-400 dark:text-sand-500',
+                    ? 'font-bold text-brand-600 dark:text-brand-200'
+                    : 'text-sand-500 dark:text-sand-400',
                 )}
               >
                 <Icon

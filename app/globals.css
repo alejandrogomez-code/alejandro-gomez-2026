@@ -5,33 +5,33 @@
 @layer base {
   :root {
     /* Colores usados por los gráficos de Recharts. */
-    --chart-line: #232120;
-    --chart-weight: #0f6b5a;
-    --chart-steps: #0f6b5a;
-    --chart-habits: #d99425;
-    --chart-bar: #e7e3db;
-    --chart-bar-active: #0f6b5a;
-    --chart-grid: #efebe3;
-    --chart-axis: #a09a90;
-    --chart-reference: #d99425;
+    --chart-line: #24164f;
+    --chart-weight: #16806f;
+    --chart-steps: #f2704a;
+    --chart-habits: #f5b524;
+    --chart-bar: #e9e0ff;
+    --chart-bar-active: #6b4fe0;
+    --chart-grid: #ece8f8;
+    --chart-axis: #8f88a8;
+    --chart-reference: #f2704a;
     --chart-tooltip-bg: #ffffff;
-    --chart-tooltip-border: #e7e3db;
-    --chart-tooltip-text: #232120;
+    --chart-tooltip-border: #e0daf0;
+    --chart-tooltip-text: #1e1537;
   }
 
   .dark {
-    --chart-line: #efece7;
-    --chart-weight: #7fb3a5;
-    --chart-steps: #7fb3a5;
-    --chart-habits: #e0a94f;
-    --chart-bar: #3a3632;
-    --chart-bar-active: #7fb3a5;
-    --chart-grid: #2b2825;
-    --chart-axis: #8a857c;
-    --chart-reference: #e0a94f;
-    --chart-tooltip-bg: #232120;
-    --chart-tooltip-border: #33302d;
-    --chart-tooltip-text: #efece7;
+    --chart-line: #ece8f8;
+    --chart-weight: #5fd4c0;
+    --chart-steps: #ff9474;
+    --chart-habits: #ffc94d;
+    --chart-bar: #2f2848;
+    --chart-bar-active: #b9a4ff;
+    --chart-grid: #241c3d;
+    --chart-axis: #8f88a8;
+    --chart-reference: #ff9474;
+    --chart-tooltip-bg: #1e1537;
+    --chart-tooltip-border: #2f2848;
+    --chart-tooltip-text: #ece8f8;
   }
 
   html {

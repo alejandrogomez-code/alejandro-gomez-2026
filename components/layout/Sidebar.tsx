@@ -21,18 +21,18 @@ export function Sidebar({ email }: { email: string }) {
   }
 
   return (
-    <aside className="hidden w-60 shrink-0 flex-col border-r border-sand-200 bg-white lg:flex dark:border-sand-800 dark:bg-sand-900">
-      <div className="flex items-center gap-2.5 px-4 py-4">
-        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-500 text-sm font-medium text-white">
+    <aside className="sticky top-4 hidden max-h-[calc(100vh-2rem)] w-60 shrink-0 flex-col overflow-y-auto rounded-3xl bg-white shadow-card lg:flex dark:bg-sand-900">
+      <div className="flex items-center gap-2.5 px-5 py-5">
+        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-clay-300 text-sm font-extrabold text-brand-800">
           V
         </span>
         <span className="min-w-0">
-          <span className="block text-sm font-medium text-sand-900 dark:text-sand-100">Vida</span>
+          <span className="block text-lg font-extrabold leading-tight text-sand-900 dark:text-sand-100">Vida</span>
           <span className="block truncate text-xs text-sand-400">Espacio personal</span>
         </span>
       </div>
 
-      <nav aria-label="Navegación principal" className="flex-1 px-2">
+      <nav aria-label="Navegación principal" className="flex-1 px-3">
         <ul className="space-y-0.5">
           {NAV_ITEMS.map((item) => {
             const active = pathname.startsWith(item.match);
@@ -45,16 +45,16 @@ export function Sidebar({ email }: { email: string }) {
                   href={item.href}
                   aria-current={active ? 'page' : undefined}
                   className={cn(
-                    'flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm transition-colors',
+                    'flex min-h-[44px] items-center gap-2.5 rounded-2xl px-3 text-sm transition-colors',
                     active
-                      ? 'bg-brand-50 font-medium text-brand-600 dark:bg-brand-500/15 dark:text-brand-200'
-                      : 'text-sand-600 hover:bg-sand-50 hover:text-sand-900 dark:text-sand-400 dark:hover:bg-sand-800/60 dark:hover:text-sand-100',
+                      ? 'bg-brand-800 font-bold text-white dark:bg-brand-300 dark:text-brand-900'
+                      : 'font-semibold text-sand-700 hover:bg-sand-50 hover:text-sand-900 dark:text-sand-400 dark:hover:bg-sand-800/60 dark:hover:text-sand-100',
                   )}
                 >
                   <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
                   <span className="flex-1 truncate">{item.label}</span>
                   {badge ? (
-                    <span className="tabular rounded-full bg-sand-100 px-1.5 text-xs text-sand-600 dark:bg-sand-800 dark:text-sand-300">
+                    <span className="tabular rounded-full bg-clay-300 px-2 text-xs font-bold text-brand-800">
                       {badge}
                     </span>
                   ) : null}
@@ -62,7 +62,7 @@ export function Sidebar({ email }: { email: string }) {
 
                 {item.children ? (
                   <>
-                    <p className="mb-1 mt-3 px-2.5 text-[11px] uppercase tracking-wider text-sand-400">
+                    <p className="mb-1 mt-4 px-3 text-[11px] font-extrabold uppercase tracking-wider text-sand-500">
                       {item.label}
                     </p>
                     <ul className="space-y-0.5">
@@ -76,10 +76,10 @@ export function Sidebar({ email }: { email: string }) {
                               href={child.href}
                               aria-current={childActive ? 'page' : undefined}
                               className={cn(
-                                'flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm transition-colors',
+                                'flex min-h-[44px] items-center gap-2.5 rounded-2xl px-3 text-sm transition-colors',
                                 childActive
-                                  ? 'bg-brand-50 font-medium text-brand-600 dark:bg-brand-500/15 dark:text-brand-200'
-                                  : 'text-sand-600 hover:bg-sand-50 hover:text-sand-900 dark:text-sand-400 dark:hover:bg-sand-800/60 dark:hover:text-sand-100',
+                                  ? 'bg-brand-800 font-bold text-white dark:bg-brand-300 dark:text-brand-900'
+                                  : 'text-sand-700 hover:bg-sand-50 hover:text-sand-900 dark:text-sand-400 dark:hover:bg-sand-800/60 dark:hover:text-sand-100',
                               )}
                             >
                               <ChildIcon
@@ -91,7 +91,7 @@ export function Sidebar({ email }: { email: string }) {
                               />
                               <span className="flex-1 truncate">{child.label}</span>
                               {childBadge ? (
-                                <span className="tabular rounded-full bg-sand-100 px-1.5 text-xs text-sand-600 dark:bg-sand-800 dark:text-sand-300">
+                                <span className="tabular rounded-full bg-ocean-300 px-2 text-xs font-bold text-brand-800">
                                   {childBadge}
                                 </span>
                               ) : null}
@@ -108,7 +108,7 @@ export function Sidebar({ email }: { email: string }) {
         </ul>
       </nav>
 
-      <div className="border-t border-sand-200 p-3 dark:border-sand-800">
+      <div className="border-t border-sand-100 p-4 dark:border-sand-800">
         <AppearanceControls />
         <div className="mt-3 flex items-center gap-2">
           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-sand-100 text-[11px] font-medium text-sand-600 dark:bg-sand-800 dark:text-sand-300">

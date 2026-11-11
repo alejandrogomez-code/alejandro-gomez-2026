@@ -16,6 +16,9 @@ import type { Habit } from '@/types/database';
 
 type Filter = 'all' | 'pending';
 
+/** Filas como tarjetitas tintadas, separadas entre sí. */
+const ROW = 'mx-3 mt-2 rounded-2xl border-t-0 px-3 py-3 sm:mx-4';
+
 export interface TodayListProps {
   habits: { habit: Habit; state: HabitDayState }[];
   todaySteps: number;
@@ -66,13 +69,14 @@ export function TodayList({
       ) : (
         visible.map(({ habit, state }) => {
           const weekly = weeklyByHabit.get(habit.id);
-          const accent = state.fromSteps ? ACCENTS.brand : ACCENTS.amber;
+          const accent = state.fromSteps ? ACCENTS.ocean : ACCENTS.clay;
 
           return (
             <ListRow
               key={habit.id}
               icon={state.fromSteps ? <Footprints className="h-4 w-4" /> : <Repeat className="h-4 w-4" />}
               iconClassName={accent.chip}
+              className={`${ROW} ${accent.soft}`}
               title={habit.name}
               meta={
                 state.fromSteps
@@ -94,7 +98,7 @@ export function TodayList({
                     Hecho
                   </button>
                 ) : (
-                  <Button size="sm" variant="secondary" onClick={() => onToggleHabit(habit, true)}>
+                  <Button size="sm" onClick={() => onToggleHabit(habit, true)}>
                     Marcar
                   </Button>
                 )
@@ -106,7 +110,8 @@ export function TodayList({
 
       <ListRow
         icon={<Footprints className="h-4 w-4" />}
-        iconClassName={ACCENTS.brand.chip}
+        iconClassName={ACCENTS.ocean.chip}
+        className={`${ROW} ${ACCENTS.ocean.soft}`}
         title="Pasos de hoy"
         meta={`${formatNumber(todaySteps)} de ${formatNumber(stepsGoal)} · ${formatPercent(calculateStepCompletion(todaySteps, stepsGoal), 0)}`}
         actions={
@@ -127,7 +132,8 @@ export function TodayList({
 
       <ListRow
         icon={<Scale className="h-4 w-4" />}
-        iconClassName={ACCENTS.ocean.chip}
+        iconClassName={ACCENTS.plum.chip}
+        className={`${ROW} mb-4 ${ACCENTS.plum.soft}`}
         title="Registro de peso"
         meta={`${weightRecordsThisWeek} de 3 registros esta semana`}
         actions={

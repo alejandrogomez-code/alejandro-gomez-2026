@@ -17,7 +17,7 @@ export function Progress({ value, className, barClassName, label }: ProgressProp
       aria-valuemax={100}
       aria-label={label}
       className={cn(
-        'h-1.5 w-full overflow-hidden rounded-full bg-sand-100 dark:bg-sand-800',
+        'h-2.5 w-full overflow-hidden rounded-full bg-sand-100 dark:bg-sand-800',
         className,
       )}
     >

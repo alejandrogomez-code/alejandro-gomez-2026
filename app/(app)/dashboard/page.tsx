@@ -140,16 +140,16 @@ export default function DashboardPage() {
   if (loading) return <LoadingState label="Cargando tu panel…" />;
 
   return (
-    <div className="space-y-5">
-      <header className="flex flex-wrap items-start justify-between gap-3">
+    <div className="space-y-5 lg:space-y-6">
+      <header className="flex flex-wrap items-center justify-between gap-4 rounded-3xl bg-brand-800 px-6 py-6 text-white sm:px-7">
         <div>
-          <h1 className="text-xl font-medium tracking-tight text-sand-900 dark:text-sand-100">
+          <h1 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
             {greeting()}
           </h1>
-          <p className="mt-0.5 text-sm capitalize text-sand-500 dark:text-sand-400">
+          <p className="mt-1 text-sm capitalize text-brand-200">
             {formatLongDate(today)}
             {pendingToday > 0 ? (
-              <span className="normal-case text-amber-500"> · {pendingToday} pendientes</span>
+              <strong className="normal-case text-amber-300"> · {pendingToday} pendientes</strong>
             ) : null}
           </p>
         </div>
@@ -183,7 +183,7 @@ export default function DashboardPage() {
         bmi={bmi}
       />
 
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+      <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
         <TodayList
           habits={todayHabits}
           todaySteps={todaySteps}
@@ -195,7 +195,7 @@ export default function DashboardPage() {
             void setRecord({ habitId: habit.id, date: today, completed: next })
           }
         />
-        <div className="space-y-4">
+        <div className="space-y-5">
           <GoalOverview goals={goals} />
           <WeeklySummary
             current={currentWeek}

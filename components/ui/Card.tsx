@@ -5,8 +5,8 @@ export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
-        'rounded-lg border border-sand-200 bg-white',
-        'dark:border-sand-800 dark:bg-sand-900',
+        'rounded-3xl bg-white shadow-card',
+        'dark:bg-sand-900',
         className,
       )}
       {...props}
@@ -28,12 +28,12 @@ export function CardHeader({
   return (
     <div
       className={cn(
-        'flex items-center justify-between gap-4 border-b border-sand-100 px-4 py-3 dark:border-sand-800',
+        'flex items-center justify-between gap-4 px-5 pb-2 pt-5',
         className,
       )}
     >
       <div className="min-w-0">
-        <h2 className="text-sm font-medium text-sand-900 dark:text-sand-100">{title}</h2>
+        <h2 className="text-lg font-extrabold text-sand-900 dark:text-sand-100">{title}</h2>
         {description ? (
           <p className="mt-0.5 text-xs text-sand-500 dark:text-sand-400">{description}</p>
         ) : null}
@@ -44,13 +44,13 @@ export function CardHeader({
 }
 
 export function CardContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn('p-4', className)} {...props} />;
+  return <div className={cn('px-5 pb-5 pt-3', className)} {...props} />;
 }
 
 export function CardFooter({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn('border-t border-sand-100 px-4 py-3 dark:border-sand-800', className)}
+      className={cn('border-t border-sand-100 px-5 py-3 dark:border-sand-800', className)}
       {...props}
     />
   );
@@ -85,7 +85,7 @@ export function ListRow({
       {icon ? (
         <span
           className={cn(
-            'flex h-8 w-8 shrink-0 items-center justify-center rounded-lg',
+            'flex h-10 w-10 shrink-0 items-center justify-center rounded-full',
             iconClassName,
           )}
           aria-hidden="true"
@@ -94,7 +94,7 @@ export function ListRow({
         </span>
       ) : null}
       <div className="min-w-0 flex-1">
-        <p className="truncate text-sm text-sand-900 dark:text-sand-100">{title}</p>
+        <p className="truncate text-sm font-bold text-sand-900 dark:text-sand-100">{title}</p>
         {meta ? (
           <p className="tabular truncate text-xs text-sand-500 dark:text-sand-400">{meta}</p>
         ) : null}
