@@ -13,6 +13,7 @@ import {
   CloudSun,
   Droplets,
   Moon,
+  Sparkles,
   Sun,
   type LucideIcon,
 } from 'lucide-react';
@@ -101,9 +102,24 @@ function WeatherCard() {
   );
 }
 
+function ToggleButton({ open, onClick }: { open: boolean; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="inline-flex items-center gap-1 rounded-full bg-white/60 px-3 py-1.5 text-xs font-bold transition hover:bg-white dark:bg-white/10 dark:hover:bg-white/20"
+      aria-expanded={open}
+    >
+      {open ? 'Mostrar menos' : 'Leer completo'}
+      <ChevronDown className={cn('h-3.5 w-3.5 transition', open && 'rotate-180')} aria-hidden="true" />
+    </button>
+  );
+}
+
 function GospelCard() {
   const state = useJson<GospelInfo>('/api/inicio/evangelio');
-  const [open, setOpen] = useState(false);
+  const [gospelOpen, setGospelOpen] = useState(false);
+  const [reflectionOpen, setReflectionOpen] = useState(false);
 
   return (
     <section
@@ -129,40 +145,59 @@ function GospelCard() {
               <p className="mt-0.5 text-xs font-semibold opacity-80">{state.data.liturgicalDay}</p>
             ) : null}
           </div>
-          <p
-            className={cn(
-              'whitespace-pre-line text-sm leading-relaxed',
-              !open && 'line-clamp-3',
-            )}
-          >
+          <p className={cn('whitespace-pre-line text-sm leading-relaxed', !gospelOpen && 'line-clamp-3')}>
             {state.data.text}
           </p>
-          <div className="flex items-center justify-between gap-3 text-xs font-bold">
-            <button
-              type="button"
-              onClick={() => setOpen((value) => !value)}
-              className="inline-flex items-center gap-1 rounded-full bg-white/60 px-3 py-1.5 transition hover:bg-white dark:bg-white/10 dark:hover:bg-white/20"
-              aria-expanded={open}
-            >
-              {open ? 'Mostrar menos' : 'Leer completo'}
-              <ChevronDown className={cn('h-3.5 w-3.5 transition', open && 'rotate-180')} aria-hidden="true" />
-            </button>
-            <a
-              href={state.data.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="opacity-70 hover:underline"
-            >
-              {state.data.translation ? `${state.data.translation} · ` : ''}Fuente: Evangelio del Día
-            </a>
+          <div>
+            <ToggleButton open={gospelOpen} onClick={() => setGospelOpen((value) => !value)} />
           </div>
+
+          {state.data.reflection ? (
+            <div className="mt-1 flex flex-col gap-2 rounded-2xl bg-white/55 p-4 dark:bg-white/5">
+              <span className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wide">
+                <Sparkles className="h-4 w-4" aria-hidden="true" />
+                Reflexión
+              </span>
+              {state.data.reflection.title ? (
+                <p className="text-sm font-extrabold leading-snug">{state.data.reflection.title}</p>
+              ) : null}
+              {state.data.reflection.author || state.data.reflection.source ? (
+                <p className="text-xs font-semibold opacity-80">
+                  {[state.data.reflection.author, state.data.reflection.source].filter(Boolean).join(' · ')}
+                </p>
+              ) : null}
+              <p
+                className={cn(
+                  'whitespace-pre-line text-sm leading-relaxed',
+                  !reflectionOpen && 'line-clamp-4',
+                )}
+              >
+                {state.data.reflection.text}
+              </p>
+              <div>
+                <ToggleButton
+                  open={reflectionOpen}
+                  onClick={() => setReflectionOpen((value) => !value)}
+                />
+              </div>
+            </div>
+          ) : null}
+
+          <a
+            href={state.data.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="self-end text-xs font-bold opacity-70 hover:underline"
+          >
+            {state.data.translation ? `${state.data.translation} · ` : ''}Fuente: Evangelio del Día
+          </a>
         </>
       )}
     </section>
   );
 }
 
-/** Franja de inicio del panel: clima de Córdoba y evangelio del día. */
+/** Franja de inicio del panel: clima de Córdoba, evangelio y reflexión del día. */
 export function DailyInfo() {
   return (
     <div className="grid items-start gap-3 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-4">

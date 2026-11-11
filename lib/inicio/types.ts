@@ -9,12 +9,20 @@ export interface WeatherInfo {
   rainChance: number | null;
 }
 
+export interface ReflectionInfo {
+  title: string | null;
+  author: string | null;
+  source: string | null;
+  text: string;
+}
+
 export interface GospelInfo {
   date: string; // YYYY-MM-DD (hora de Argentina)
   liturgicalDay: string | null;
   reference: string | null;
   text: string;
   translation: string | null;
+  reflection: ReflectionInfo | null;
   sourceUrl: string;
 }
 
