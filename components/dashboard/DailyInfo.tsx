@@ -12,13 +12,14 @@ import {
   CloudSnow,
   CloudSun,
   Droplets,
+  Flame,
   Moon,
   Sparkles,
   Sun,
   type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { describeWeather, type GospelInfo, type WeatherInfo } from '@/lib/inicio/types';
+import { describeWeather, type GospelInfo, type SaintInfo, type WeatherInfo } from '@/lib/inicio/types';
 
 const WEATHER_ICONS: Record<string, LucideIcon> = {
   sun: Sun,
@@ -97,6 +98,63 @@ function WeatherCard() {
             </>
           );
         })()
+      )}
+    </section>
+  );
+}
+
+function SaintCard() {
+  const state = useJson<SaintInfo>('/api/inicio/santo');
+  const [open, setOpen] = useState(false);
+
+  return (
+    <section
+      aria-label="Santo del día"
+      className="flex flex-col gap-3 rounded-3xl bg-brand-100 p-5 text-brand-900 dark:bg-brand-400/15 dark:text-brand-50"
+    >
+      <span className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wide">
+        <Flame className="h-4 w-4" aria-hidden="true" />
+        Santo del día
+      </span>
+
+      {state.status === 'loading' ? (
+        <div className="h-10 animate-pulse rounded-2xl bg-white/40" />
+      ) : state.status === 'error' ? (
+        <p className="text-sm font-semibold">No se pudo cargar el santo del día ahora.</p>
+      ) : (
+        <>
+          <p className="text-lg font-extrabold leading-snug">{state.data.name}</p>
+          {state.data.others.length > 0 ? (
+            <>
+              {open ? (
+                <ul className="flex flex-col gap-1 text-xs font-semibold opacity-90">
+                  {state.data.others.map((other) => (
+                    <li key={other}>{other}</li>
+                  ))}
+                </ul>
+              ) : null}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setOpen((value) => !value)}
+                  className="inline-flex items-center gap-1 rounded-full bg-white/60 px-3 py-1.5 text-xs font-bold transition hover:bg-white dark:bg-white/10 dark:hover:bg-white/20"
+                  aria-expanded={open}
+                >
+                  {open ? 'Ocultar' : `También se recuerda a ${state.data.others.length} más`}
+                  <ChevronDown className={cn('h-3.5 w-3.5 transition', open && 'rotate-180')} aria-hidden="true" />
+                </button>
+              </div>
+            </>
+          ) : null}
+          <a
+            href={state.data.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="self-end text-xs font-bold opacity-70 hover:underline"
+          >
+            Fuente: Evangelio del Día
+          </a>
+        </>
       )}
     </section>
   );
@@ -197,11 +255,14 @@ function GospelCard() {
   );
 }
 
-/** Franja de inicio del panel: clima de Córdoba, evangelio y reflexión del día. */
+/** Franja de inicio del panel: clima de Córdoba, santo del día, evangelio y reflexión. */
 export function DailyInfo() {
   return (
     <div className="grid items-start gap-3 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-4">
-      <WeatherCard />
+      <div className="flex flex-col gap-3 lg:gap-4">
+        <WeatherCard />
+        <SaintCard />
+      </div>
       <GospelCard />
     </div>
   );

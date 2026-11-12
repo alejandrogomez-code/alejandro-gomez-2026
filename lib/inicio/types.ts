@@ -26,6 +26,15 @@ export interface GospelInfo {
   sourceUrl: string;
 }
 
+export interface SaintInfo {
+  date: string; // YYYY-MM-DD (hora de Argentina)
+  /** Santo principal del día. */
+  name: string;
+  /** Otros santos y beatos que se recuerdan ese día. */
+  others: string[];
+  sourceUrl: string;
+}
+
 /** Fecha de hoy en Argentina, sin importar el huso horario del servidor. */
 export function argentinaToday(): string {
   return new Intl.DateTimeFormat('en-CA', {
