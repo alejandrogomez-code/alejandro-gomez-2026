@@ -5,13 +5,14 @@ import { cn } from '@/lib/utils';
 import { ACCENTS, type Accent } from '@/lib/accents';
 
 /** Colores sólidos para las tarjetas de indicadores destacados. */
-export type StatFill = 'coral' | 'lilac' | 'mint' | 'sun';
+export type StatFill = 'coral' | 'lilac' | 'mint' | 'sun' | 'lime';
 
 const FILLS: Record<StatFill, { bg: string; ring: string }> = {
   coral: { bg: 'bg-clay-300', ring: 'stroke-clay-200' },
   lilac: { bg: 'bg-plum-300', ring: 'stroke-plum-200' },
   mint: { bg: 'bg-ocean-300', ring: 'stroke-ocean-200' },
   sun: { bg: 'bg-amber-300', ring: 'stroke-amber-200' },
+  lime: { bg: 'bg-leaf-300', ring: 'stroke-leaf-200' },
 };
 
 export interface StatCardProps {

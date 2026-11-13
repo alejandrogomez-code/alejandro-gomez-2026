@@ -91,6 +91,19 @@ const config: Config = {
           800: '#0d4840',
           900: '#0b3b35',
         },
+        // Verde lima: Economía y Finanzas.
+        leaf: {
+          50: '#effbe6',
+          100: '#dcf5c8',
+          200: '#c2ec9c',
+          300: '#a3e06a',
+          400: '#7cc63d',
+          500: '#3f7d14',
+          600: '#336610',
+          700: '#29520e',
+          800: '#21420c',
+          900: '#1a350a',
+        },
         // Lavanda.
         plum: {
           50: '#f4eeff',

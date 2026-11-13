@@ -36,6 +36,8 @@ import {
   todayString,
 } from '@/lib/calculations/dates';
 import type { Habit, Task } from '@/types/database';
+import { useUsdRate } from '@/components/finance/FinanceShared';
+import { debtTotals, formatMoney, monthKey, monthTotals } from '@/lib/calculations/finance';
 
 export default function DashboardPage() {
   const { profile, loading: profileLoading } = useProfile();
@@ -69,6 +71,12 @@ export default function DashboardPage() {
     eq: { done: false },
     order: [{ column: 'due_date', ascending: true }],
   });
+
+  const usdRate = useUsdRate();
+  const { rows: financeMovements } = useRows('finance_movements', { order: [{ column: 'date', ascending: false }] });
+  const { rows: financeDebts } = useRows('finance_debts', { eq: { status: 'activa' } });
+  const financeMonth = monthTotals(financeMovements, monthKey(today), usdRate);
+  const financeDebt = debtTotals(financeDebts, usdRate);
 
   const dailyStepsGoal = profile?.daily_steps_goal ?? 10000;
 
@@ -201,6 +209,13 @@ export default function DashboardPage() {
             goalProgress.length === 0
               ? null
               : goalProgress.reduce((sum, value) => sum + value, 0) / goalProgress.length,
+        }}
+        finance={{
+          balanceLabel: formatMoney(financeMonth.balance),
+          detail:
+            financeDebt.count > 0
+              ? `saldo del mes · deudas ${formatMoney(financeDebt.balance)}`
+              : 'saldo del mes',
         }}
       />
 

@@ -1,11 +1,12 @@
-import { Briefcase, Compass, HeartPulse, Sparkles, Target } from 'lucide-react';
+import { Briefcase, Compass, HeartPulse, Sparkles, Target, Wallet } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import type { Accent } from '@/lib/accents';
 import type { Area, WorkArea } from '@/types/database';
 
 /**
  * Cada área tiene su color, para reconocerla de un vistazo en toda la app:
- * Trabajo violeta, Personal coral, Salud menta y Objetivos amarillo.
+ * Trabajo violeta, Personal coral, Salud menta, Objetivos amarillo y
+ * Economía y Finanzas verde lima.
  */
 export interface AreaMeta {
   label: string;
@@ -20,6 +21,9 @@ export const AREAS: Record<Area, AreaMeta> = {
   salud: { label: 'Salud', accent: 'ocean', icon: HeartPulse, href: '/salud/resumen' },
   general: { label: 'General', accent: 'amber', icon: Compass, href: '/objetivos' },
 };
+
+/** Color y ícono de la sección Economía y Finanzas. */
+export const FINANCE_META = { label: 'Economía y Finanzas', short: 'Finanzas', accent: 'leaf' as Accent, icon: Wallet, href: '/finanzas' };
 
 /** Color y ícono de la sección Objetivos. */
 export const GOALS_META = { label: 'Objetivos', accent: 'amber' as Accent, icon: Target };

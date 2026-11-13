@@ -1,5 +1,9 @@
 import {
+  ArrowLeftRight,
   BookOpen,
+  CreditCard,
+  LineChart,
+  PieChart,
   CalendarClock,
   CalendarDays,
   CalendarHeart,
@@ -17,7 +21,7 @@ import {
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import type { Accent } from '@/lib/accents';
-import { AREAS, GOALS_META } from '@/lib/areas';
+import { AREAS, FINANCE_META, GOALS_META } from '@/lib/areas';
 
 export interface NavItem {
   href: string;
@@ -90,6 +94,21 @@ export const NAV_ITEMS: NavItem[] = [
       { href: '/salud/pasos', label: 'Pasos', icon: Footprints, match: '/salud/pasos', accent: 'ocean' },
       { href: '/salud/habitos', label: 'Hábitos', icon: Repeat, match: '/salud/habitos', accent: 'ocean' },
       { href: '/salud/calendario', label: 'Calendario', icon: CalendarDays, match: '/salud/calendario', accent: 'ocean' },
+    ],
+  },
+  {
+    href: FINANCE_META.href,
+    label: FINANCE_META.label,
+    short: FINANCE_META.short,
+    icon: FINANCE_META.icon,
+    match: '/finanzas',
+    accent: FINANCE_META.accent,
+    mobile: true,
+    children: [
+      { href: '/finanzas', label: 'Resumen', icon: PieChart, match: '/finanzas', exact: true, accent: 'leaf' },
+      { href: '/finanzas/movimientos', label: 'Ingresos y egresos', icon: ArrowLeftRight, match: '/finanzas/movimientos', accent: 'leaf' },
+      { href: '/finanzas/deudas', label: 'Deudas y plan de pago', icon: CreditCard, match: '/finanzas/deudas', accent: 'leaf' },
+      { href: '/finanzas/inversiones', label: 'Inversiones', icon: LineChart, match: '/finanzas/inversiones', accent: 'leaf' },
     ],
   },
   { href: '/configuracion', label: 'Ajustes', icon: Settings, match: '/configuracion', accent: 'neutral' },

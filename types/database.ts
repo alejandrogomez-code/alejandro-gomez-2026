@@ -15,6 +15,11 @@ export type WorkArea = 'trabajo' | 'personal';
 export type DeadlineKind = 'vencimiento' | 'fecha';
 export type Recurrence = 'none' | 'monthly' | 'yearly';
 export type BookStatus = 'pendiente' | 'leyendo' | 'leido';
+export type Currency = 'ARS' | 'USD';
+export type MovementKind = 'ingreso' | 'egreso';
+export type DebtKind = 'tarjeta' | 'prestamo' | 'personal' | 'hipoteca' | 'otro';
+export type DebtStatus = 'activa' | 'cancelada';
+export type InvestmentKind = 'plazo_fijo' | 'fci' | 'dolares' | 'acciones' | 'cedears' | 'bonos' | 'cripto' | 'otro';
 
 export interface Database {
   public: {
@@ -23,6 +28,7 @@ export interface Database {
         Row: {
           reminder_email: string | null;
           reminders_enabled: boolean;
+          usd_rate: number | null;
           id: string;
           height_cm: number | null;
           initial_weight_kg: number | null;
@@ -47,6 +53,7 @@ export interface Database {
         Update: {
           reminder_email?: string | null;
           reminders_enabled?: boolean;
+          usd_rate?: number | null;
           id?: string;
           height_cm?: number | null;
           initial_weight_kg?: number | null;
@@ -550,6 +557,150 @@ export interface Database {
         };
         Relationships: [];
       };
+      finance_debts: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          creditor: string | null;
+          kind: DebtKind;
+          currency: Currency;
+          original_amount: number | null;
+          balance: number;
+          rate_annual: number | null;
+          monthly_payment: number | null;
+          installments_left: number | null;
+          due_day: number | null;
+          status: DebtStatus;
+          notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name: string;
+          creditor?: string | null;
+          kind?: DebtKind;
+          currency?: Currency;
+          original_amount?: number | null;
+          balance?: number;
+          rate_annual?: number | null;
+          monthly_payment?: number | null;
+          installments_left?: number | null;
+          due_day?: number | null;
+          status?: DebtStatus;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          name?: string;
+          creditor?: string | null;
+          kind?: DebtKind;
+          currency?: Currency;
+          original_amount?: number | null;
+          balance?: number;
+          rate_annual?: number | null;
+          monthly_payment?: number | null;
+          installments_left?: number | null;
+          due_day?: number | null;
+          status?: DebtStatus;
+          notes?: string | null;
+        };
+        Relationships: [];
+      };
+      finance_movements: {
+        Row: {
+          id: string;
+          user_id: string;
+          kind: MovementKind;
+          category: string;
+          description: string | null;
+          amount: number;
+          currency: Currency;
+          date: string;
+          recurring: boolean;
+          debt_id: string | null;
+          notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          kind?: MovementKind;
+          category?: string;
+          description?: string | null;
+          amount: number;
+          currency?: Currency;
+          date?: string;
+          recurring?: boolean;
+          debt_id?: string | null;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          kind?: MovementKind;
+          category?: string;
+          description?: string | null;
+          amount?: number;
+          currency?: Currency;
+          date?: string;
+          recurring?: boolean;
+          debt_id?: string | null;
+          notes?: string | null;
+        };
+        Relationships: [];
+      };
+      finance_investments: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          kind: InvestmentKind;
+          currency: Currency;
+          amount: number;
+          current_value: number | null;
+          rate_annual: number | null;
+          start_date: string;
+          maturity_date: string | null;
+          active: boolean;
+          notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name: string;
+          kind?: InvestmentKind;
+          currency?: Currency;
+          amount?: number;
+          current_value?: number | null;
+          rate_annual?: number | null;
+          start_date?: string;
+          maturity_date?: string | null;
+          active?: boolean;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          name?: string;
+          kind?: InvestmentKind;
+          currency?: Currency;
+          amount?: number;
+          current_value?: number | null;
+          rate_annual?: number | null;
+          start_date?: string;
+          maturity_date?: string | null;
+          active?: boolean;
+          notes?: string | null;
+        };
+        Relationships: [];
+      };
     };
     Views: { [_ in never]: never };
     Functions: { [_ in never]: never };
@@ -587,6 +738,9 @@ export type Deadline = Database['public']['Tables']['deadlines']['Row'];
 export type Book = Database['public']['Tables']['books']['Row'];
 export type Note = Database['public']['Tables']['notes']['Row'];
 export type WeeklyReview = Database['public']['Tables']['weekly_reviews']['Row'];
+export type FinanceDebt = Database['public']['Tables']['finance_debts']['Row'];
+export type FinanceMovement = Database['public']['Tables']['finance_movements']['Row'];
+export type FinanceInvestment = Database['public']['Tables']['finance_investments']['Row'];
 
 export type WeightRecord = Database['public']['Tables']['weight_records']['Row'];
 export type StepRecord = Database['public']['Tables']['step_records']['Row'];

@@ -5,7 +5,7 @@ import type { ProjectColor } from '@/types/database';
  * categoría para los chips de icono. Las clases van escritas completas
  * (no interpoladas) para que Tailwind las incluya en el build.
  */
-export type Accent = 'brand' | 'ocean' | 'amber' | 'plum' | 'clay' | 'neutral';
+export type Accent = 'brand' | 'ocean' | 'amber' | 'plum' | 'clay' | 'leaf' | 'neutral';
 
 interface AccentClasses {
   /** Chip cuadrado del icono en filas y tarjetas. */
@@ -69,6 +69,15 @@ export const ACCENTS: Record<Accent, AccentClasses> = {
     soft: 'bg-clay-50 dark:bg-clay-500/10',
     solid: 'bg-clay-500 text-white dark:bg-clay-500',
     dot: 'bg-clay-500 dark:bg-clay-300',
+  },
+  leaf: {
+    chip: 'bg-leaf-300 text-brand-900 dark:bg-leaf-300 dark:text-brand-900',
+    bar: 'bg-leaf-500 dark:bg-leaf-300',
+    text: 'text-leaf-600 dark:text-leaf-200',
+    pill: 'bg-leaf-50 text-leaf-600 dark:bg-leaf-500/15 dark:text-leaf-200',
+    soft: 'bg-leaf-50 dark:bg-leaf-500/10',
+    solid: 'bg-leaf-500 text-white dark:bg-leaf-500',
+    dot: 'bg-leaf-500 dark:bg-leaf-300',
   },
   neutral: {
     chip: 'bg-sand-100 text-sand-600 dark:bg-sand-800 dark:text-sand-400',

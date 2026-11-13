@@ -10,6 +10,7 @@ const TONE_TO_ACCENT: Record<Tone, Accent> = {
   amber: 'amber',
   plum: 'plum',
   clay: 'clay',
+  leaf: 'leaf',
   neutral: 'neutral',
   success: 'brand',
   warning: 'amber',

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { AREAS, GOALS_META } from '@/lib/areas';
+import { AREAS, FINANCE_META, GOALS_META } from '@/lib/areas';
 import { cn } from '@/lib/utils';
 import type { LucideIcon } from 'lucide-react';
 
@@ -15,7 +15,7 @@ interface AreaCardProps {
   detail: ReactNode;
 }
 
-function AreaCard({ href, label, icon: Icon, bg, value, detail }: AreaCardProps) {
+function AreaCard({ href, label, icon: Icon, bg, value, detail, className }: AreaCardProps & { className?: string }) {
   return (
     <Link
       href={href}
@@ -23,6 +23,7 @@ function AreaCard({ href, label, icon: Icon, bg, value, detail }: AreaCardProps)
         'group flex flex-col gap-2 rounded-3xl p-4 text-brand-900 transition hover:-translate-y-0.5 hover:shadow-float sm:p-5',
         'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-500/40',
         bg,
+        className,
       )}
     >
       <span className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wide">
@@ -42,12 +43,13 @@ export interface AreaOverviewProps {
   personal: { pending: number; nextDate: string | null };
   health: { habitsLabel: string; stepsLabel: string };
   goals: { active: number; averageProgress: number | null };
+  finance?: { balanceLabel: string; detail: string };
 }
 
 /** Una tarjeta de color por área, con lo esencial de cada una. */
-export function AreaOverview({ work, personal, health, goals }: AreaOverviewProps) {
+export function AreaOverview({ work, personal, health, goals, finance }: AreaOverviewProps) {
   return (
-    <section aria-label="Resumen por área" className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+    <section aria-label="Resumen por área" className={cn('grid grid-cols-2 gap-3 lg:gap-4', finance ? 'lg:grid-cols-5' : 'lg:grid-cols-4')}>
       <AreaCard
         href="/trabajo"
         label={AREAS.trabajo.label}
@@ -88,6 +90,17 @@ export function AreaOverview({ work, personal, health, goals }: AreaOverviewProp
             : `activos · ${Math.round(goals.averageProgress)}% de avance promedio`
         }
       />
+      {finance ? (
+        <AreaCard
+          href={FINANCE_META.href}
+          label={FINANCE_META.short}
+          icon={FINANCE_META.icon}
+          bg="bg-leaf-300"
+          value={finance.balanceLabel}
+          detail={finance.detail}
+          className="col-span-2 lg:col-span-1"
+        />
+      ) : null}
     </section>
   );
 }
